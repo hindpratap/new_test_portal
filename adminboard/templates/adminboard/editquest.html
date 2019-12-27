@@ -1,0 +1,67 @@
+{% extends 'adminboard/quest.html' %}
+{% if email in authorized_admin %}
+{% block question %}
+    <div class="normal">
+                    <form action="{% url 'adminboard:changequest' %}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form2">
+                            <div class="form-div">
+                                <label for="" class="form-label">Question</label>
+                                <textarea name="question" id="question" class="form-elem form-textarea"></textarea>
+                            </div>
+
+                            <div class="form">
+                                <div class="form-div">
+                                    <label for="" class="form-label">Option1</label>
+                                    <input type="text" name="opt1" id="opt1" class="form-elem" required="required">
+                                </div>
+                                <div class="form-div">
+                                    <label for="" class="form-label">Option2</label>
+                                    <input type="text" name="opt2" id="opt2" class="form-elem" required="required">
+                                </div>
+                                <div class="form-div">
+                                    <label for="" class="form-label">Option3</label>
+                                    <input type="text" name="opt3" id="opt3" class="form-elem" required="required">
+                                </div>
+                                <div class="form-div">
+                                    <label for="" class="form-label">Option4</label>
+                                    <input type="text" name="opt4" id="opt4" class="form-elem" required="required">
+                                </div>
+                                <div class="form-div">
+                                    <label for="" class="form-label">Correct Option</label>
+                                    <input type="text" name="correct" id="correct" class="form-elem" required="required">
+                                </div>
+                                <div class="form-div">
+                                    <label for="" class="form-label">Category</label>
+                                    <select name="category" id="category" class="form-elem" required="required">
+                                        <option value="">--select--</option>
+                                        <option value="English">English (Comprehension)</option>
+                                        <option value="Reasoning">Reasoning</option>
+                                        <option value="Quantitative">Quantitative</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <input type="text" style="display: none;" name="questid" value="{{ question.id }}" />
+
+                        <div class="btn-div mt-4">
+                            <button type="submit" class="btn btn--success">Update</button>
+                        </div>
+                    </form>
+                </div>
+{% endblock %}
+{% block script %}
+    <script>
+        document.querySelector('#question').innerHTML = `{{ question.question }}`;
+        document.querySelector('#opt1').value = `{{ question.option1 }}`;
+        document.querySelector('#opt2').value = `{{ question.option2 }}`;
+        document.querySelector('#opt3').value = `{{ question.option3 }}`;
+        document.querySelector('#opt4').value = `{{ question.option4 }}`;
+        document.querySelector('#correct').value = `{{ question.correct }}`;
+        document.querySelector('#category').value = `{{ question.category }}`;
+    </script>
+{% endblock %}
+{% else %}
+    <h2>You do not have admin rights.</h2>
+{% endif %}

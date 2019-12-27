@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="DataFlow | Candidate Testing Portal">
+
+    <!-- Favicon -->
+    {% load staticfiles %}
+    <link rel="icon" href="{% static 'images/DF Logo.svg' %}">
+
+    <!-- CDN CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/admin_home.css' %}">
+
+    <!-- Fontawesome -->
+    <script src="https://kit.fontawesome.com/8aa13c88ab.js"></script>
+
+    <title>DataFlow | Admin Board</title>
+</head>
+<body class="body-log">
+    <noscript>
+        Your Browser's JavaScript has been turned off kindly enable it.
+    </noscript>
+
+    <main class="main container-fluid">
+        <div class="box1">
+            <img src="{% static 'images/test.svg' %}" alt="test" class="test-svg">
+        </div>
+        <div class="box2">
+            <div class="box-div">
+                <div class="box-log-text mb-4">
+                    <h1>ADMIN BOARD</h1>
+                    <span>Testing Portal</span>
+                </div>
+                <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn--google">
+                    <img src="{% static 'images/google.svg' %}" alt="google" class="google-svg mr-2">
+                    <span>Sign-in</span>
+                </a>
+            </div>
+            <footer class="foot-log">
+                <p>&copy; <span class="foot-log__span">DATA</span>FLOW GROUP</p>
+            </footer>
+        </div>
+    </main>
+
+    <!-- Script
+    ------------------------>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+    <!-- <script src="../assets/js/inspect.js"></script> -->
+    <script src="{% static 'js/index.js' %}"></script>
+</body>
+</html>

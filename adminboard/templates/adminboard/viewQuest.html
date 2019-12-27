@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="DataFlow | Candidate Testing Portal">
+    {% load staticfiles %}
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'images/DF Logo.svg' %}">
+
+    <!-- CDN CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/admin_home.css' %}">
+
+    <!-- Fontawesome -->
+    <script src="https://kit.fontawesome.com/8aa13c88ab.js"></script>
+
+    <title>Create Credentials</title>
+</head>
+<body>
+
+    <noscript>
+        Your Browser's JavaScript has been turned off kindly enable it.
+    </noscript>
+
+    <header class="header container-fluid">
+        <div class="row admin-head">
+            <div class="admin-logo col-lg-11">
+                <a href="./home.html" class="admin-logo__h3">ADMIN BOARD</a>
+            </div>
+    
+            <div class="admin-logout col-lg-1">
+                <a href="{% url 'adminboard:logoutAdmin' %}" class="btn btn--logout">Logout</a>
+            </div>
+        </div>
+    </header>
+    {% if email in authorized_admin %}
+    <main class="board container-fluid">
+        <div id="grid">
+            <p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p>
+        </div>
+        
+        <aside class="nav">
+            <ul class="navbar">
+                <li class="nav-items"> <a href="{% url 'adminboard:adminhome' %}"><i class="fas fa-home"></i>Home</a> </li>
+                <li class="nav-items"> <a href="{% url 'adminboard:adminuser' %}"><i class="fas fa-user"></i>User</a> </li>
+                <li class="nav-items"> <a href="{% url 'adminboard:addquest' %}" class="active"><i class="fas fa-book"></i>Question</a> </li>
+                <li class="nav-items"> <a href="{% url 'adminboard:submission' %}"><i class="fas fa-tasks"></i>Submissions</a> </li>
+            </ul>
+        </aside>
+
+        <div class="screen">
+            <div class="screen__table">
+                <div class="screen__table__top">
+                    <h3 class="table-title">Objective Questions</h3>
+                        <a href="{% url 'adminboard:addquest' %}" class="btn btn--create"><i class="fas fa-plus pr-2"></i> Add Questions</a>
+                </div>
+
+                <div class="screen__table__sect">
+                    <table class="table" id="questTable">
+                    <thead>
+                        <tr>
+                            <th scope="row">#</th>
+                            <th scope="row" class="w-50">Question</th>
+                            <th scope="row">Option1</th>
+                            <th scope="row">Option2</th>
+                            <th scope="row">Option3</th>
+                            <th scope="row">Option4</th>
+                            <th scope="row">Option5</th>
+                            <th scope="row">Correct</th>
+                            <th scope="row">Category</th>
+                            <th scope="row">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for i in questions %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td class="w-50 quest-data">{{i.question}}</td>
+                            <td>{{i.option1 }}</td>
+                            <td>{{ i.option2 }}</td>
+                            <td>{{ i.option3 }}</td>
+                            <td>{{ i.option4 }}</td>
+                            <td>{{ i.option5 }}</td>
+                            <td>{{ i.correct }}</td>
+                            <td>{{ i.category }}</td>
+                            <td>
+                                <a href="{% url 'adminboard:editquest' quest=i.id %}"><i class="fas fa-edit pr-2"></i></a>
+                                <a href="{% url 'adminboard:delquest' quest=i.id %}"><i class="fas fa-trash-alt" title="delete"></i></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </div>
+    </main>
+    {% else %}
+        <h2>You do not have admin rights.</h2>
+    {% endif %}
+
+
+    <!-- Script
+    ------------------------>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+    <!-- <script src="../assets/js/inspect.js"></script> -->
+    <script src="{% static 'js/admin.js' %}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#questTable').DataTable();
+        });
+    </script>
+</body>
+</html>

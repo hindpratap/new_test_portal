@@ -1,0 +1,80 @@
+{% extends 'adminboard/cred.html' %}
+{% block scripts %}
+    {% load staticfiles %}
+    <script src="{% static 'js/index.js' %}"></script>
+    <script>
+        try{
+            //Datepicker
+            $('#dob').datepicker({
+                uiLibrary: 'bootstrap4'
+            });
+
+            //File upload name
+            $(".custom-file-input").on("change", function() {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+            });
+
+            //Candidate Data
+            let candidateObj =
+                {
+                    "name": `{{ candidate.fullname }}`,
+                    "username": `{{ candidate.username }}`,
+                    "pass": `{{ candidate.password }}`,
+                    "email": `{{ candidate.email }}`,
+                    "mobile": `{{ candidate.phone }}`,
+                    "dob": `{{ candidate.dob }}`,
+                    "position": `{{ candidate.designation }}`,
+                    "team": `{{ candidate.team }}`,
+                    "dResume": `{{ candidate.resume }}`
+                };
+            const formElem = document.querySelectorAll('.form-elem');
+            const dob = `{{ candidate.dob }}`;
+            let formElemId;
+
+            const keys = Object.keys(candidateObj);
+            console.log(candidateObj[keys[1]]);
+
+
+            [...formElem].map(e => {
+                e.required = true;
+                formElemId = e.getAttribute('data-id');
+                keys.forEach(k => {
+                    if(formElemId === k){
+                        if(e.tagName === 'SELECT'){
+                            for(let i=0; i<e.options.length; i++){
+                                if(e.options[i].value === candidateObj[k]){
+                                    e.options[i].selected = 'selected';
+                                }
+                            }
+                        }else if(e.tagName === 'INPUT'){
+                            e.value = candidateObj[k];
+                        }else{
+                            e.innerHTML = `${candidateObj[k]}`;
+                        }
+                    }
+                });
+
+                if(formElemId === 'username' || formElemId === 'pass'){
+                    e.readOnly = true;
+                    e.style = 'background: #ececec';
+                }
+
+                if(formElemId === 'dob'){
+                    e.addEventListener('click', ()=> {
+                        e.parentElement.parentElement.querySelector('.form-label').innerHTML = `D.O.B &nbsp; <span style="color: blue">(Prev: ${dob})</span>`;
+                    })
+                }
+
+                if(formElemId === 'resume'){
+                    e.required = false;
+                }
+
+            });
+
+        }catch(err){}
+    </script>
+{% endblock %}
+{% block button %}
+    <button type="submit" class="btn btn--success">Update</button>
+{% endblock %}

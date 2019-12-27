@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="DataFlow | Candidate Testing Portal">
+    {% load staticfiles %}
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'images/DF Logo.svg' %}">
+
+    <!-- CDN CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/3.3.0/css/fixedColumns.bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/admin_home.css' %}">
+
+    <!-- Fontawesome -->
+    <script src="https://kit.fontawesome.com/8aa13c88ab.js"></script>
+
+    <title>User Panel</title>
+</head>
+<body>
+    <noscript>
+        Your Browser's JavaScript has been turned off kindly enable it.
+    </noscript>
+
+    <header class="header container-fluid">
+        <div class="row admin-head">
+            <div class="admin-logo col-lg-11">
+                <a href="./home.html" class="admin-logo__h3">ADMIN BOARD</a>
+            </div>
+    
+            <div class="admin-logout col-lg-1">
+                <a href="{% url 'adminboard:logoutAdmin' %}" class="btn btn--logout">Logout</a>
+            </div>
+        </div>
+    </header>
+    {% if email in authorized_admin %}
+    <main class="board container-fluid">
+        <div id="grid">
+            <p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p>
+        </div>
+        
+        <aside class="nav">
+            <ul class="navbar">
+                <li class="nav-items"> <a href="{% url 'adminboard:adminhome' %}"><i class="fas fa-home"></i>Home</a> </li>
+                <li class="nav-items"> <a href="{% url 'adminboard:adminuser' %}" class="active"><i class="fas fa-user"></i>User</a> </li>
+                <li class="nav-items"> <a href="{% url 'adminboard:addquest' %}"><i class="fas fa-book"></i>Question</a> </li>
+                <li class="nav-items"> <a href="{% url 'adminboard:submission' %}"><i class="fas fa-tasks"></i>Submissions</a> </li>
+            </ul>
+        </aside>
+
+        <div class="screen">
+            <div class="screen__table">
+                <div class="screen__table__top">
+                    <h3 class="table-title">Candidate Credentials</h3>
+                    <a href="{% url 'adminboard:addcredential' %}" class="btn btn--create"> <i class="fas fa-plus pr-2"></i> Add Credentials</a>
+                </div>
+
+                <table class="table dt-responsive nowrap" id="CCTable">
+                    <thead>
+                        <tr>
+                            <th scope="row">Name</th>
+                            <th scope="row">Username</th>
+                            <th scope="row">Email</th>
+                            <th scope="row">D.O.B</th>
+                            <th scope="row">Phone</th>
+                            <th scope="row">Designation</th>
+                            <th scope="row">Team</th>
+                            <th scope="row">Invite Status</th>
+                            <th scope="row">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for i in candidates %}
+                        <tr>
+                            <td>{{ i.fullname }}</td>
+                            <td>{{ i.username }}</td>
+                            <td>{{ i.email }}</td>
+                            <td>{{ i.dob }}</td>
+                            <td>{{ i.phone }}</td>
+{#                            <td><a href="/static/media/{{ i.resume }}" target="_blank">View Resume</a></td>#}
+                            <td>{{ i.designation }}</td>
+                            <td>{{ i.team }}</td>
+                            <td>{{ i.invitestatus }}</td>
+                            <td>
+                                <a href="{% url 'adminboard:admineditcand' username=i.username %}" class="pr-2 edit"><i class="fas fa-edit" title="edit"></i></a>
+                                <a href="{% url 'adminboard:adminnotifycand' username=i.username %}" class="pr-2 plane"><i class="fas fa-paper-plane" title="send"></i></a>
+                                <a href="{% url 'adminboard:admindelcand' username=i.username %}" class="delete"><i class="fas fa-trash-alt" title="delete"></i></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+    {% else %}<h1>Get OUT</h1>
+    {% endif %}
+
+
+    <!-- Script
+    ------------------------>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/fixedcolumns/3.3.0/js/dataTables.fixedColumns.min.js"></script>
+    <script src="{% static 'js/index.js' %}"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#CCTable').DataTable({
+                "scrollX": true,
+                fixedColumns: {
+                    leftColumns: 0,
+                    rightColumns: 1
+                }
+            });
+        });
+    </script>
+</body>
+</html>

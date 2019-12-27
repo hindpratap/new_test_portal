@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="DataFlow | Candidate Testing Portal">
+    {% load staticfiles %}
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'images/DF Logo.svg' %}">
+
+    <!-- CDN CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/admin_home.css' %}">
+
+    <!-- Fontawesome -->
+    <script src="https://kit.fontawesome.com/8aa13c88ab.js"></script>
+
+    <title>Create Credentials</title>
+</head>
+<body>
+
+    <noscript>
+        Your Browser's JavaScript has been turned off kindly enable it.
+    </noscript>
+
+    <header class="header container-fluid">
+        <div class="row admin-head">
+            <div class="admin-logo col-lg-11">
+                <a href="./home.html" class="admin-logo__h3">ADMIN BOARD</a>
+            </div>
+
+            <div class="admin-logout col-lg-1">
+                <a href="{% url 'adminboard:logoutAdmin' %}" class="btn btn--logout">Logout</a>
+            </div>
+        </div>
+    </header>
+{% if email in authorized_admin %}
+    <main class="board container-fluid">
+        <div id="grid">
+            <p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p>
+        </div>
+
+        <aside class="nav">
+            <ul class="navbar">
+                <li class="nav-items"> <a href="{% url 'adminboard:adminhome' %}"><i class="fas fa-home"></i>Home</a> </li>
+                <li class="nav-items"> <a href="{% url 'adminboard:adminuser' %}"><i class="fas fa-user"></i>User</a> </li>
+                <li class="nav-items"> <a href="{% url 'adminboard:addquest' %}"><i class="fas fa-book"></i>Question</a> </li>
+                <li class="nav-items"> <a href="{% url 'adminboard:submission' %}" class="active"><i class="fas fa-tasks"></i>Submissions</a> </li>
+            </ul>
+        </aside>
+
+        <div class="screen">
+            <div class="screen__table">
+                <div class="screen__table__top">
+                    <h3 class="table-title">All Submissions</h3>
+                </div>
+
+                <div class="screen__table__sect">
+                    <table class="table" id="subTable">
+                    <thead>
+                        <tr>
+                            <th scope="row">Name</th>
+                            <th scope="row">Username</th>
+                            <th scope="row">Email</th>
+                            <th scope="row">Profile</th>
+                            <th scope="row">Team</th>
+                            <th scope="row">Score</th>
+                            <th scope="row">Resume</th>
+                            <th scope="row">Status</th>
+                            <th scope="row">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for i in data %}
+                        <tr>
+                            <td class="">{{ i.fullname }}</td>
+                            <td>{{ i.username }}</td>
+                            <td>{{ i.email }}</td>
+                            <td>{{ i.designation }}</td>
+                            <td>{{ i.team }}</td>
+                            <td>{{ i.score }}</td>
+                            <td><a href="/static/media/{{ i.resume }}">Resume</a></td>
+                            <td>{{ i.selectionstatus }}</td>
+                            <td>
+{#                                <a href="#" class="pr-2 accept"><i class="fas fa-check" title="accept"></i></a>#}
+{#                                <a href="#" class="pl-2 reject"><i class="fas fa-times" title="reject"></i></a>#}
+                                <form method="post" action="{% url 'adminboard:candaction' id=i.id %}">{% csrf_token %}
+                                    {% if i.selectionstatus != 'Selected' and i.selectionstatus != 'Rejected' %}
+                                    <button type="submit" name="accept" class="pr-2 accept"><i class="fas fa-check" title="accept"></i></button>
+                                    <button type="submit" name="reject" class="pl-2 reject"><i class="fas fa-times" title="reject"></i></button>
+                                    {% endif %}
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </div>
+    </main>
+    {% else %}
+    <h2>You do not have admin rights.</h2>
+    {% endif %}
+
+
+    <!-- Script
+    ------------------------>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+    <!-- <script src="../assets/js/inspect.js"></script> -->
+    <script src="{% static 'js/admin.js' %}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#subTable').DataTable();
+        });
+    </script>
+</body>
+</html>

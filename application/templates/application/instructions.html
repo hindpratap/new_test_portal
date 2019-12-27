@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="DataFlow | Candidate Testing Portal">
+    {% load staticfiles %}
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'images/DF Logo.svg' %}">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+{#    <link rel="stylesheet" href="{% static 'css/dark.css' %}">#}
+
+    <!-- Fontawesome -->
+    <script src="https://kit.fontawesome.com/8aa13c88ab.js"></script>
+
+    <title>DataFlow | Candidate Portal</title>
+</head>
+<body>
+    <noscript>
+        Your Browser's JavaScript has been turned off kindly enable it.
+    </noscript>
+
+    <div class="app">
+
+        <header class="App-header">
+            <div class="brand">
+                <img src="{% static 'images/DF Logo.svg' %}" alt="logo" class="navbar-brand">
+                <span class="navbar-brand">Candidate Portal</span>
+            </div>
+            <nav class="navbar">
+                <ul class="nav">
+                    <li class="nav-items active assess-link"><a href="" class="nav-link">Assessment</a></li>
+                    <li class="nav-items report-link"><a class="nav-link">Report an Issue?</a></li>
+                    <li class="nav-items log"><a href="{% url 'application:logout_user' %}" class="nav-link btn--logout">Logout</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main class="render">
+
+            <section class="user-details">
+                <h4 class="user-detail-head">Candidate Details<span title="if your details doesn't match kindly report to us." class="info"><i class="fas fa-info-circle"></i></span></h4>
+                <div class="brief">
+                    <!-- <div class="user-profile">
+                        <img src="../assets/images/user-persona.svg" alt="user-img" class="user-profile-img">
+                    </div> -->
+                    <div class="brief-all">
+                        <div class="brief-box">
+                            <strong>Name:</strong>
+                            <p>Kaneki</p>
+                        </div>
+                        <div class="brief-box">
+                            <strong>Email:</strong>
+                            <p>kaneki@anime.com</p>
+                        </div>
+                        <div class="brief-box">
+                            <strong>Phone Number:</strong>
+                            <p>9876543210</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="instruction-details">
+                <h4 class="instruct-title">Instructions</h4>
+                <div class="instructions-all">
+                    <strong class="imp-note">Read through instructions given below carefully before attempting test</strong>
+                    <div class="read-all">
+                        <p class="read-all__p">1. This is a time bound test of 30 minutes.</p>
+                        <p class="read-all__p">2. Clock starts with Ques 1 getting displayed.</p>
+                        <p class="read-all__p">3. You may choose to attempt the test right now or may login with your credentials later.</p>
+                        <p class="read-all__p">4. It will contain question based on English grammar, logical, and reasoning areas.</p>
+                        <p class="read-all__p">5. The test shall get auto-submitted after 30 minutes.</p>
+                        <p class="read-all__p">6. The test cannot be fragmented. It should be completed in a single attempt.</p>
+                        <p class="read-all__p">7. You can go back and forth in while answering questions.</p>
+                        <p class="read-all__p">8. You will receive an email on your registered email id about the result.</p>
+                        <strong class="wishes">BEST OF LUCK 😊</strong>
+                    </div>
+                    <button class="btn btn--primary start-test">Start Test<i class="fas fa-chevron-right"></i></button>
+                </div>
+            </section>
+
+        </main>
+
+        <div class="report overlay">
+            <div class="report-div overlay-div">
+                <form action="" method="POST" class="report-form">
+                    <h1 class="report-form__title overlay-div__title">Tell us!</h1>
+                    <i class="fas fa-times cross"></i>
+                    <div class="error-type">
+                        <div class="error-type__radio" onclick="reportState(this)">
+                            <input type="radio" name="whichErr" id="detailErr">
+                            <label for="detailErr">
+                                <i class="fas fa-user-edit rep-icon1"></i>
+                                <span class="text">Incorrect Details</span>
+                            </label>        
+                        </div>
+                        <div class="error-type__radio" onclick="reportState(this)">
+                            <input type="radio" name="whichErr" id="otherErr">
+                            <label for="otherErr">
+                                <i class="fas fa-ellipsis-h rep-icon2"></i>
+                                <span class="text">Other Issue</span>
+                            </label>        
+                        </div>
+                    </div>
+                    <div class="error-type__describe">
+                        <label for="describe">Kindly describe the issue to us</label>
+                        <textarea name="describe" id="describe" class="describe__text" placeholder="Please provide a brief about the issue"></textarea>
+                    </div>
+                    <div class="err-btn">
+                        <button type="submit" class="btn btn--primary">Report</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="start overlay">
+            <div class="start-div overlay-div">
+                <h4 class="overlay-div__title">Make an attempt</h4>
+                <div class="cold-info">
+                    <p>This test has a time limit of 30mins. Count down will start the moment you start the test. You've to submit the test within 30 minutes or else it will automatically get submitted.</p><br>
+                    <p>Are you sure you wish to start now?</p>
+                </div>
+                <div class="start-btn">
+                    <a href="{% url 'application:panel' %}" class="btn btn--primary cont mr-3">Continue</a>
+                    <a class="btn btn--cancel cancel-no">Cancel</a>
+                </div>
+            </div>
+        </div>
+
+{#        <iframe id="main_frame" src="{% url 'application:panel' %}" style="width:100%;height:100%;border:none;display:none"></iframe>#}
+    </div>
+    
+    <!-- Script -->
+    <script src="{% static 'js/index.js' %}"></script>
+    <script src="{% static 'js/interactive.js' %}"></script>
+{#    <script src="{% static 'js/inspect.js' %}"></script>#}
+
+{#    <script>#}
+{#    function goFullscreen() {#}
+{#        // Must be called as a result of user interaction to work#}
+{#        mf = document.getElementById("main_frame");#}
+{#        mf.webkitRequestFullscreen();#}
+{#        mf.style.display="";#}
+{#    }#}
+{#    function fullscreenChanged() {#}
+{#        if (document.webkitFullscreenElement == null) {#}
+{#            mf = document.getElementById("main_frame");#}
+{#            mf.style.display="none";#}
+{#            window.location= `{% url 'application:forcelogout' username=username %}`;#}
+{#        }#}
+{#    }#}
+{#    let cont = document.querySelector('.cont');#}
+{##}
+{#    cont.onclick = goFullscreen;#}
+{#    document.onwebkitfullscreenchange = fullscreenChanged;#}
+{##}
+{#    //check for Navigation Timing API support#}
+{#    if (window.performance) {#}
+{#        console.info("window.performance works fine on this browser");#}
+{#    }#}
+{#    if (performance.navigation.type == 1) {#}
+{#        window.location= `{% url 'application:forcelogout' username=username %}`;#}
+{#        console.info( "This page is reloaded" );#}
+{#    } else {#}
+{#        console.info( "This page is not reloaded");#}
+{#    }#}
+{##}
+{#</script>#}
+
+</body>
+</html>

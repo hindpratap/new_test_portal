@@ -1,0 +1,109 @@
+/*--- Dark mode
+------------------------------------------*/
+
+/* Login */
+.app {
+    background: #121212;
+}
+
+input:focus ~ .label-placeholder, input:not(:focus):valid ~ .label-placeholder{
+    color: #e2e2e2;
+}
+
+/* Instructions */
+.app {
+    background-color: #121212;
+    height: 100vh;
+}
+
+.App-header{
+    background-color: #1f1f1f;
+    border: none;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.4);
+}
+
+.navbar-brand {
+    color: #e1e1e1;
+}
+
+.active, .nav-items:hover, .nav-items:focus {
+    background-color: #292929;
+    color: #e1e1e1;
+}
+
+.nav-link,
+a:not([href]):not([tabindex]){
+    color: #e1e1e1;
+    opacity: 1;
+}
+
+.user-detail-head, .info .fa-info-circle, .instruct-title{
+    color: #7b9cff;
+}
+
+.user-detail-head::before, .instruct-title::before{
+    background-color: #ee6f27;
+}
+
+.brief,
+.instructions-all{
+    color: #e1e1e1;
+}
+
+.brief-box strong,
+.imp-note,
+.wishes{
+    font-weight: 500;
+}
+
+.overlay {
+    background:rgba(33, 33, 33, 0.77);
+}
+
+.overlay-div{
+    background: #121212;
+    color: #e1e1e1;
+}
+
+.overlay-div__title{
+    color: #ccc;
+}
+
+.btn--cancel,
+.btn--cancel:hover{
+    color: #e1e1e1;
+}
+
+.error-type__radio{
+    background: radial-gradient(ellipse at center, #121212 45%, transparent 40%);
+}
+
+#describe {
+    background: #121212;
+    border: 1px solid #bbb;
+    color: #e1e1e1;
+}
+
+/* Panel */
+.panel--quest,
+.panel--nav__body {
+    background-color: #121212;
+    box-shadow: 0px 0px 12px 5px rgba(0,0,0,0.4);
+    color: #e1e1e1;
+}
+
+.panel--quest__cat{
+    background-color: #ee6f27;
+}
+
+.panel--nav__body{
+    border-top: 5px solid #ee6f27;
+}
+
+.panel--nav__body .h3{
+    color: #989898;
+}
+
+.nav-ques .h3{
+    color: #93a5de;
+}

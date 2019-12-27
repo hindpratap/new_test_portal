@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="DataFlow | Candidate Testing Portal">
+    {% load staticfiles %}
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'images/DF Logo.svg' %}">
+
+    <!-- CDN CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/admin_home.css' %}">
+
+    <!-- Fontawesome -->
+    <script src="https://kit.fontawesome.com/8aa13c88ab.js"></script>
+
+    <title>Create Credentials</title>
+</head>
+<body>
+
+    <noscript>
+        Your Browser's JavaScript has been turned off kindly enable it.
+    </noscript>
+
+    <header class="header container-fluid">
+        <div class="row admin-head">
+            <div class="admin-logo col-lg-11">
+                <a href="./home.html" class="admin-logo__h3">ADMIN BOARD</a>
+            </div>
+    
+            <div class="admin-logout col-lg-1">
+                <a href="{% url 'adminboard:logoutAdmin' %}" class="btn btn--logout">Logout</a>
+            </div>
+        </div>
+    </header>
+    {% if email in authorized_admin %}
+    <main class="board container-fluid">
+        <div id="grid">
+            <p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p>
+        </div>
+        
+        <aside class="nav">
+            <ul class="navbar">
+                <li class="nav-items"> <a href="{% url 'adminboard:adminhome' %}"><i class="fas fa-home"></i>Home</a> </li>
+                <li class="nav-items"> <a href="{% url 'adminboard:adminuser' %}"><i class="fas fa-user"></i>User</a> </li>
+                <li class="nav-items"> <a href="{% url 'adminboard:addquest' %}"><i class="fas fa-book"></i>Question</a> </li>
+                <li class="nav-items"> <a href="{% url 'adminboard:submission' %}"><i class="fas fa-tasks"></i>Submissions</a> </li>
+            </ul>
+        </aside>
+
+        <div class="screen">
+            <div class="screen__table">
+                <div class="screen__table__top">
+                    <h3 class="table-title">Add Candidate Credentials</h3>
+                    <a href="{% url 'adminboard:adminuser' %}" class="a--back"><i class="fas fa-chevron-left pr-2"></i> View credentials</a>
+                </div>
+                <form action="{% url 'adminboard:postcred' %}" method="POST" class="form cred-form" enctype="multipart/form-data">{% csrf_token %}
+
+                    <div class="form-div">
+                        <label for="" class="form-label">Full Name</label>
+                        <input type="text" name="fullName" class="form-elem form-elem--name" data-id="name" autocomplete="off">
+                        <span class="note"></span>
+                    </div>
+
+                    <div class="form-div">
+                        <label for="" class="form-label">Username</label>
+                        <input type="text" name="username" class="form-elem form-elem--user" data-id="username" autocomplete="off">
+                        <span class="note"></span>
+                    </div>
+
+                    <div class="form-div">
+                        <label for="" class="form-label">Password
+                            <span class="info-title">i</span>
+                        </label>
+                        <input type="text" name="password" class="form-elem form-elem--pass" data-id="pass" maxlength=10 minlength=8 autocomplete="off">
+                        <span class="note"></span>
+                    </div>
+
+                    <div class="form-div">
+                        <label for="" class="form-label">Email</label>
+                        <input type="text" name="email" class="form-elem form-elem--email" data-id="email" autocomplete="off">
+                        <span class="note"></span>
+                    </div>
+
+                    <div class="form-div">
+                        <label for="" class="form-label">Phone Number</label>
+                        <input type="number" name="phone" class="form-elem form-elem--mobile" data-id="mobile" maxlength='10' minlength='10' autocomplete="off">
+                        <span class="note"></span>
+                    </div>
+
+                    <div class="form-div">
+                        <label for="" class="form-label">Date of Birth</label>
+                        <input type="" name="dob" class="form-elem form-elem--dob form-control" id="dob" data-id="dob" autocomplete="off">
+                        <span class="note"></span>
+                    </div>
+
+                    <div class="form-div">
+                        <label for="" class="form-label">Designation</label>
+                        <select name="profile" id="profile" class="form-elem custom-select" data-id="position">
+                            <option value="">--select a designation--</option>
+                            <option value="Associate I">Associate I</option>
+                            <option value="Associate II">Associate II</option>
+                            <option value="Associate III">Associate III</option>
+                            <option value="Team Lead I">Team Lead I</option>
+                            <option value="Team Lead II">Team Lead II</option>
+                            <option value="Team Lead III">Team Lead III</option>
+                        </select>
+                        <span class="note"></span>
+                    </div>
+
+                    <div class="form-div">
+                        <label for="" class="form-label">Team</label>
+                        <select name="team" id="team" class="form-elem custom-select" data-id="team">
+                            <option value="">--select team--</option>
+                            <option value="Analytics">Analytics</option>
+                            <option value="Upsell">Upsell</option>
+                            <option value="Verification">Verification</option>
+                            <option value="Audit">Audit</option>
+                            <option value="Case Management">Case Management</option>
+                            <option value="Issuing Authority">Issuing Authority</option>
+                        </select>
+                        <span class="note"></span>
+                    </div>
+
+                    <div class="form-div mt-2">
+                        <label for="" class="form-label">Upload Resume</label>
+                        <input type="file" name="resume" class="custom-file-input form-elem form-elem--resume" id="customFile resume" data-id="resume">
+                        <label class="custom-file-label form-elem" for="customFile" data-id="dResume">Choose file</label>
+                        <span class="note"></span>
+                    </div>
+
+                    <div></div>
+
+                    <div class="btn-div mt-3">
+                        {% block button %}
+                        <button type="submit" class="btn btn--success">Submit</button>
+                        <button type="reset" class="btn btn--reset">Reset</button>
+                        {% endblock %}
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </main>
+    {% else %}
+        GET OUT
+    {% endif %}
+
+
+    <!-- Script
+    ------------------------>
+    <!-- <script src="../assets/js/inspect.js"></script> -->
+    {% block scripts %}
+    <script src="{% static 'js/index.js' %}"></script>
+    <script>
+            //Datepicker
+            $('#dob').datepicker({
+                uiLibrary: 'bootstrap4'
+            });
+
+            //File upload name
+            $(".custom-file-input").on("change", function() {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+            });
+
+            /* Get full data */
+            let usernameDup = [];
+            let emailDup = [];
+            let mobileDup = [];
+            let dobDup = [];
+
+            {% for i in data %}
+                usernameDup.push(`{{ i.username }}`);
+                emailDup.push(`{{ i.email }}`);
+                mobileDup.push(`{{ i.phone }}`);
+                dobDup.push(`{{ i.dob }}`);
+            {% endfor %}
+
+    </script>
+    <script src="{% static 'js/validation.js' %}"></script>
+    {% endblock %}
+</body>
+</html>

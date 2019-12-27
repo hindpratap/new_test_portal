@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="DataFlow | Candidate Testing Portal">
+    {% load staticfiles %}
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'images/DF Logo.svg' %}">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+{#    <link rel="stylesheet" href="{% static 'css/dark.css' %}">#}
+
+    <!-- Fontawesome -->
+    <script src="https://kit.fontawesome.com/8aa13c88ab.js"></script>
+
+    <title>DataFlow | Candidate Portal</title>
+</head>
+<body>
+    <noscript>
+        Your Browser's JavaScript has been turned off kindly enable it.
+    </noscript>
+
+    <div class="app">
+
+        <div class="cont-img">
+            <!-- <img src="./assets/images/Dataflow entrance.jpg" alt="containerImage"> -->
+        </div>
+
+        <div class="cont-box">
+            <img src="{% static 'images/homeGrap.svg' %}" alt="homeGrap" class="homeGrap">
+            <form action="{% url 'application:logincand' %}" method="POST" class="login-form">{% csrf_token %}
+                <h1 class="heading">Candidate Portal</h1>
+               {% for message in messages %}
+                        <div class="alert alert-danger">
+                            <a class="close" href="#" data-dismiss="alert"></a>
+                            <p>{{ message }}</p>
+                        </div>
+                {% endfor %}
+                <div class="login-form-comp">
+                    <input type="text" name="username" class="input-field" required>
+                    <span class="label-placeholder">Username</span>
+                </div>
+                <div class="login-form-comp">
+                    <input type="password" name="password" class="input-field" required>
+                    <span class="label-placeholder">Password</span>
+                    <span class="password-eye" title="Show Password">
+                        <i class="fas fa-eye-slash"></i>
+                    </span>
+                </div>
+                <button type="submit" class="btn btn--login">Login</button>
+            </form>
+
+        </div>
+
+    </div>
+    <!-- Script -->
+    <script src="{% static 'js/index.js' %}"></script>
+    <script src="{% static 'js/interactive.js' %}"></script>
+    <!-- <script src="../assets/js/inspect.js"></script> -->
+</body>
+</html>

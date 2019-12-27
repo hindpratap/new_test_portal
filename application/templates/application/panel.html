@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="DataFlow | Candidate Testing Portal">
+
+    {% load staticfiles %}
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'images/DF Logo.svg' %}">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+{#    <link rel="stylesheet" href="{% static 'css/dark.css' %}">#}
+
+    <!-- Fontawesome -->
+    <script src="https://kit.fontawesome.com/8aa13c88ab.js"></script>
+
+    <title>DataFlow | Candidate Portal</title>
+</head>
+<body>
+    <noscript>
+        Your Browser's JavaScript has been turned off kindly enable it.
+    </noscript>
+
+    <div class="app">
+
+        <header class="App-header">
+            <div class="brand">
+                <img src="{% static 'images/DF Logo.svg' %}" alt="logo" class="navbar-brand">
+                <span class="navbar-brand">Candidate Portal</span>
+            </div>
+            <nav class="navbar">
+                <ul class="nav">
+                    <li class="nav-items active assess-link"><a class="nav-link">Assessment</a></li>
+                </ul>
+            </nav>
+        </header>
+
+
+        <main class="main--panel container mt-5 mb-5">
+            
+            <section class="panel--quest">
+                <form action="#" method="POST" id="panelForm">{% csrf_token %}
+                    {% for i in reasoning_questions %}
+                        <div  class="panel panel-hide" data-id="res--quest-{{ forloop.counter }}">
+                        <span class="panel--quest__cat">Reasoning</span>
+                        <div class="panel__head mt-5 mb-4">
+                            <h3 class="h3">Ques {{ forloop.counter }}.</h3>
+                            <input type="text" class="hidden" value="{{ i.id }}" name="res__{{ i.id }}">
+                        </div>
+                        <div class="question mb-4">
+                            <p class="question__p">{{ i.question }}
+                            </p>
+                        </div>
+                        <div class="options">
+                            <div class="options__opt pt-2 pb-2">
+                                <label for="res{{ forloop.counter }}__1" class="radio">
+                                    <input type="radio" name="res__{{ forloop.counter }}" id="res{{ forloop.counter }}__1" class="hidden optBtn" value="{{ i.option1 }}">
+                                    <span class="label"></span>{{ i.option1 }}
+                                </label>
+                            </div>
+                            <div class="options__opt pt-2 pb-2">
+                                <label for="res{{ forloop.counter }}__2" class="radio">
+                                    <input type="radio" name="res__{{ forloop.counter }}" id="res{{ forloop.counter }}__2" class="hidden optBtn" value="{{ i.option2 }}">
+                                    <span class="label"></span>{{ i.option2 }}
+                                </label>
+                            </div>
+                            <div class="options__opt pt-2 pb-2">
+                                <label for="res{{ forloop.counter }}__3" class="radio">
+                                    <input type="radio" name="res__{{ forloop.counter }}" id="res{{ forloop.counter }}__3" class="hidden optBtn" value="{{ i.option3 }}">
+                                    <span class="label"></span>{{ i.option3 }}
+                                </label>
+                            </div>
+                            <div class="options__opt pt-2 pb-2">
+                                <label for="res{{ forloop.counter }}__4" class="radio">
+                                    <input type="radio" name="res__{{ forloop.counter }}" id="res{{ forloop.counter }}__4" class="hidden optBtn" value="{{ i.option4 }}">
+                                    <span class="label"></span>{{ i.option4 }}
+                                </label>
+                            </div>
+                            {% if i.option5 != 'null' %}
+                                <div class="options__opt pt-2 pb-2">
+                                    <label for="res{{ forloop.counter }}__5" class="radio">
+                                        <input type="radio" name="res__{{ forloop.counter }}" id="res{{ forloop.counter }}__5" class="hidden optBtn" value="{{ i.option5 }}">
+                                        <span class="label"></span>{{ i.option5 }}
+                                    </label>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% for i in english_questions %}
+                        <div  class="panel panel-hide" data-id="eng--quest-{{ forloop.counter }}">
+                        <span class="panel--quest__cat">English</span>
+                        <div class="panel__head mt-5 mb-4">
+                            <h3 class="h3">Ques {{ forloop.counter }}.</h3>
+                            <input type="text" class="hidden" value="{{ i.id }}" name="eng__{{ i.id }}">
+                        </div>
+                        <div class="question mb-4">
+                            <p class="question__p">{{ i.question }}
+                            </p>
+                        </div>
+                        <div class="options">
+                            <div class="options__opt pt-2 pb-2">
+                                <label for="eng{{ forloop.counter }}__1" class="radio">
+                                    <input type="radio" name="eng__{{ forloop.counter }}" id="eng{{ forloop.counter }}__1" class="hidden optBtn" value="{{ i.option1 }}">
+                                    <span class="label"></span>{{ i.option1 }}
+                                </label>
+                            </div>
+                            <div class="options__opt pt-2 pb-2">
+                                <label for="eng{{ forloop.counter }}__2" class="radio">
+                                    <input type="radio" name="eng__{{ forloop.counter }}" id="eng{{ forloop.counter }}__2" class="hidden optBtn" value="{{ i.option2 }}">
+                                    <span class="label"></span>{{ i.option2 }}
+                                </label>
+                            </div>
+                            <div class="options__opt pt-2 pb-2">
+                                <label for="eng{{ forloop.counter }}__3" class="radio">
+                                    <input type="radio" name="eng__{{ forloop.counter }}" id="eng{{ forloop.counter }}__3" class="hidden optBtn" value="{{ i.option3 }}">
+                                    <span class="label"></span>{{ i.option3 }}
+                                </label>
+                            </div>
+                            <div class="options__opt pt-2 pb-2">
+                                <label for="eng{{ forloop.counter }}__4" class="radio">
+                                    <input type="radio" name="eng__{{ forloop.counter }}" id="eng{{ forloop.counter }}__4" class="hidden optBtn" value="{{ i.option4 }}">
+                                    <span class="label"></span>{{ i.option4 }}
+                                </label>
+                            </div>
+                            {% if i.option5 != 'null' %}
+                            <div class="options__opt pt-2 pb-2">
+                                <label for="eng{{ forloop.counter }}__5" class="radio">
+                                    <input type="radio" name="eng__{{ forloop.counter }}" id="eng{{ forloop.counter }}__5" class="hidden optBtn" value="{{ i.option5 }}">
+                                    <span class="label"></span>{{ i.option5 }}
+                                </label>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% for i in quantitative_questions %}
+                        <div  class="panel panel-hide" data-id="psy--quest-{{ forloop.counter }}">
+                        <span class="panel--quest__cat">Quantitative</span>
+                        <div class="panel__head mt-5 mb-4">
+                            <h3 class="h3">Ques {{ forloop.counter }}.</h3>
+                            <input type="text" class="hidden" value="{{ i.id }}" name="quant__{{ i.id }}">
+                        </div>
+                        <div class="question mb-4">
+                            <p class="question__p">{{ i.question }}
+                            </p>
+                        </div>
+                        <div class="options">
+                            <div class="options__opt pt-2 pb-2">
+                                <label for="psy{{ forloop.counter }}__1" class="radio">
+                                    <input type="radio" name="psy__{{ forloop.counter }}" id="psy{{ forloop.counter }}__1" class="hidden optBtn" value="{{ i.option1 }}">
+                                    <span class="label"></span>{{ i.option1 }}
+                                </label>
+                            </div>
+                            <div class="options__opt pt-2 pb-2">
+                                <label for="psy{{ forloop.counter }}__2" class="radio">
+                                    <input type="radio" name="psy__{{ forloop.counter }}" id="psy{{ forloop.counter }}__2" class="hidden optBtn" value="{{ i.option2 }}">
+                                    <span class="label"></span>{{ i.option2 }}
+                                </label>
+                            </div>
+                            <div class="options__opt pt-2 pb-2">
+                                <label for="psy{{ forloop.counter }}__3" class="radio">
+                                    <input type="radio" name="psy__{{ forloop.counter }}" id="psy{{ forloop.counter }}__3" class="hidden optBtn" value="{{ i.option3 }}">
+                                    <span class="label"></span>{{ i.option3 }}
+                                </label>
+                            </div>
+                            <div class="options__opt pt-2 pb-2">
+                                <label for="psy{{ forloop.counter }}__4" class="radio">
+                                    <input type="radio" name="psy__{{ forloop.counter }}" id="psy{{ forloop.counter }}__4" class="hidden optBtn" value="{{ i.option4 }}">
+                                    <span class="label"></span>{{ i.option4 }}
+                                </label>
+                            </div>
+                            {% if i.option5 != 'null' %}
+                            <div class="options__opt pt-2 pb-2">
+                                <label for="psy{{ forloop.counter }}__5" class="radio">
+                                    <input type="radio" name="psy__{{ forloop.counter }}" id="psy{{ forloop.counter }}__5" class="hidden optBtn" value="{{ i.option5 }}">
+                                    <span class="label"></span>{{ i.option5 }}
+                                </label>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                    <input type="number" class="hidden parinam" value="" name="percent__">
+                    <input type="text" class="hidden" value="{{ username }}" name="username__">
+
+                </form>
+            </section>
+
+            <section class="panel--nav">
+                <div class="panel--nav__body">
+                    <div class="panel--nav__body__head">
+                        <h3 class="h3">Navigation</h3>
+                    </div>
+
+                    <div class="panel--nav__body__time mt-3 mb-3">
+                        <p class="monitor">Time Left - <span class="monitor--time"></span></p>
+                    </div>
+
+                    <div class="inst">
+                        <div class="inst--div">
+                            <label for="" class="label">
+                                <span class="label-circle notvisited"></span>Not Visited
+                            </label>
+                        </div>
+                        <div class="inst--div">
+                            <label for="" class="label">
+                                <span class="label-circle currently"></span>Current
+                            </label>
+                        </div>
+                        <div class="inst--div">
+                            <label for="" class="label">
+                                <span class="label-circle answered"></span>Answered
+                            </label>
+                        </div>
+
+                        <div class="inst--div">
+                            <label for="" class="label">
+                                <span class="label-circle notanswered"></span>Not Answered
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="nav-ques mt-4">
+                        {% if reasoning_questions %}
+                            <h3 class="h3 nav-ques__h3">Reasoning</h3>
+                        {% endif %}
+
+                        <div class="ques__switch mt-4">
+                            {% for i in reasoning_questions %}
+                                <div class="switch__">
+                                    <a class="switch__a" data-comp="res--quest-{{ forloop.counter }}">{{ forloop.counter }}</a>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="nav-ques mt-4">
+                        {% if english_questions %}
+                            <h3 class="h3 nav-ques__h3">English</h3>
+                        {% endif %}
+
+                        <div class="ques__switch mt-4">
+                            {% for i in english_questions %}
+                                <div class="switch__">
+                                    <a class="switch__a" data-comp="eng--quest-{{ forloop.counter }}">{{ forloop.counter }}</a>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="nav-ques mt-4">
+                        {% if quantitative_questions %}
+                            <h3 class="h3 nav-ques__h3">Quantitative</h3>
+                        {% endif %}
+
+                        <div class="ques__switch mt-4">
+                            {% for i in quantitative_questions %}
+                                <div class="switch__">
+                                    <a class="switch__a" data-comp="psy--quest-{{ forloop.counter }}">{{ forloop.counter }}</a>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+
+                </div>
+            </section>
+
+            <section class="panel--btn">
+                <button class="btn btn--cancel mr-2" id="prevBtn">Previous</button>
+                <button class="btn btn--primary" id="nextBtn">Next</button>
+            </section>
+        </main>
+
+    </div>
+
+    <!-- Script -->
+    <script src="{% static 'js/interactive.js' %}"></script>
+    <script src="{% static 'js/panel.js' %}"></script>
+    <script src="{% static 'js/inspect.js' %}"></script>
+    {% include 'application/result.html' %}
+
+
+</body>
+</html>
