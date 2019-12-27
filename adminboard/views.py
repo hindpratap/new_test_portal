@@ -67,33 +67,33 @@ def postcred(request):
 
         dob = dob[6:10] + '-' + dob[:2] + '-' + dob[3:5]
         if User.objects.filter(username=username).exists() and CreateCandidate.objects.filter(username=username).exists():
-            try:
-                authcand = User.objects.get(username=username)
-                cand = CreateCandidate.objects.get(username=username)
-                authcand.first_name = fullname
-                authcand.email = email
-                authcand.save()
-                cand.fullname = fullname
-                cand.email = email
-                cand.phone = phone
-                cand.team = team
-                cand.designation = designation
-                if resume != None:
-                    cand.resume = resume
-                else:
-                    pass
-                cand.save()
-            except:
-                return HttpResponse('<h2>Error code v6s v7.5s(postcred if)</h2>')
+            # try:
+            authcand = User.objects.get(username=username)
+            cand = CreateCandidate.objects.get(username=username)
+            authcand.first_name = fullname
+            authcand.email = email
+            authcand.save()
+            cand.fullname = fullname
+            cand.email = email
+            cand.phone = phone
+            cand.team = team
+            cand.designation = designation
+            if resume != None:
+                cand.resume = resume
+            else:
+                pass
+            cand.save()
+            # except:
+            #     return HttpResponse('<h2>Error code v6s v7.5s(postcred if)</h2>')
             return redirect('adminboard:adminuser')
         else:
-            try:
-                CreateCandidate.objects.create(fullname=fullname, username=username, password=password, email=email,
-                                            phone=phone, designation=designation, team=team, created_at=datetime.today(), dob=dob, resume=resume)
-                User.objects.create_user(first_name=fullname, username=username, password=password, email=email)
+            # try:
+            CreateCandidate.objects.create(fullname=fullname, username=username, password=password, email=email,
+                                        phone=phone, designation=designation, team=team, created_at=datetime.today(), dob=dob, resume=resume)
+            User.objects.create_user(first_name=fullname, username=username, password=password, email=email)
 
-            except:
-                return HttpResponse('<h2>Error code v8-8.5s(postcred else)</h2>')
+            # except:
+            #     return HttpResponse('<h2>Error code v8-8.5s(postcred else)</h2>')
             return redirect('adminboard:addcredential')
     return redirect('adminboard:addcredential')
 
@@ -112,14 +112,14 @@ def admindelcand(request, username):
     authorized_admin = [i.email for i in Authorizedadmin.objects.all()]
     email = request.user.email
     if email in authorized_admin:
-        try:
-            User.objects.get(username=username).delete()
-            obj = CreateCandidate.objects.get(username=username)
-            obj.activestatus = 'deleted'
-            obj.save()
-            return redirect('adminboard:adminuser')
-        except:
-            return HttpResponse('<h2>Error: V@admindelcand</h2>')
+        # try:
+        User.objects.get(username=username).delete()
+        obj = CreateCandidate.objects.get(username=username)
+        obj.activestatus = 'deleted'
+        obj.save()
+        return redirect('adminboard:adminuser')
+        # except:
+        #     return HttpResponse('<h2>Error: V@admindelcand</h2>')
     else:
         return HttpResponse('<h2>Error: You do not have admin rights.</h2>')
 

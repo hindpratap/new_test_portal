@@ -29,8 +29,10 @@ def logincand(request):
 @login_required(login_url='logincand/')
 @csrf_exempt
 def instructions(request):
+    email = request.user.email
     username = request.user.username
-    return render(request, 'application/instructions.html', {'username': username})
+    obj = CreateCandidate.objects.get(username=username)
+    return render(request, 'application/instructions.html', {'username': username, 'name': obj.fullname, 'email': email, 'phone': obj.phone})
 
 @login_required(login_url='logincand/')
 def logout_user(request):
@@ -60,7 +62,7 @@ def submitted(request):
         except:
             return HttpResponse('<h2>Unique contraint failed for username</h2>')
         logout(request)
-        return redirect('application:submitted')
+        return render(request, 'application/submit.html')
     return redirect('application:panel')
 
 

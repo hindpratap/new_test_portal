@@ -20,3 +20,9 @@ class Tagquestion(models.Model):
 
     def __str__(self):
         return self.username
+
+class Instructions(models.Model):
+    points = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return self.points

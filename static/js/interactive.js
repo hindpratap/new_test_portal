@@ -23,49 +23,21 @@ try{
 
 // Instruction Components
 try{
-
-    // Report
-    const assessLink = document.querySelector('.assess-link');
-    const reportLink = document.querySelector('.report-link');
-    const reportDiv = document.querySelector('.report');
-    const radioDiv = document.querySelectorAll('.error-type__radio');
-    const cross = document.querySelector('.cross');
-
-    reportLink.addEventListener('click', ()=>{
-        reportLink.classList.add('active');
-        assessLink.classList.remove('active');
-        reportDiv.style.visibility = 'visible';
-    });
-
-    function reportState(e){
-        let radioBtn = e.querySelector(`[name='whichErr']`);
-        radioBtn.checked = true;
-
-        Array.from(radioDiv).forEach((div)=>{
-            div.classList.remove('err__active');
-        });
-
-        e.classList.add('err__active');
-        console.log(e.classList);
-    }
-
-    cross.addEventListener('click', ()=>{
-        reportDiv.style.visibility = 'hidden';
-        assessLink.classList.add('active');
-        reportLink.classList.remove('active');
-    });
-
     // Continue/Start
     const startBtn = document.querySelector('.start-test');
-    const startDiv = document.querySelector('.start');
+    const startDiv = document.querySelector('.starter');
     const cancelNo = document.querySelector('.cancel-no');
 
     startBtn.addEventListener('click', (e)=>{
         startDiv.style.visibility = 'visible';
+        console.log('start');
     });
 
     cancelNo.addEventListener('click', (e)=>{
         startDiv.style.visibility = 'hidden';
+        console.log('close');
     });
 
-}catch(err){}
+}catch(err){
+    console.log('err');
+}

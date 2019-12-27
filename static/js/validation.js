@@ -3,16 +3,16 @@ let infoTitle = document.querySelector('.info-title');
 infoTitle.title = `
 Password must contain 
 1.Uppercase letter 
-2.Lowecase letter 
+2.Lowercase letter 
 3.Number 
 4.Special Character 
-5.Password-length must be 8-10 Character`
+5.Password-length must be 8-10 Character`;
 
 /*--- Form Validation
 ------------------------------------*/
 
 // Regex
-let passRegx = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^\*])(?=.{8,})/);
+let passRegx = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@\$\^\*])(?=.{8,})/);
 let emailRegx = new RegExp(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/);
 let mobileRegx = new RegExp(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/);
 
@@ -31,7 +31,6 @@ try{
     let lenArr = [8, 9, 10];
     let len = lenArr[Math.floor(Math.random() * lenArr.length)];
     pass.value = password_generator(len);
-    // pass.addEventListener('keyup', ()=>{validator(pass);});
 
     // Email Validation
     let email = credForm.querySelector('.form-elem--email');
@@ -52,9 +51,6 @@ try{
     mobile.addEventListener('keyup', ()=>{
         if(validator(mobile)){
             duplicateChecker(mobile);
-        }else{
-            mobile.parentElement.querySelector('.note').innerHTML = '';
-            mobile.style = `border: 1px solid tomato; background: #ffeae6;`;
         }
     });
 
@@ -68,18 +64,17 @@ try{
     });
 
     // Submit Button
-    let submitBtn = credForm.querySelector('[type="submit"]');
-    submitBtn.addEventListener('click', e => {
+    const credSubmit = document.querySelector('#credForm');
+    credSubmit.addEventListener('submit', e => {
         let fOpt;
         [...formElem].map(f=>{
             const dataID = f.getAttribute('data-id');
             switch(dataID){
-
                 case 'name':
                     if (f.value === ``){
+                        e.preventDefault();
                         f.parentElement.querySelector('.note').innerHTML = 'Please Enter Full Name of user';
                         f.style = `border: 1px solid tomato; background: #ffeae6;`;
-                        e.preventDefault();
                     }else{
                         f.parentElement.querySelector('.note').innerHTML = '';
                         f.style = `border: 1px solid mediumaquamarine; background: #dbfdf1;`;
@@ -87,95 +82,55 @@ try{
                     break;
 
                 case 'username':
-                    if(f.value === ``){
-                        f.parentElement.querySelector('.note').innerHTML = 'Please provide a username';
-                        f.style = `border: 1px solid tomato; background: #ffeae6;`;
+                    if(duplicateChecker(user)){
                         e.preventDefault();
-                    }else{
-                        for(let i=0; i<=usernameDup; i++){
-                            if(f.value === usernameDup[i]){
-                                f.parentElement.querySelector('.note').innerHTML = 'username already exists!';
-                                f.style = `border: 1px solid tomato; background: #ffeae6;`;
-                                e.preventDefault();
-                                break;
-                            }else{
-                                f.parentElement.querySelector('.note').innerHTML = '';
-                                f.style = `border: 1px solid mediumaquamarine; background: #dbfdf1;`;
-                            }
-                        }
                     }
                     break;
 
                 case 'pass':
                     if (f.value === ``){
+                        e.preventDefault();
                         f.parentElement.querySelector('.note').innerHTML = 'Please provide password';
                         f.style = `border: 1px solid tomato; background: #ffeae6;`;
-                        e.preventDefault();
                     }else if(passRegx.test(f.value)){
                         f.parentElement.querySelector('.note').innerHTML = '';
                         f.style = `border: 1px solid mediumaquamarine; background: #dbfdf1;`;
                     }else{
+                        e.preventDefault();
                         f.parentElement.querySelector('.note').innerHTML = 'Password does not match the guidelines';
                         f.style = `border: 1px solid tomato; background: #ffeae6;`;
-                        e.preventDefault();
                     }
                     break;
 
                 case 'email':
-                    if(f.value === ``){
-                        f.parentElement.querySelector('.note').innerHTML = 'Please provide email-id';
-                        f.style = `border: 1px solid tomato; background: #ffeae6;`;
-                        e.preventDefault();
-                    }else{
-                        if(validator(f)){
-                            for(let i=0; i<emailDup.length; i++){
-                                if(f.value === emailDup[i]){
-                                    f.parentElement.querySelector('.note').innerHTML = 'email already exists!';
-                                    f.style = `border: 1px solid tomato; background: #ffeae6;`;
-                                    e.preventDefault();
-                                }else {
-                                    f.parentElement.querySelector('.note').innerHTML = '';
-                                    f.style = `border: 1px solid mediumaquamarine; background: #dbfdf1;`;
-                                }
-                            }
-                        }else{
-                            f.parentElement.querySelector('.note').innerHTML = 'Please provide correct email-id';
-                            f.style = `border: 1px solid tomato; background: #ffeae6;`;
+                    if(validator(f)){
+                        if(duplicateChecker(email)){
                             e.preventDefault();
                         }
+                    }else{
+                        e.preventDefault();
+                        f.parentElement.querySelector('.note').innerHTML = 'Please provide correct email-id';
+                        f.style = `border: 1px solid tomato; background: #ffeae6;`;
                     }
                     break;
 
                 case 'mobile':
-                    if(f.value === ``){
-                        f.parentElement.querySelector('.note').innerHTML = 'Please provide the phone number';
-                        f.style = `border: 1px solid tomato; background: #ffeae6;`;
-                        e.preventDefault();
-                    }else{
-                        if(validator(f)){
-                            for(let i=0; i<mobileDup; i++){
-                            if(f.value === mobileDup[i]){
-                                f.parentElement.querySelector('.note').innerHTML = 'mobile already exists';
-                                f.style = `border: 1px solid tomato; background: #ffeae6;`;
-                                e.preventDefault();
-                            }else{
-                                f.parentElement.querySelector('.note').innerHTML = '';
-                                f.style = `border: 1px solid mediumaquamarine; background: #dbfdf1;`;
-                            }
-                        }
-                        }else{
-                            f.parentElement.querySelector('.note').innerHTML = 'Please provide correct phone number';
-                            f.style = `border: 1px solid tomato; background: #ffeae6;`;
+                    if(validator(mobile)){
+                        if(duplicateChecker(mobile)){
                             e.preventDefault();
                         }
+                    }else{
+                        e.preventDefault();
+                        f.parentElement.querySelector('.note').innerHTML = 'Please provide correct phone number';
+                        f.style = `border: 1px solid tomato; background: #ffeae6;`;
                     }
                     break;
 
                 case 'dob':
                     if (f.value === ``){
+                        e.preventDefault();
                         f.parentElement.parentElement.querySelector('.note').innerHTML = 'Please provide date of birth';
                         f.style = `border: 1px solid tomato; background: #ffeae6;`;
-                        e.preventDefault();
                     }else{
                         f.parentElement.parentElement.querySelector('.note').innerHTML = '';
                         f.style = `border: 1px solid mediumaquamarine; background: #dbfdf1;`;
@@ -197,9 +152,9 @@ try{
                 case 'team':
                     fOpt = f.options[f.selectedIndex].value;
                     if (fOpt === ``){
+                        e.preventDefault();
                         f.parentElement.querySelector('.note').innerHTML = 'Please select a team for candidate';
                         f.style = `border: 1px solid tomato; background: #ffeae6;`;
-                        e.preventDefault();
                     }else{
                         f.parentElement.querySelector('.note').innerHTML = '';
                         f.style = `border: 1px solid mediumaquamarine; background: #dbfdf1;`;
@@ -208,10 +163,10 @@ try{
 
                 case 'resume':
                     if (f.value === ``){
+                        e.preventDefault();
                         console.log(f.nextSibling)
                         f.parentElement.querySelector('.note').innerHTML = 'Please upload a resume of candidate';
                         f.parentElement.querySelector('.custom-file-label').style = `border: 1px solid tomato; background: #ffeae6;`;
-                        e.preventDefault();
                     }else{
                         f.parentElement.querySelector('.note').innerHTML = '';
                         f.parentElement.querySelector('.custom-file-label').style = `border: 1px solid mediumaquamarine; background: #dbfdf1;`;
@@ -230,7 +185,7 @@ try{
     }
 
 }catch(err){
-    console.assert('hey');
+    console.error('hey error');
 }
 
 let validator = (arg) => {
@@ -256,28 +211,35 @@ let duplicateChecker = (dup)=>{
     let dupMed = dup.getAttribute('data-id');
     let dupID = dupMed + 'Dup';
     let dupVal = eval(dupID);
+    let flag = false;
 
     for(let i=0; i<dupVal.length; i++){
         if(dup.value === dupVal[i]){
             dup.parentElement.querySelector('.note').innerHTML = `${dupMed} already exists!`;
             dup.style = `border: 1px solid tomato; background: #ffeae6;`;
+            flag = true;
             break;
         }else if(dup.value === ``){
-            dup.parentElement.querySelector('.note').innerHTML = '';
+            dup.parentElement.querySelector('.note').innerHTML = `Please provide ${dupMed}`;
             dup.style = `border: 1px solid tomato; background: #ffeae6;`;
+            flag = false;
         }
         else{
             dup.parentElement.querySelector('.note').innerHTML = ``;
             dup.style = `border: 1px solid mediumaquamarine; background: #dbfdf1;`;
+            flag = false;
         }
     }
+
+    console.log(flag);
+    return flag;
 };
 
 function password_generator( len ){
     let length = (len)?(len):(10);
     let string = "abcdefghijklmnopqrstuvwxyz"; //to upper
     let numeric = '0123456789';
-    let punctuation = '!@#$%^*';
+    let punctuation = '!@$%^*';
     let password = "";
     let character = "";
     let crunch = true;

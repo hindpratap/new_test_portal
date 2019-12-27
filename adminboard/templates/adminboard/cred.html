@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="{% static 'css/admin_home.css' %}">
 
     <!-- Fontawesome -->
-    <script src="https://kit.fontawesome.com/8aa13c88ab.js"></script>
+    <script src="https://kit.fontawesome.com/11dafce953.js" crossorigin="anonymous"></script>
 
     <title>Create Credentials</title>
 </head>
@@ -51,7 +51,7 @@
         <aside class="nav">
             <ul class="navbar">
                 <li class="nav-items"> <a href="{% url 'adminboard:adminhome' %}"><i class="fas fa-home"></i>Home</a> </li>
-                <li class="nav-items"> <a href="{% url 'adminboard:adminuser' %}"><i class="fas fa-user"></i>User</a> </li>
+                <li class="nav-items"> <a href="{% url 'adminboard:adminuser' %}" class="active"><i class="fas fa-user"></i>User</a> </li>
                 <li class="nav-items"> <a href="{% url 'adminboard:addquest' %}"><i class="fas fa-book"></i>Question</a> </li>
                 <li class="nav-items"> <a href="{% url 'adminboard:submission' %}"><i class="fas fa-tasks"></i>Submissions</a> </li>
             </ul>
@@ -63,7 +63,7 @@
                     <h3 class="table-title">Add Candidate Credentials</h3>
                     <a href="{% url 'adminboard:adminuser' %}" class="a--back"><i class="fas fa-chevron-left pr-2"></i> View credentials</a>
                 </div>
-                <form action="{% url 'adminboard:postcred' %}" method="POST" class="form cred-form" enctype="multipart/form-data">{% csrf_token %}
+                <form action="{% url 'adminboard:postcred' %}" method="POST" class="form cred-form" id="credForm" enctype="multipart/form-data">{% csrf_token %}
 
                     <div class="form-div">
                         <label for="" class="form-label">Full Name</label>
@@ -187,7 +187,7 @@
             {% endfor %}
 
     </script>
-    <script src="{% static 'js/validation.js' %}"></script>
+    <script src="{% static 'js/validation.min.js' %}"></script>
     {% endblock %}
 </body>
 </html>
