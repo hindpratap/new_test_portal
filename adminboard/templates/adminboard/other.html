@@ -44,9 +44,13 @@
                     <a href="{% url 'adminboard:adminuser' %}" class="a--back"><i class="fas fa-chevron-left pr-2"></i>All Instructions</a>
                 </div>
                 <form action="" method="post">
-                    <label for="">Instruction</label>
-                    <textarea name="" id=""></textarea>
-                    <button type="submit" class="btn btn--primary">Add</button>
+                    <div class="form-div">
+                        <label for="instruction" class="form-label">Instruction</label>
+                        <textarea name="instruction" id="instruction" class="form-elem form-textarea"></textarea>
+                    </div>
+                    <div class="btn-div mt-4">
+                        <button type="submit" class="btn btn--primary">Add</button>
+                    </div>
                 </form>
             </div>
         </div>
