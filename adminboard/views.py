@@ -11,6 +11,7 @@ from adminboard.tasks import sendmailtask
 from django.db.models import Q
 import pandas as pd
 import numpy as np
+from application.models import Instructions
 
 
 def adminlogin(request):
@@ -199,7 +200,7 @@ def editquest(request, quest):
 def submission(request):
     authorized_admin = [i.email for i in Authorizedadmin.objects.all()]
     email = request.user.email
-    data = CreateCandidate.objects.filter(teststatus__iexact='TestTaken')
+    data = CreateCandidate.objects.filter(score__gte=70).order_by('-id')
     return render(request, 'adminboard/submission.html', {'data': data, 'email': email, 'authorized_admin': authorized_admin})
 
 @login_required
@@ -241,15 +242,12 @@ def changequest(request):
 def candaction(request, id):
     authorized_admin = [i.email for i in Authorizedadmin.objects.all()]
     email = request.user.email
-    if email in authorized_admin:
+    if request.method == 'POST' and email in authorized_admin:
+        fStatus = request.POST.get('fStatus')
         try:
             obj = CreateCandidate.objects.get(pk=id)
-            if 'accept' in request.POST:
-                obj.selectionstatus = 'Selected'
-                obj.save()
-            elif 'reject' in request.POST:
-                obj.selectionstatus = 'Rejected'
-                obj.save()
+            obj.selectionstatus = fStatus
+            obj.save()
             return redirect('adminboard:submission')
         except:
             return HttpResponse('<h2>Error: V@candaccept</h2>')
@@ -309,3 +307,21 @@ def bulkupload(request):
         return redirect('adminboard:addquest')
     else:
         return HttpResponse('You do not have admin rights.')
+
+@login_required
+def other(request):
+    authorized_admin = [i.email for i in Authorizedadmin.objects.all()]
+    email = request.user.email
+    instruct = Instructions.objects.all().order_by('-id')[0]
+    return render(request, 'adminboard/other.html', {'email': email, 'authorized_admin': authorized_admin, 'instruct': instruct})
+
+@login_required
+@csrf_exempt
+def postinstructions(request):
+    authorized_admin = [i.email for i in Authorizedadmin.objects.all()]
+    email = request.user.email
+    if request.method == 'POST' and email in authorized_admin:
+        instr = request.POST.get('instruction')
+        Instructions.objects.create(points=instr)
+        return redirect('adminboard:other')
+    return redirect('adminboard:other')
