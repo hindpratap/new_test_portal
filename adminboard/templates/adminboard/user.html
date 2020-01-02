@@ -27,31 +27,12 @@
         Your Browser's JavaScript has been turned off kindly enable it.
     </noscript>
 
-    <header class="header container-fluid">
-        <div class="row admin-head">
-            <div class="admin-logo col-lg-11">
-                <a href="./home.html" class="admin-logo__h3">ADMIN BOARD</a>
-            </div>
-    
-            <div class="admin-logout col-lg-1">
-                <a href="{% url 'adminboard:logoutAdmin' %}" class="btn btn--logout">Logout</a>
-            </div>
-        </div>
-    </header>
+    {% include 'adminboard/header.html' %}
+
     {% if email in authorized_admin %}
     <main class="board container-fluid">
-        <div id="grid">
-            <p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p>
-        </div>
-        
-        <aside class="nav">
-            <ul class="navbar">
-                <li class="nav-items"> <a href="{% url 'adminboard:adminhome' %}"><i class="fas fa-home"></i>Home</a> </li>
-                <li class="nav-items"> <a href="{% url 'adminboard:adminuser' %}" class="active"><i class="fas fa-user"></i>User</a> </li>
-                <li class="nav-items"> <a href="{% url 'adminboard:addquest' %}"><i class="fas fa-book"></i>Question</a> </li>
-                <li class="nav-items"> <a href="{% url 'adminboard:submission' %}"><i class="fas fa-tasks"></i>Submissions</a> </li>
-            </ul>
-        </aside>
+
+        {% include 'adminboard/aside.html' %}
 
         <div class="screen">
             <div class="screen__table">
