@@ -34,11 +34,6 @@
         {% include 'adminboard/aside.html' %}
 
         <div class="screen">
-            <!-- <div class="screen__head">
-                <h2>Welcome to Admin Board</h2>
-                <p>Here you can keep a tab on number of candidate credentials active, the question bank, and review candidate submissions.
-                    Also you can add new data, delete and update in regards to the above disclaimer.</p>
-            </div> -->
 
             <div class="screen__card">
                 <div class="card">
@@ -47,7 +42,12 @@
                     <span class="card__ico"><i class="fas fa-user"></i></span>
                 </div>
                 <div class="card">
-                    <p class="card__p">Number of Submissions for Review</p>
+                    <p class="card__p">Pending Submissions</p>
+                    <h2 class="card__h2">{{candidate_under_review}}</h2>
+                    <span class="card__ico"><i class="fas fa-tasks"></i></span>
+                </div>
+                <div class="card">
+                    <p class="card__p">Total Submission</p>
                     <h2 class="card__h2">{{candidate_under_review}}</h2>
                     <span class="card__ico"><i class="fas fa-tasks"></i></span>
                 </div>

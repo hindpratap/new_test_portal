@@ -127,6 +127,8 @@ body{
 
 .admin-logo{
     flex: 1;
+    display: flex;
+    align-items: center;
 }
 
 .admin-logo__h3,
