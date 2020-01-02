@@ -64,7 +64,7 @@ p{
 .password-eye{
     position: absolute;
     right: 18px;
-    top: 24px;
+    top: 26px;
     visibility: hidden;
 }
 
@@ -442,6 +442,10 @@ input[name="whichErr"]{
 .start-btn{
     padding: 0em 1em;
     display: flex;
+}
+
+.cont{
+    color: #fff !important;
 }
 
 /* Keyframes */

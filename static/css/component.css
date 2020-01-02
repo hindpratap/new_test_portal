@@ -192,7 +192,7 @@ body{
 #grid p{
     border-left: 1px solid #bbb;
     margin: 0;
-    opacity: 0.2;
+    opacity: 0.05;
 }
 
 /* Aside Nacigation */
@@ -655,4 +655,12 @@ delete{
     to{
         transform: scale(1);
     }
+}
+
+/* Submission */
+.fStatus {
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    padding: .25em .5em;
+    outline: none;
 }

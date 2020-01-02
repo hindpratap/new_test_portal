@@ -37,7 +37,7 @@
         <div class="screen">
             <div class="screen__table">
                 <div class="screen__table__top">
-                    <h3 class="table-title">All Submissions</h3>
+                    <h3 class="table-title">Finalized</h3>
                 </div>
 
                 <div class="screen__table__sect">
@@ -45,39 +45,47 @@
                     <thead>
                         <tr>
                             <th scope="row">Name</th>
-                            <th scope="row">Username</th>
                             <th scope="row">Email</th>
+                            <th scope="row">Phone</th>
                             <th scope="row">Profile</th>
                             <th scope="row">Team</th>
                             <th scope="row">Score</th>
                             <th scope="row">Resume</th>
-                            <th scope="row">Status</th>
+<!--                            <th scope="row">Status</th>-->
                             <th scope="row">Action</th>
                         </tr>
                     </thead>
                     <tbody>
+
                     {% for i in data %}
                         <tr>
-                            <td class="">{{ i.fullname }}</td>
-                            <td>{{ i.username }}</td>
+                            <td class="">{{ i.fullname }}a</td>
                             <td>{{ i.email }}</td>
+                            <td>{{ i.phone }}</td>
                             <td>{{ i.designation }}</td>
                             <td>{{ i.team }}</td>
                             <td>{{ i.score }}%</td>
                             <td><a href="/static/media/{{ i.resume }}">Resume</a></td>
-                            <td>{{ i.selectionstatus }}</td>
+<!--                            <td>{{ i.selectionstatus }}</td>-->
                             <td>
-{#                                <a href="#" class="pr-2 accept"><i class="fas fa-check" title="accept"></i></a>#}
-{#                                <a href="#" class="pl-2 reject"><i class="fas fa-times" title="reject"></i></a>#}
                                 <form method="post" action="{% url 'adminboard:candaction' id=i.id %}">{% csrf_token %}
                                     {% if i.selectionstatus != 'Selected' and i.selectionstatus != 'Rejected' %}
                                     <button type="submit" name="accept" class="pr-2 accept"><i class="fas fa-check" title="accept"></i></button>
                                     <button type="submit" name="reject" class="pl-2 reject"><i class="fas fa-times" title="reject"></i></button>
                                     {% endif %}
+
+                                    <select name="fStatus" id="fStatus" class="fStatus">
+                                        <option value="Pending">Pending</option>
+                                        <option value="Offered">Offered</option>
+                                        <option value="Not Offered">Not Offered</option>
+                                        <option value="Joined">Joined</option>
+                                        <option value="Not Joined">Not Joined</option>
+                                    </select>
                                 </form>
                             </td>
                         </tr>
                     {% endfor %}
+
                     </tbody>
                 </table>
                 </div>
@@ -95,7 +103,7 @@
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
     <!-- <script src="../assets/js/inspect.js"></script> -->
-    <script src="{% static 'js/admin.js' %}"></script>
+    <script src="{% static 'js/admin/admin.js' %}"></script>
     <script>
         $(document).ready(function() {
             $('#subTable').DataTable();

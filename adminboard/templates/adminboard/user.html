@@ -69,8 +69,8 @@
                             <td class="inv">{{ i.invitestatus }}</td>
                             <td>
                                 <a href="{% url 'adminboard:admineditcand' username=i.username %}" class="pr-2 edit"><i class="fas fa-edit" title="edit"></i></a>
-                                <a href="{% url 'adminboard:adminnotifycand' username=i.username %}" class="pr-2 plane"><i class="fas fa-paper-plane" title="send"></i></a>
-                                <a href="{% url 'adminboard:admindelcand' username=i.username %}" class="delete"><i class="fas fa-trash-alt" title="delete"></i></a>
+                                <a href="{% url 'adminboard:adminnotifycand' username=i.username %}" class="pl-2 pr-2 plane"><i class="fas fa-paper-plane" title="send"></i></a>
+<!--                                <a href="{% url 'adminboard:admindelcand' username=i.username %}" class="delete"><i class="fas fa-trash-alt" title="delete"></i></a>-->
                             </td>
                         </tr>
                     {% endfor %}
@@ -79,7 +79,7 @@
             </div>
         </div>
     </main>
-    {% else %}<h1>Get OUT</h1>
+    {% else %}<h1>Get Out</h1>
     {% endif %}
 
 
@@ -89,16 +89,12 @@
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://cdn.datatables.net/fixedcolumns/3.3.0/js/dataTables.fixedColumns.min.js"></script>
-    <script src="{% static 'js/admin.js' %}"></script>
+    <script src="{% static 'js/admin/admin.js' %}"></script>
 
     <script>
         $(document).ready(function() {
             $('#CCTable').DataTable({
-                // "scrollX": true,
-                // fixedColumns: {
-                //     leftColumns: 0,
-                //     rightColumns: 1
-                // }
+                "scrollX": true,
             });
         });
     </script>

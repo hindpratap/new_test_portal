@@ -16,3 +16,14 @@ for(let key in pt){
         }
     }
 }
+
+try{
+    let inv = document.querySelectorAll('.inv');
+    let st;
+    [...inv].map(m => {
+        st = m.innerHTML.toLowerCase();
+        if(st === 'invite sent'){
+            m.nextElementSibling.querySelector('.fa-paper-plane').title = 'resend';s
+        }
+    })
+}catch(err){}
