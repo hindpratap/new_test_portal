@@ -22,10 +22,10 @@ def adminhome(request):
     authorized_admin = [i.email for i in obj]
     email = request.user.email
     candidate_cont = CreateCandidate.objects.all().count()
-    candidate_under_review = CreateCandidate.objects.exclude(Q(selectionstatus__iexact='selected') | Q(selectionstatus__iexact='rejected')).count()
-    candidate_selected = CreateCandidate.objects.filter(selectionstatus__iexact='selected').order_by('-id')
+    pending_submissions = CreateCandidate.objects.filter(invitestatus__iexact='Invite sent', teststatus__iexact='Pending').count()
+    candidate_shortlisted = CreateCandidate.objects.filter(selectionstatus__iexact='selected').count()
     return render(request, 'adminboard/home.html', {'authorized_admin': authorized_admin, 'email': email, 'candidate_count': candidate_cont,
-                                                    'candidate_under_review': candidate_under_review, 'candidate_selected':candidate_selected})
+                                                    'pending_submissions': pending_submissions, 'candidate_shortlisted':candidate_shortlisted})
 
 @login_required
 def logoutAdmin(request):
@@ -132,6 +132,7 @@ def adminnotifycand(request, username):
         # sendmailtask.delay(sub, mail)
         user = CreateCandidate.objects.get(username=username)
         user.invitestatus = 'Invite sent'
+        user.status = 'Invite sent'
         user.save()
         return redirect('adminboard:adminuser')
     else:

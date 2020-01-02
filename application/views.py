@@ -57,7 +57,8 @@ def submitted(request):
         try:
             user = CreateCandidate.objects.get(username=username)
             user.score = percent
-            user.teststatus = 'TestTaken'
+            user.teststatus = 'Test Taken'
+            user.status = 'Test Taken'
             user.save()
         except:
             return HttpResponse('<h2>Unique contraint failed for username</h2>')

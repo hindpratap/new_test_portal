@@ -20,6 +20,7 @@ class CreateCandidate(models.Model):
     invitestatus = models.CharField(max_length=200, null=True, blank=True, default='Pending')
     teststatus = models.CharField(max_length=200, null=True, blank=True, default='Pending')
     selectionstatus = models.CharField(max_length=200, null=True, blank=True, default='Pending')
+    status = models.CharField(max_length=200, null=True, blank=True, default='Pending for invite')
     dob = models.DateField(default=None, null=True, blank=True)
     resume = models.FileField(upload_to='', blank=True)
     created_at = models.DateTimeField(null=True, blank=True, default=None)
