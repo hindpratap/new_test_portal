@@ -22,10 +22,14 @@ def adminhome(request):
     authorized_admin = [i.email for i in obj]
     email = request.user.email
     candidate_cont = CreateCandidate.objects.all().count()
-    pending_submissions = CreateCandidate.objects.filter(invitestatus__iexact='Invite sent', teststatus__iexact='Pending').count()
-    candidate_shortlisted = CreateCandidate.objects.filter(selectionstatus__iexact='selected').count()
+    pending_submissions = CreateCandidate.objects.filter(invitestatus__iexact='Invite sent', teststatus__iexact='Pending')
+    pending_submissions_count = pending_submissions.count()
+    candidate_shortlisted = CreateCandidate.objects.filter(score__gte=70)
+    candidate_shortlisted_count = candidate_shortlisted.count()
     return render(request, 'adminboard/home.html', {'authorized_admin': authorized_admin, 'email': email, 'candidate_count': candidate_cont,
-                                                    'pending_submissions': pending_submissions, 'candidate_shortlisted':candidate_shortlisted})
+                                                    'pending_submissions': pending_submissions, 'candidate_shortlisted':candidate_shortlisted,
+                                                    'candidate_shortlisted_count': candidate_shortlisted_count,
+                                                    'pending_submissions_count': pending_submissions_count})
 
 @login_required
 def logoutAdmin(request):

@@ -43,12 +43,12 @@
                 </div>
                 <div class="card">
                     <p class="card__p">Pending Submissions</p>
-                    <h2 class="card__h2">{{ pending_submissions }}</h2>
+                    <h2 class="card__h2">{{ pending_submissions_count }}</h2>
                     <span class="card__ico"><i class="fas fa-hourglass-half"></i></span>
                 </div>
                 <div class="card">
                     <p class="card__p">Shortlisted</p>
-                    <h2 class="card__h2">{{candidate_shortlisted}}</h2>
+                    <h2 class="card__h2">{{candidate_shortlisted_count}}</h2>
                     <span class="card__ico"><i class="fas fa-tasks"></i></span>
                 </div>
             </div>
@@ -80,7 +80,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                    {% for i in candidate_selected %}
+                    {% for i in pending_submissions %}
                         <tr>
                             <td scope="row">{{ forloop.counter }}</td>
                             <td>{{ i.fullname }}</td>
@@ -115,7 +115,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                    {% for i in candidate_selected %}
+                    {% for i in candidate_shortlisted %}
                         <tr>
                             <td scope="row">{{ forloop.counter }}</td>
                             <td>{{ i.fullname }}</td>
