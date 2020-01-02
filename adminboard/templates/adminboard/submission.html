@@ -37,7 +37,7 @@
         <div class="screen">
             <div class="screen__table">
                 <div class="screen__table__top">
-                    <h3 class="table-title">Finalized</h3>
+                    <h3 class="table-title">Finalize</h3>
                 </div>
 
                 <div class="screen__table__sect">
@@ -69,12 +69,12 @@
 <!--                            <td>{{ i.selectionstatus }}</td>-->
                             <td>
                                 <form method="post" action="{% url 'adminboard:candaction' id=i.id %}">{% csrf_token %}
-                                    {% if i.selectionstatus != 'Selected' and i.selectionstatus != 'Rejected' %}
-                                    <button type="submit" name="accept" class="pr-2 accept"><i class="fas fa-check" title="accept"></i></button>
-                                    <button type="submit" name="reject" class="pl-2 reject"><i class="fas fa-times" title="reject"></i></button>
-                                    {% endif %}
+<!--                                    {% if i.selectionstatus != 'Selected' and i.selectionstatus != 'Rejected' %}-->
+<!--                                    <button type="submit" name="accept" class="pr-2 accept"><i class="fas fa-check" title="accept"></i></button>-->
+<!--                                    <button type="submit" name="reject" class="pl-2 reject"><i class="fas fa-times" title="reject"></i></button>-->
+<!--                                    {% endif %}-->
 
-                                    <select name="fStatus" id="fStatus" class="fStatus">
+                                    <select name="fStatus" class="fStatus">
                                         <option value="Pending">Pending</option>
                                         <option value="Offered">Offered</option>
                                         <option value="Not Offered">Not Offered</option>
@@ -85,7 +85,6 @@
                             </td>
                         </tr>
                     {% endfor %}
-
                     </tbody>
                 </table>
                 </div>
@@ -108,6 +107,13 @@
         $(document).ready(function() {
             $('#subTable').DataTable();
         });
+
+        let fStatus = document.querySelectorAll('.fStatus');
+        [...fStatus].map(m => {
+            m.addEventListener('change', () => {
+                m.parentElement.submit();
+            });
+        })
     </script>
 </body>
 </html>
