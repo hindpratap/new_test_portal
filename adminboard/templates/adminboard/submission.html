@@ -66,20 +66,8 @@
                             <td>{{ i.team }}</td>
                             <td>{{ i.score }}%</td>
                             <td><a href="/static/media/{{ i.resume }}">Resume</a></td>
-{#<!--                            <td>{{ i.selectionstatus }}</td>-->#}
                             <td>
                                 <form method="post" action="{% url 'adminboard:candaction' id=i.id %}">{% csrf_token %}
-<<<<<<< HEAD
-<!--                                    {% if i.selectionstatus != 'Selected' and i.selectionstatus != 'Rejected' %}
-                                    <button type="submit" name="accept" class="pr-2 accept"><i class="fas fa-check" title="accept"></i></button>
-                                    <button type="submit" name="reject" class="pl-2 reject"><i class="fas fa-times" title="reject"></i></button>
-                                    {% endif %}-->
-=======
-{#<!--                                    {% if i.selectionstatus != 'Selected' and i.selectionstatus != 'Rejected' %} -->#}
-<!--                                    <button type="submit" name="accept" class="pr-2 accept"><i class="fas fa-check" title="accept"></i></button>-->
-<!--                                    <button type="submit" name="reject" class="pl-2 reject"><i class="fas fa-times" title="reject"></i></button>-->
-{#<!--                                    {% endif %}-->#}
->>>>>>> df605942c5597e74a4b2e01ea41f3acc15662424
 
                                     <select name="fStatus" class="fStatus">
                                         <option value="Pending">Pending</option>
