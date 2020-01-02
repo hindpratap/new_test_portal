@@ -37,25 +37,33 @@
 
             <div class="screen__card">
                 <div class="card">
-                    <p class="card__p">Number of Candidate credentials</p>
+                    <p class="card__p">Total Credentials</p>
                     <h2 class="card__h2">{{ candidate_count }}</h2>
                     <span class="card__ico"><i class="fas fa-user"></i></span>
                 </div>
                 <div class="card">
                     <p class="card__p">Pending Submissions</p>
                     <h2 class="card__h2">{{candidate_under_review}}</h2>
-                    <span class="card__ico"><i class="fas fa-tasks"></i></span>
+                    <span class="card__ico"><i class="fas fa-hourglass-half"></i></span>
                 </div>
                 <div class="card">
-                    <p class="card__p">Total Submission</p>
+                    <p class="card__p">Shortlisted</p>
                     <h2 class="card__h2">{{candidate_under_review}}</h2>
                     <span class="card__ico"><i class="fas fa-tasks"></i></span>
                 </div>
             </div>
 
+            <div class="tab mt-5">
+                <ul class="tabs-nav">
+                    <span class="back-span back-span__home"></span>
+                    <li class="tab-items" data-id="pending">Pending</li>
+                    <li class="tab-items" data-id="submitted">Submitted</li>
+                </ul>
+            </div>
+
             <div class="screen__table mt-5">
                 <div class="screen__table__top">
-                    <h3 class="table-title">Shorlisted Candidates</h3>
+                    <h3 class="table-title">Shortlisted Candidates</h3>
                 </div>
 
                 <table class="table" id="sTable">
@@ -64,6 +72,7 @@
                             <th scope="row">#</th>
                             <th scope="row">Name</th>
                             <th scope="row">Email</th>
+                            <th scope="row">Phone</th>
                             <th scope="row">Profile</th>
                             <th scope="row">Team</th>
                             <th scope="row">Score</th>
@@ -76,6 +85,7 @@
                             <td scope="row">{{ forloop.counter }}</td>
                             <td>{{ i.fullname }}</td>
                             <td>{{ i.email }}</td>
+                            <td>{{ i.phone }}</td>
                             <td>{{ i.designation }}</td>
                             <td>{{ i.team }}</td>
                             <td>{{ i.score }}%</td>
