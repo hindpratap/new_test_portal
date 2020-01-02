@@ -7,6 +7,7 @@ from application.models import Question
 from adminboard.models import CreateCandidate
 from django.http import HttpResponse
 from django.contrib.auth.models import User
+from application.models import Instructions
 
 # Create your views here.
 def applogin(request):
@@ -32,7 +33,8 @@ def instructions(request):
     email = request.user.email
     username = request.user.username
     obj = CreateCandidate.objects.get(username=username)
-    return render(request, 'application/instructions.html', {'username': username, 'name': obj.fullname, 'email': email, 'phone': obj.phone})
+    instruct = Instructions.objects.all().order_by('-id')[0]
+    return render(request, 'application/instructions.html', {'username': username, 'name': obj.fullname, 'email': email, 'phone': obj.phone, 'instruct': instruct})
 
 @login_required(login_url='logincand/')
 def logout_user(request):

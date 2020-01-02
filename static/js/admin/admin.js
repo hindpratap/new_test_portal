@@ -6,7 +6,8 @@ const pt  = {
     "/adminboard/addcredential/": "adminuser",
     "/adminboard/addquest/": "addquest",
     "/adminboard/viewquest/": "addquest",
-    "/adminboard/submission/": "submissions"
+    "/adminboard/submission/": "submissions",
+    "/adminboard/other/": 'other'
 };
 
 for(let key in pt){

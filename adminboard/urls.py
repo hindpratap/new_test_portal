@@ -20,5 +20,8 @@ urlpatterns = [
     path('editquest/<int:quest>/', views.editquest, name='editquest'),
     path('changequest/', views.changequest, name='changequest'),
     path('candaction/<int:id>/', views.candaction, name='candaction'),
-    path('bulkupload/', views.bulkupload, name='bulkupload')
+    path('bulkupload/', views.bulkupload, name='bulkupload'),
+    path('other/', views.other, name='other'),
+    path('postinstructions/', views.postinstructions, name='postinstructions'),
+
 ]
