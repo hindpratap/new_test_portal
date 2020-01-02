@@ -2,9 +2,6 @@
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Roboto+Slab:400,700&display=swap');
 
-/* Import other css files */
-@import './_mediaQuery.css';
-
 /* Global */
 html,
 body{
