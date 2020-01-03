@@ -22,6 +22,6 @@ urlpatterns = [
     path('candaction/<int:id>/', views.candaction, name='candaction'),
     path('bulkupload/', views.bulkupload, name='bulkupload'),
     path('other/', views.other, name='other'),
+    path('delinstructions/<int:inst>/', views.delinstructions, name='delinstructions'),
     path('postinstructions/', views.postinstructions, name='postinstructions'),
-
 ]

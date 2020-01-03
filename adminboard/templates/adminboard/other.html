@@ -41,18 +41,27 @@
             <div class="screen__table">
                 <div class="screen__table__top">
                     <h3 class="table-title">Add Instructions</h3>
-{#                    <a href="" class="a--back"><i class="fas fa-chevron-left pr-2"></i>All Instructions</a>#}
                 </div>
                 <form action="{% url 'adminboard:postinstructions' %}" method="post">{% csrf_token %}
                     <div class="form-div">
-                        <label for="instruction" class="form-label">Instruction</label>
+                        <label for="instruction" class="form-label"><strong>Store the instructions guide</strong></label>
                         <textarea name="instruction" id="instruction" class="form-elem form-textarea"></textarea>
                     </div>
                     <div class="btn-div mt-4">
-                        <button type="submit" class="btn btn-primary">Add</button>
+                        <button type="submit" class="btn btn--primary">Add</button>
                     </div>
                 </form>
-                {{ instruct }}
+
+                <div class="screen__table__top mt-5">
+                    <h3 class="table-title">All Instructions</h3>
+                </div>
+
+                {% for i in instruct %}
+                <div class="alert">
+                    <p class="alert--text">{{ i }}</p>
+                    <a href="{% url 'adminboard:delinstructions' inst=i.id%}" class="del"><i class="fas fa-trash-alt"></i></a>
+                </div>
+                {% endfor %}
             </div>
         </div>
     </main>
@@ -63,10 +72,8 @@
 
     <!-- Script
     ------------------------>
-    <!-- <script src="../assets/js/inspect.js"></script> -->
     {% block scripts %}
     <script src="{% static 'js/admin/admin.js' %}"></script>
-    <script src="{% static 'js/admin/validation.min.js' %}"></script>
     {% endblock %}
 </body>
 </html>

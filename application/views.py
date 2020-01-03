@@ -33,7 +33,7 @@ def instructions(request):
     email = request.user.email
     username = request.user.username
     obj = CreateCandidate.objects.get(username=username)
-    instruct = Instructions.objects.all().order_by('-id')[0]
+    instruct = Instructions.objects.all().order_by('id')
     return render(request, 'application/instructions.html', {'username': username, 'name': obj.fullname, 'email': email, 'phone': obj.phone, 'instruct': instruct})
 
 @login_required(login_url='logincand/')

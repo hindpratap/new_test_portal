@@ -515,6 +515,17 @@ td{
     margin-left: 1em;
 }
 
+.btn--primary,
+.btn--primary:hover{
+    background: #7a68fb;
+    padding: 0.25rem 2rem;
+    color: #fff;
+}
+
+.btn--primary:hover{
+    background: #6a4cfb;
+}
+
 /* Tabs */
 .tab{
     margin-bottom: 2rem;
@@ -581,9 +592,10 @@ td{
     min-height: 180px;
     line-height: 2em;
     opacity: 1;
+    color: #000;
     visibility: visible;
     text-align: center;
-    border: 2px dashed #bbb;
+    border: 2px dashed #9980ff;
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     overflow: hidden;
 }
@@ -657,10 +669,44 @@ delete{
     }
 }
 
+/* Quest Progress Bar */
+.progress-bar{
+    background: #fff;
+    border: 1px solid #008eff;
+}
+
+.progress-bar-fill{
+    display: flex;
+    background: #53b3ff;
+    align-items: center;
+    width: 0%;
+}
+
+
 /* Submission */
 .fStatus {
     border: 1px solid #bbb;
     border-radius: 4px;
     padding: .25em .5em;
     outline: none;
+}
+
+/* Others */
+.alert{
+    background: #e0dcff;
+    color: #391eff;
+    width: 87%;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.alert--text{
+    margin-bottom: 0rem;
+    text-transform: uppercase;
+}
+
+.del{
+    position: absolute;
+    right: .75rem;
 }

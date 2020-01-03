@@ -312,8 +312,18 @@ def bulkupload(request):
 def other(request):
     authorized_admin = [i.email for i in Authorizedadmin.objects.all()]
     email = request.user.email
-    instruct = Instructions.objects.all().order_by('-id')[0]
+    instruct = Instructions.objects.all().order_by('-id')
     return render(request, 'adminboard/other.html', {'email': email, 'authorized_admin': authorized_admin, 'instruct': instruct})
+
+@login_required
+def delinstructions(request, inst):
+    authorized_admin = [i.email for i in Authorizedadmin.objects.all()]
+    email = request.user.email
+    if email in authorized_admin:
+        Instructions.objects.get(pk=inst).delete()
+        return redirect('adminboard:other')
+    else:
+        return HttpResponse('<h2>Error: You do not have admin rights.</h2>')
 
 @login_required
 @csrf_exempt
@@ -325,3 +335,4 @@ def postinstructions(request):
         Instructions.objects.create(points=instr)
         return redirect('adminboard:other')
     return redirect('adminboard:other')
+

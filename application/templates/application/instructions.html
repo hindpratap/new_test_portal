@@ -70,15 +70,9 @@
                 <div class="instructions-all">
                     <strong class="imp-note">Read through instructions given below carefully before attempting test</strong>
                     <div class="read-all">
-{#                        {{ instruct }}#}
-                        <p class="read-all__p">1. This is a time bound test of 30 minutes.</p>
-                        <p class="read-all__p">2. Clock starts with Ques 1 getting displayed.</p>
-                        <p class="read-all__p">3. You may choose to attempt the test right now or may login with your credentials later.</p>
-                        <p class="read-all__p">4. It will contain question based on English grammar, logical, and reasoning areas.</p>
-                        <p class="read-all__p">5. The test shall get auto-submitted after 30 minutes.</p>
-                        <p class="read-all__p">6. The test cannot be fragmented. It should be completed in a single attempt.</p>
-                        <p class="read-all__p">7. You can go back and forth in while answering questions.</p>
-                        <p class="read-all__p">8. You will receive an email on your registered email id about the result.</p>
+                        {% for i in instruct %}
+                            <p class="read-all__p">{{ i }}</p>
+                        {% endfor %}
                         <strong class="wishes">BEST OF LUCK 😊</strong>
                     </div>
                     <button class="btn btn--primary start-test">Start Test<i class="fas fa-chevron-right"></i></button>
