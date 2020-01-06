@@ -1,4 +1,13 @@
 {% extends 'application/submit.html' %}
 {% block result %}
-    <h2>Due to force Escape or Reload, your test has been submitted. <br>If not intentional please contact Dataflow- HR Team</h2>
+    <style>
+        #rocket{
+            opacity: 0;
+        }
+
+      .forced{
+        color: #ccc;
+      }
+    </style>
+    <h2 class="forced">Due to force Escape or Reload, your test has been submitted. <br>If not intentional please contact Dataflow- HR Team</h2>
 {% endblock %}
