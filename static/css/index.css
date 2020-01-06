@@ -14,6 +14,20 @@ p{
     margin-bottom: 0rem;
 }
 
+.foot-log{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 30px;
+    text-align: center;
+    font-size: .8rem;
+}
+
+.foot-log__span{
+    color: darkorange;
+}
+
 /* Form Components */
 .cont-box{
     height: 100vh;
