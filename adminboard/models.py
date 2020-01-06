@@ -25,6 +25,10 @@ class CreateCandidate(models.Model):
     resume = models.FileField(upload_to='', blank=True)
     created_at = models.DateTimeField(null=True, blank=True, default=None)
     activestatus = models.CharField(max_length=200, null=True, blank=True, default='active')
+    source = models.CharField(max_length=200, null=True, blank=True)
+    referralid = models.CharField(max_length=100, null=True, blank=True, default='No-referral')
+    candempid = models.CharField(max_length=100, null=True, blank=True, default='Nan')
+
 
 
     def __str__(self):

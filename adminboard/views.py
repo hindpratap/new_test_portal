@@ -244,9 +244,11 @@ def candaction(request, id):
     email = request.user.email
     if request.method == 'POST' and email in authorized_admin:
         fStatus = request.POST.get('fStatus')
+        empId = request.POST.get('empId')
         try:
             obj = CreateCandidate.objects.get(pk=id)
             obj.selectionstatus = fStatus
+            obj.candempid = empId
             obj.save()
             return redirect('adminboard:submission')
         except:
