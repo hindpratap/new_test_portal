@@ -145,7 +145,7 @@ def adminnotifycand(request, username):
         if User.objects.filter(username=username).exists():
             pass
         else:
-            User.objects.create(username=username, password=recreate_cand.password, first_name=recreate_cand.fullname, email=recreate_cand.email)
+            User.objects.create_user(username=username, password=recreate_cand.password, first_name=recreate_cand.fullname, email=recreate_cand.email)
         sub = 'test sub'
         content = ''
         tomail = ''
