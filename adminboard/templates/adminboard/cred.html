@@ -111,14 +111,23 @@
                         <span class="note"></span>
                     </div>
 
+                    <div class="form-div">
+                        <label for="" class="form-label">Location</label>
+                        <select name="team" id="location" class="form-elem custom-select" data-id="location">
+                            <option value="">--select location--</option>
+                            <option value="Noida">Noida</option>
+                            <option value="Jordan">Jordan</option>
+                            <option value="Manila">Manila</option>
+                        </select>
+                        <span class="note"></span>
+                    </div>
+
                     <div class="form-div mt-2">
                         <label for="" class="form-label">Upload Resume</label>
                         <input type="file" name="resume" class="custom-file-input form-elem form-elem--resume" id="customFile resume" data-id="resume">
                         <label class="custom-file-label form-elem" for="customFile" data-id="dResume">Choose file</label>
                         <span class="note"></span>
                     </div>
-
-                    <div></div>
 
                     <div class="btn-div mt-3">
                         {% block button %}
