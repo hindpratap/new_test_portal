@@ -70,7 +70,11 @@
                             <td><a href="/static/media/{{ i.resume }}">Resume</a></td>
                             <td>
                                 <form method="post" action="{% url 'adminboard:candaction' id=i.id %}">{% csrf_token %}
-                                    <input type="text" name="empId" id="empID" class="empID">
+                                    {% if i.candempid == 'Nan' %}
+                                    <input type="text" name="empId" class="empID" value="" placeholder="Employee ID">
+                                    {% else %}
+                                    <input type="text" name="empId" class="empID" value="{{ i.candempid }}" readonly>
+                                    {% endif %}
                                     {% if i.selectionstatus == 'Pending' %}
                                     <select name="fStatus" class="fStatus">
                                         <option value="Pending">Pending</option>
@@ -120,7 +124,7 @@
             m.addEventListener('change', () => {
                 m.parentElement.submit();
             });
-        })
+        });
     </script>
 </body>
 </html>
