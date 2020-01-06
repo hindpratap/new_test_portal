@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from adminboard.models import Authorizedadmin, CreateCandidate
@@ -13,8 +13,6 @@ import pandas as pd
 import numpy as np
 from application.models import Instructions
 from django.core.cache import cache
-
-
 
 def adminlogin(request):
     cache.clear()
@@ -145,7 +143,7 @@ def adminnotifycand(request, username):
         if User.objects.filter(username=username).exists():
             pass
         else:
-            User.objects.create(username=username, password=recreate_cand.password, first_name=recreate_cand.fullname, email=recreate_cand.email)
+            User.objects.create_user(username=username, password=recreate_cand.password, first_name=recreate_cand.fullname, email=recreate_cand.email)
         sub = 'test sub'
         content = ''
         tomail = ''
