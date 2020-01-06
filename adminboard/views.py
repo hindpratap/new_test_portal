@@ -141,10 +141,12 @@ def adminnotifycand(request, username):
     authorized_admin = [i.email for i in Authorizedadmin.objects.all()]
     email = request.user.email
     if email in authorized_admin:
+        recreate_cand = CreateCandidate.objects.get(username=username)
+        User.objects.update_or_create(username=username, password=recreate_cand.password, first_name=recreate_cand.fullname, email=recreate_cand.email)
         sub = 'test sub'
         content = ''
         tomail = ''
-        sendmailtask.delay(sub, content, tomail)
+        # sendmailtask.delay(sub, content, tomail)
         user = CreateCandidate.objects.get(username=username)
         user.invitestatus = 'Invite sent'
         user.status = 'Invite sent'
