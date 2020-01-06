@@ -54,16 +54,6 @@ try{
         }
     });
 
-    // Reset Button
-    const resetBtn = credForm.querySelector('.btn--reset');
-
-    resetBtn.addEventListener('click', () => {
-       [...formElem].map((e)=>{
-            e.style = `border: 1px solid #bbb; background: #f8f8f8;`;
-            e.nextElementSibling.innerHTML = '';
-       })
-    });
-
     // Submit Button
     const credSubmit = document.querySelector('#credForm');
     credSubmit.addEventListener('submit', e => {
