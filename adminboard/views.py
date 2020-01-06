@@ -12,9 +12,12 @@ from django.db.models import Q
 import pandas as pd
 import numpy as np
 from application.models import Instructions
+from django.core.cache import cache
+
 
 
 def adminlogin(request):
+    cache.clear()
     return render(request, 'adminboard/login.html')
 
 @login_required
@@ -69,6 +72,9 @@ def postcred(request):
         team = request.POST.get('team')
         dob = request.POST.get('dob')
         resume = request.FILES.get('resume')
+        location = request.FILES.get('location')
+        source = request.FILES.get('source')
+        referral = request.FILES.get('referral')
 
         dob = dob[6:10] + '-' + dob[:2] + '-' + dob[3:5]
         if User.objects.filter(username=username).exists() and CreateCandidate.objects.filter(username=username).exists():
@@ -83,6 +89,9 @@ def postcred(request):
             cand.phone = phone
             cand.team = team
             cand.designation = designation
+            cand.location = location
+            cand.source = source
+            cand.referralid = referral
             if resume != None:
                 cand.resume = resume
             else:
@@ -94,7 +103,7 @@ def postcred(request):
         else:
             # try:
             CreateCandidate.objects.create(fullname=fullname, username=username, password=password, email=email,
-                                        phone=phone, designation=designation, team=team, created_at=datetime.today(), dob=dob, resume=resume)
+                                        phone=phone, designation=designation, team=team, created_at=datetime.today(), dob=dob, resume=resume, location=location, source=source, referralid=referral)
             User.objects.create_user(first_name=fullname, username=username, password=password, email=email)
 
             # except:
