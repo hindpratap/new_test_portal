@@ -26,7 +26,10 @@
                     "dob": `{{ candidate.dob }}`,
                     "position": `{{ candidate.designation }}`,
                     "team": `{{ candidate.team }}`,
-                    "dResume": `{{ candidate.resume }}`
+                    "location": `{{ candidate.location }}`,
+                    "source": `{{ candidate.source }}`,
+                    "referral": `{{ candidate.referralid }}`,
+                    "dResume": `{{ candidate.resume }}`,
                 };
             const formElem = document.querySelectorAll('.form-elem');
             const dob = `{{ candidate.dob }}`;
@@ -35,6 +38,14 @@
             const keys = Object.keys(candidateObj);
             console.log(candidateObj[keys[1]]);
 
+            // Referral Source
+            if(candidateObj["source"] === `Referral`){
+                const referralInp = document.querySelector('[data-id="referral"]');
+                referralInp.parentElement.classList.remove('hidden');
+
+                const blank = document.querySelector('.blank_');
+                blank.classList.add('hidden');
+            }
 
             [...formElem].map(e => {
                 e.required = true;
