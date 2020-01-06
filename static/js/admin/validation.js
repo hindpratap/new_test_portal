@@ -60,6 +60,7 @@ try{
     resetBtn.addEventListener('click', () => {
        [...formElem].map((e)=>{
             e.style = `border: 1px solid #bbb; background: #f8f8f8;`;
+            e.nextElementSibling.innerHTML = '';
        })
     });
 
