@@ -122,12 +122,32 @@
                         <span class="note"></span>
                     </div>
 
+                    <div class="form-div">
+                        <label for="" class="form-label">Source</label>
+                        <select name="team" id="source" class="form-elem custom-select" data-id="source">
+                            <option value="">--select source--</option>
+                            <option value="Referral">Referral</option>
+                            <option value="Direct Sourcing">Direct Sourcing</option>
+                            <option value="Consultant">Consultant</option>
+                            <option value="Social Media">Social Media</option>
+                        </select>
+                        <span class="note"></span>
+                    </div>
+
+                    <div class="form-div hidden">
+                        <label for="" class="form-label">Referral ID</label>
+                        <input type="text" name="referral" class="form-elem form-elem--refer" data-id="referral" autocomplete="off">
+                        <span class="note"></span>
+                    </div>
+
                     <div class="form-div mt-2">
-                        <label for="" class="form-label">Upload Resume</label>
+                        <label class="form-label">Upload Resume</label>
                         <input type="file" name="resume" class="custom-file-input form-elem form-elem--resume" id="customFile resume" data-id="resume">
                         <label class="custom-file-label form-elem" for="customFile" data-id="dResume">Choose file</label>
                         <span class="note"></span>
                     </div>
+
+                    <div></div>
 
                     <div class="btn-div mt-3">
                         {% block button %}
@@ -175,6 +195,19 @@
                 dobDup.push(`{{ i.dob }}`);
             {% endfor %}
 
+            const source = document.querySelector('#source');
+            source.addEventListener('change', () => {
+                const sourceOpt = source.options[source.selectedIndex].value;
+                const referral = document.querySelector('.form-elem--refer');
+                console.log(sourceOpt);
+                if(sourceOpt === 'Referral'){
+                    referral.parentElement.classList.remove('hidden');
+                    referral.required = true;
+                }else{
+                    referral.parentElement.classList.add('hidden');
+                    referral.required = false;
+                }
+            });
     </script>
     <script src="{% static 'js/admin/validation.min.js' %}"></script>
     {% endblock %}

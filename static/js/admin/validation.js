@@ -161,6 +161,30 @@ try{
                     }
                     break;
 
+                case 'location':
+                    fOpt = f.options[f.selectedIndex].value;
+                    if (fOpt === ``){
+                        e.preventDefault();
+                        f.parentElement.querySelector('.note').innerHTML = 'Please select a location';
+                        f.style = `border: 1px solid tomato; background: #ffeae6;`;
+                    }else{
+                        f.parentElement.querySelector('.note').innerHTML = '';
+                        f.style = `border: 1px solid mediumaquamarine; background: #dbfdf1;`;
+                    }
+                    break;
+
+                case 'source':
+                    fOpt = f.options[f.selectedIndex].value;
+                    if (fOpt === ``){
+                        e.preventDefault();
+                        f.parentElement.querySelector('.note').innerHTML = 'Please select a location';
+                        f.style = `border: 1px solid tomato; background: #ffeae6;`;
+                    }else{
+                        f.parentElement.querySelector('.note').innerHTML = '';
+                        f.style = `border: 1px solid mediumaquamarine; background: #dbfdf1;`;
+                    }
+                    break;
+
                 case 'resume':
                     if (f.value === ``){
                         e.preventDefault();

@@ -684,11 +684,16 @@ delete{
 
 
 /* Submission */
-.fStatus {
+.fStatus,
+.empID{
     border: 1px solid #bbb;
     border-radius: 4px;
     padding: .25em .5em;
     outline: none;
+}
+
+.empID{
+    width: 100px;
 }
 
 /* Others */

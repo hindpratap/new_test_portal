@@ -45,12 +45,13 @@
                     <thead>
                         <tr>
                             <th scope="row">Name</th>
-                            <th scope="row">Username</th>
                             <th scope="row">Email</th>
                             <th scope="row">D.O.B</th>
                             <th scope="row">Phone</th>
                             <th scope="row">Designation</th>
                             <th scope="row">Team</th>
+                            <th scope="row">Location</th>
+                            <th scope="row">Source</th>
                             <th scope="row">Invite Status</th>
                             <th scope="row">Action</th>
                         </tr>
@@ -59,13 +60,14 @@
                     {% for i in candidates %}
                         <tr>
                             <td>{{ i.fullname }}</td>
-                            <td>{{ i.username }}</td>
                             <td>{{ i.email }}</td>
                             <td>{{ i.dob }}</td>
                             <td>{{ i.phone }}</td>
 {#                            <td><a href="/static/media/{{ i.resume }}" target="_blank">View Resume</a></td>#}
                             <td>{{ i.designation }}</td>
                             <td>{{ i.team }}</td>
+                            <td>{{ i.location }}</td>
+                            <td>{{ i.source }}</td>
                             <td class="inv">{{ i.invitestatus }}</td>
                             <td>
                                 <a href="{% url 'adminboard:admineditcand' username=i.username %}" class="pr-2 edit"><i class="fas fa-edit" title="edit"></i></a>
@@ -98,5 +100,5 @@
             });
         });
     </script>
-</body>
+</body> 
 </html>

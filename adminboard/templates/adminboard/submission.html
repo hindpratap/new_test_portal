@@ -49,6 +49,7 @@
                             <th scope="row">Phone</th>
                             <th scope="row">Profile</th>
                             <th scope="row">Team</th>
+                            <th scope="row">Location</th>
                             <th scope="row">Score</th>
                             <th scope="row">Resume</th>
 <!--                            <th scope="row">Status</th>-->
@@ -64,11 +65,13 @@
                             <td>{{ i.phone }}</td>
                             <td>{{ i.designation }}</td>
                             <td>{{ i.team }}</td>
+                            <td>{{ i.location }}</td>
                             <td>{{ i.score }}%</td>
                             <td><a href="/static/media/{{ i.resume }}">Resume</a></td>
                             <td>
                                 <form method="post" action="{% url 'adminboard:candaction' id=i.id %}">{% csrf_token %}
-
+                                    <input type="text" name="empId" id="empID" class="empID">
+                                    {% if i.selectionstatus == 'Pending' %}
                                     <select name="fStatus" class="fStatus">
                                         <option value="Pending">Pending</option>
                                         <option value="Offered">Offered</option>
@@ -76,6 +79,16 @@
                                         <option value="Joined">Joined</option>
                                         <option value="Not Joined">Not Joined</option>
                                     </select>
+                                    {% else %}
+                                    <select name="fStatus" class="fStatus">
+                                        <option value="" hidden>{{ i.selectionstatus }}</option>
+                                        <option value="Pending">Pending</option>
+                                        <option value="Offered">Offered</option>
+                                        <option value="Not Offered">Not Offered</option>
+                                        <option value="Joined">Joined</option>
+                                        <option value="Not Joined">Not Joined</option>
+                                    </select>
+                                    {% endif %}
                                 </form>
                             </td>
                         </tr>
