@@ -179,7 +179,6 @@ try{
                 case 'resume':
                     if (f.value === ``){
                         e.preventDefault();
-                        console.log(f.nextSibling)
                         f.parentElement.querySelector('.note').innerHTML = 'Please upload a resume of candidate';
                         f.parentElement.querySelector('.custom-file-label').style = `border: 1px solid tomato; background: #ffeae6;`;
                     }else{
@@ -246,7 +245,6 @@ let duplicateChecker = (dup)=>{
         }
     }
 
-    console.log(flag);
     return flag;
 };
 
