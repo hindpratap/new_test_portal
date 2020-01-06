@@ -67,11 +67,12 @@ def submitted(request):
         except:
             return HttpResponse('<h2>Unique contraint failed for username</h2>')
         logout(request)
-        return render(request, 'application/submit.html')
+        return render(request, 'application/submit.html', {'score': percent})
     return redirect('application:panel')
 
 
 def forcelogout(request, username):
     User.objects.get(username=username).delete()
+    CreateCandidate.objects.filter(username__exact=username).update(status='force-logout')
     logout(request)
-    return redirect('application:applogin')
+    return render(request, 'application/forcelogout.html')
