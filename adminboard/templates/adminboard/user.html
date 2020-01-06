@@ -67,7 +67,12 @@
                             <td>{{ i.designation }}</td>
                             <td>{{ i.team }}</td>
                             <td>{{ i.location }}</td>
-                            <td>{{ i.source }}</td>
+                            <td>{% if i.source == 'Referral'%}
+                                    {{ i.referralid }}
+                                {% else %}
+                                    {{ i.source }}
+                                {% endif %}
+                            </td>
                             <td class="inv">{{ i.invitestatus }}</td>
                             <td>
                                 <a href="{% url 'adminboard:admineditcand' username=i.username %}" class="pr-2 edit"><i class="fas fa-edit" title="edit"></i></a>
