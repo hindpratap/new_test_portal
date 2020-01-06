@@ -72,9 +72,9 @@ def postcred(request):
         team = request.POST.get('team')
         dob = request.POST.get('dob')
         resume = request.FILES.get('resume')
-        location = request.FILES.get('location')
-        source = request.FILES.get('source')
-        referral = request.FILES.get('referral')
+        location = request.POST.get('location')
+        source = request.POST.get('source')
+        referral = request.POST.get('referral')
 
         dob = dob[6:10] + '-' + dob[:2] + '-' + dob[3:5]
         if User.objects.filter(username=username).exists() and CreateCandidate.objects.filter(username=username).exists():
