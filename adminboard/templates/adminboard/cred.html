@@ -147,7 +147,7 @@
                         <span class="note"></span>
                     </div>
 
-                    <div></div>
+                    <div class="blank_"></div>
 
                     <div class="btn-div mt-3">
                         {% block button %}
@@ -199,13 +199,16 @@
             source.addEventListener('change', () => {
                 const sourceOpt = source.options[source.selectedIndex].value;
                 const referral = document.querySelector('.form-elem--refer');
+                const blank = document.querySelector('.blank_');
                 console.log(sourceOpt);
                 if(sourceOpt === 'Referral'){
                     referral.parentElement.classList.remove('hidden');
                     referral.required = true;
+                    blank.classList.add('hidden');
                 }else{
                     referral.parentElement.classList.add('hidden');
                     referral.required = false;
+                    blank.classList.remove('hidden');
                 }
             });
     </script>
