@@ -8,9 +8,11 @@ from adminboard.models import CreateCandidate
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from application.models import Instructions
+from django.core.cache import cache
 
-# Create your views here.
+
 def applogin(request):
+    cache.clear()
     return render(request, 'application/index.html')
 
 @csrf_exempt
