@@ -9,6 +9,7 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from application.models import Instructions
 from django.core.cache import cache
+import math
 
 
 def applogin(request):
@@ -60,14 +61,15 @@ def submitted(request):
         username = request.POST.get('username__')
         try:
             user = CreateCandidate.objects.get(username=username)
-            user.score = percent
+            user.score = math.ceil(int(percent))
             user.teststatus = 'Test Taken'
             user.status = 'Test Taken'
             user.save()
+            User.objects.get(username=username).delete()
         except:
             return HttpResponse('<h2>Unique contraint failed for username</h2>')
         logout(request)
-        return render(request, 'application/submit.html', {'score': percent})
+        return render(request, 'application/submit.html', {'score': user.score})
     return redirect('application:panel')
 
 
