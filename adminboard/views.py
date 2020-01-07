@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from adminboard.models import Authorizedadmin, CreateCandidate
@@ -13,8 +13,6 @@ import pandas as pd
 import numpy as np
 from application.models import Instructions
 from django.core.cache import cache
-
-
 
 def adminlogin(request):
     cache.clear()
@@ -46,7 +44,7 @@ def adminuser(request):
     obj = Authorizedadmin.objects.all()
     email = request.user.email
     authorized_admin = [i.email for i in obj]
-    candidates = CreateCandidate.objects.filter(activestatus__iexact='active').order_by('-id')
+    candidates = CreateCandidate.objects.filter(activestatus__iexact='active').exclude(teststatus__iexact='Test Taken').order_by('-id')
     return render(request, 'adminboard/user.html', {'authorized_admin': authorized_admin, 'email':email, 'candidates':candidates})
 
 @login_required

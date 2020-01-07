@@ -7,9 +7,10 @@ class RemoveuserMiddleware(MiddlewareMixin):
     def process_request(self, request):
         users = User.objects.exclude(username='raghav').exclude(username='analytics@123')
         for i in users:
-            if abs(i.date_joined.date() - datetime.today().date()).days > 1:
+            if abs(i.date_joined.date() - datetime.today().date()).days > 14:
                 username = i.username
                 User.objects.get(username=username).delete()
                 candidate = CreateCandidate.objects.get(username=username)
-                candidate.status = 'expired'
-                candidate.save()
+                if candidate.teststatus == 'Pending':
+                    candidate.status = 'expired'
+                    candidate.save()
