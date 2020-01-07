@@ -204,23 +204,23 @@
 
                     <div class="inst">
                         <div class="inst--div">
-                            <label for="" class="label">
+                            <label class="label">
                                 <span class="label-circle notvisited"></span>Not Visited
                             </label>
                         </div>
                         <div class="inst--div">
-                            <label for="" class="label">
+                            <label class="label">
                                 <span class="label-circle currently"></span>Current
                             </label>
                         </div>
                         <div class="inst--div">
-                            <label for="" class="label">
+                            <label class="label">
                                 <span class="label-circle answered"></span>Answered
                             </label>
                         </div>
 
                         <div class="inst--div">
-                            <label for="" class="label">
+                            <label class="label">
                                 <span class="label-circle notanswered"></span>Not Answered
                             </label>
                         </div>
@@ -273,17 +273,15 @@
             <section class="panel--btn">
                 <button class="btn btn--cancel mr-2" id="prevBtn">Previous</button>
                 <button class="btn btn--primary" id="nextBtn">Next</button>
+                <button class="btn btn--primary hidden" id="submitBtn" form="panelForm">Submit</button>
             </section>
         </main>
 
     </div>
 
     <!-- Script -->
-    <script src="{% static 'js/user/interactive.js' %}"></script>
-    <script src="{% static 'js/user/panel.js' %}"></script>
     <script src="{% static 'js/user/inspect.js' %}"></script>
+    <script src="{% static 'js/user/panel.js' %}"></script>
     {% include 'application/result.html' %}
-
-
 </body>
 </html>

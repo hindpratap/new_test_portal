@@ -89,51 +89,18 @@
                     <p>Are you sure you wish to start now?</p>
                 </div>
                 <div class="start-btn">
-                    <a class="btn btn--primary cont mr-3">Continue</a>
+                    <a href="{% url 'application:panel' %}" class="btn btn--primary cont mr-3">Continue</a>
                     <a class="btn btn--cancel cancel-no">Cancel</a>
                 </div>
             </div>
         </div>
 
-        <iframe id="main_frame" src="{% url 'application:panel' %}" style="width:100%;height:100%;border:none;display:none"></iframe>
     </div>
     
     <!-- Script -->
-    <script src="{% static 'js/user/index.js' %}"></script>
     <script src="{% static 'js/user/interactive.js' %}"></script>
     <script src="{% static 'js/user/inspect.js' %}"></script>
 
-    <script>
-    function goFullscreen() {
-        // Must be called as a result of user interaction to work
-        mf = document.getElementById("main_frame");
-        mf.webkitRequestFullscreen();
-        mf.style.display="";
-    }
-    function fullscreenChanged() {
-        if (document.webkitFullscreenElement == null) {
-            mf = document.getElementById("main_frame");
-            mf.style.display="none";
-            window.location= `{% url 'application:forcelogout' username=username %}`;
-        }
-    }
-    let cont = document.querySelector('.cont');
-
-    cont.onclick = goFullscreen;
-    document.onwebkitfullscreenchange = fullscreenChanged;
-
-    //check for Navigation Timing API support
-    if (window.performance) {
-        console.info("window.performance works fine on this browser");
-    }
-    if (performance.navigation.type == 1) {
-        window.location= `{% url 'application:forcelogout' username=username %}`;
-        console.info( "This page is reloaded" );
-    } else {
-        console.info( "This page is not reloaded");
-    }
-
-</script>
 
 </body>
 </html>

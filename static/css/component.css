@@ -113,6 +113,10 @@ body{
 .header{
     border-bottom: 1px solid #AEAEAE;
     padding: .5em 0em;
+    position: sticky;
+    top: 0px;
+    background: #fff;
+    z-index: 10000;
 }
 
 .admin-head{
@@ -201,7 +205,7 @@ body{
     min-height: calc(100vh - 61.66px);
     max-height: calc(100vh - 61.66px);
     position: sticky;
-    top: 0;
+    top: 62px;
     z-index: 1;
     background-color: #fff;
 }
@@ -396,6 +400,13 @@ td{
 
 .fa-trash-alt{
     color: #ff6347;
+}
+
+.dt-button.buttons-csv.buttons-html5 {
+    background: #fefefe;
+    border: 1px solid #bbb;
+    padding: 0.25rem 1rem;
+    border-radius: 4px;
 }
 
 /* Form */
@@ -684,6 +695,10 @@ delete{
 
 
 /* Submission */
+.finalForm{
+    position: relative;
+}
+
 .fStatus,
 .empID{
     border: 1px solid #bbb;
@@ -695,6 +710,20 @@ delete{
 .empID{
     width: 100px;
 }
+
+.btn--final {
+    background: none;
+    border: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #d4fdee;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #1b8c72;
+}
+
 
 /* Others */
 .alert{

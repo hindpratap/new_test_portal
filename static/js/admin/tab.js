@@ -9,6 +9,7 @@ const normal = document.querySelector('.normal');
 const pending = document.querySelector('.pending');
 const shortlisted = document.querySelector('.shortlisted');
 
+
 let tabId;
 
 [...tabItems].map(e => {

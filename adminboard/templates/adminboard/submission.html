@@ -53,7 +53,7 @@
                             <th scope="row">Score</th>
                             <th scope="row">Resume</th>
 <!--                            <th scope="row">Status</th>-->
-                            <th scope="row">Action</th>
+                            <th scope="row">Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -69,12 +69,12 @@
                             <td>{{ i.score }}%</td>
                             <td><a href="/static/media/{{ i.resume }}">Resume</a></td>
                             <td>
-                                <form method="post" action="{% url 'adminboard:candaction' id=i.id %}">{% csrf_token %}
-                                    {% if i.candempid == 'Nan' %}
-                                    <input type="text" name="empId" class="empID" value="" placeholder="Employee ID">
-                                    {% else %}
-                                    <input type="text" name="empId" class="empID" value="{{ i.candempid }}" readonly>
-                                    {% endif %}
+                                <form method="post" action="{% url 'adminboard:candaction' id=i.id %}" class="finalForm">{% csrf_token %}
+<!--                                    {% if i.candempid == 'Nan' %}-->
+<!--                                    <input type="text" name="empId" class="empID" value="" placeholder="Employee ID">-->
+<!--                                    {% else %}-->
+<!--                                    <input type="text" name="empId" class="empID" value="{{ i.candempid }}" readonly>-->
+<!--                                    {% endif %}-->
                                     {% if i.selectionstatus == 'Pending' %}
                                     <select name="fStatus" class="fStatus">
                                         <option value="Pending">Pending</option>
@@ -83,15 +83,17 @@
                                         <option value="Joined">Joined</option>
                                         <option value="Not Joined">Not Joined</option>
                                     </select>
+                                    {% elif i.selectionstatus == 'Joined' %}
+                                        {{ i.selectionstatus }} - {{ i.candempid }}
                                     {% else %}
-                                    <select name="fStatus" class="fStatus">
-                                        <option value="" hidden>{{ i.selectionstatus }}</option>
-                                        <option value="Pending">Pending</option>
-                                        <option value="Offered">Offered</option>
-                                        <option value="Not Offered">Not Offered</option>
-                                        <option value="Joined">Joined</option>
-                                        <option value="Not Joined">Not Joined</option>
-                                    </select>
+                                        <select name="fStatus" class="fStatus">
+                                            <option value="" hidden>{{ i.selectionstatus }}</option>
+                                            <option value="Pending">Pending</option>
+                                            <option value="Offered">Offered</option>
+                                            <option value="Not Offered">Not Offered</option>
+                                            <option value="Joined">Joined</option>
+                                            <option value="Not Joined">Not Joined</option>
+                                        </select>
                                     {% endif %}
                                 </form>
                             </td>
@@ -116,13 +118,37 @@
     <script src="{% static 'js/admin/admin.js' %}"></script>
     <script>
         $(document).ready(function() {
-            $('#subTable').DataTable();
+            $('#subTable').DataTable({
+                "scrollX": true,
+                fixedColumns:   {
+                    leftColumns: 0,
+                    rightColumns: 1
+                }
+            });
         });
 
         let fStatus = document.querySelectorAll('.fStatus');
         [...fStatus].map(m => {
             m.addEventListener('change', () => {
-                m.parentElement.submit();
+                const mOpt = m.options[m.selectedIndex].value;
+                if(mOpt === 'Joined'){
+                    const inpDiv = document.createElement('div');
+                    inpDiv.setAttribute('class', 'form-input-div');
+                    const inp = document.createElement('input');
+                    inp.setAttribute('name', 'empId');
+                    inp.setAttribute('class', 'empID');
+                    inp.setAttribute('placeholder', 'Employee ID');
+                    const btn = document.createElement('button');
+                    btn.setAttribute('type', 'submit');
+                    btn.setAttribute('class', 'btn--final ml-2');
+                    btn.innerHTML = '<i class="fas fa-check"></i>';
+                    inpDiv.appendChild(inp);
+                    inpDiv.appendChild(btn);
+                    m.style.display = 'none';
+                    m.parentElement.appendChild(inpDiv);
+                }else{
+                    m.parentElement.submit();
+                }
             });
         });
     </script>

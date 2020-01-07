@@ -35,9 +35,9 @@
         {% include 'adminboard/aside.html' %}
 
         <div class="screen">
-            <div class="screen__table">
+            <div class="screen__table invite">
                 <div class="screen__table__top">
-                    <h3 class="table-title">Candidate Credentials</h3>
+                    <h3 class="table-title">Credentials for Invite</h3>
                     <a href="{% url 'adminboard:addcredential' %}" class="btn btn--create"> <i class="fas fa-plus pr-2"></i> Add Credentials</a>
                 </div>
 
@@ -52,7 +52,7 @@
                             <th scope="row">Team</th>
                             <th scope="row">Location</th>
                             <th scope="row">Source</th>
-                            <th scope="row">Invite Status</th>
+                            <th scope="row">Status</th>
                             <th scope="row">Action</th>
                         </tr>
                     </thead>
@@ -73,7 +73,7 @@
                                     {{ i.source }}
                                 {% endif %}
                             </td>
-                            <td class="inv">{{ i.invitestatus }}</td>
+                            <td class="inv">{{ i.status }}</td>
                             <td>
                                 <a href="{% url 'adminboard:admineditcand' username=i.username %}" class="pr-2 edit"><i class="fas fa-edit" title="edit"></i></a>
                                 <a href="{% url 'adminboard:adminnotifycand' username=i.username %}" class="pl-2 pr-2 plane"><i class="fas fa-paper-plane" title="send"></i></a>
@@ -96,13 +96,36 @@
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://cdn.datatables.net/fixedcolumns/3.3.0/js/dataTables.fixedColumns.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.flash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>
+
     <script src="{% static 'js/admin/admin.js' %}"></script>
 
     <script>
         $(document).ready(function() {
             $('#CCTable').DataTable({
                 "scrollX": true,
+                fixedColumns:   {
+                    leftColumns: 1,
+                    rightColumns: 0
+                }
             });
+            // $('#ACTable').DataTable({
+            //     "scrollX": true,
+            //     fixedColumns:   {
+            //         leftColumns: 1,
+            //         rightColumns: 0
+            //     },
+            //     dom: 'Bfrtip',
+            //     buttons: [
+            //         'csv'
+            //     ],
+            // });
         });
     </script>
 </body>
