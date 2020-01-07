@@ -21,36 +21,26 @@
         g.push(qObj);
     {% endfor %}
 
-    console.log(g[0]["02"]);
-    console.log(g[1]["02"]);
-    console.log(g[30]["02"]);
-    console.log(g[31]["02"]);
-    console.log(g[40]["02"]);
-    console.log(g[41]["02"]);
-
     const s = document.querySelector('#nextBtn');
     const p = document.querySelectorAll('.panel');
     const pr = document.querySelector('.parinam');
 
     let c = 0;
-    s.addEventListener('click', e => {
+    form.addEventListener('submit', e => {
         e.preventDefault();
-        if(s.getAttribute('type') === 'submit'){
-            for(let i=0; i<panel.length; i++){
-                opt = p[i].querySelectorAll('.optBtn');
-                [...opt].map(o => {
-                   if(o.checked){
-                       v = o.value;
-                       x = g[i]["02"];
-                       if(v === x){
-                           c++;
-                       }
+        for(let i=0; i<panel.length; i++){
+            opt = p[i].querySelectorAll('.optBtn');
+            [...opt].map(o => {
+               if(o.checked){
+                   v = o.value;
+                   x = g[i]["02"];
+                   if(v === x){
+                       c++;
                    }
-                });
-            }
-            pr.value = (c/(p.length)) * 100;
-            console.log(pr.value);
-            form.submit();
+               }
+            });
         }
-    })
+        pr.value = Math.round((c/(p.length)) * 100);
+        form.submit();
+    });
 </script>

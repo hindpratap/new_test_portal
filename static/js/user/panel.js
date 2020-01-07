@@ -60,6 +60,7 @@ function timeBetweenDates(toDate) {
 const panel = document.querySelectorAll('.panel');
 const nextBtn  = document.querySelector('#nextBtn');
 const prevBtn = document.querySelector('#prevBtn');
+const submitBtn = document.querySelector('#submitBtn');
 
 const navSwitch = document.querySelectorAll('.switch__a');
 navSwitch[0].style = 'background-color: royalblue; border: 2px solid royalblue; color: #fff;';
@@ -73,21 +74,18 @@ prevBtn.style.display = 'none';
 nextBtn.addEventListener('click', () => {
     prevBtn.style.display = "block";
 
-    if(counterPanel < panel.length-1){
+    if(counterPanel < panel.length - 1){
         panel[counterPanel].classList.add('panel-hide');
         panel[counterPanel + 1].classList.remove('panel-hide');
         navigator(counterPanel);
         counterPanel++;
         navSwitch[counterPanel].style = 'background-color: royalblue; border: 2px solid royalblue; color: #fff;';
-        nextBtn.type = 'button';
-        nextBtn.setAttribute('form', '');
-        nextBtn.innerHTML = 'Next';
     }
 
     // When last panel reached change nextBtn type & text to submit
-    if(counterPanel === (panel.length-1)){
-        nextBtn.type = 'submit';
-        nextBtn.innerHTML = 'Submit';
+    if(counterPanel === (panel.length - 1)){
+        nextBtn.classList.add('hidden');
+        submitBtn.classList.remove('hidden');
     }
 
 });
@@ -106,9 +104,8 @@ prevBtn.addEventListener('click', () => {
         prevBtn.style.display='none';
     }
 
-    nextBtn.type = 'button';
-    nextBtn.setAttribute('form', '');
-    nextBtn.innerHTML = 'Next';
+    nextBtn.classList.remove('hidden');
+    submitBtn.classList.add('hidden');
 });
 
 // Navigation
@@ -128,19 +125,16 @@ prevBtn.addEventListener('click', () => {
 
                 if([...panel].indexOf(p) === 0){
                     prevBtn.style.display = 'none';
-                    nextBtn.type = 'button';
-                    nextBtn.setAttribute('form', '');
-                    nextBtn.innerHTML = 'Next';
+                    nextBtn.classList.remove('hidden');
+                    submitBtn.classList.add('hidden');
                 }else if([...panel].indexOf(p) === panel.length-1){
                     prevBtn.style.display = 'block';
-                    nextBtn.type = 'submit';
-                    nextBtn.setAttribute('form', 'panelForm');
-                    nextBtn.innerHTML = 'Submit';
+                    nextBtn.classList.add('hidden');
+                    submitBtn.classList.remove('hidden');
                 }else{
                     prevBtn.style.display = 'block';
-                    nextBtn.type = 'button';
-                    nextBtn.setAttribute('form', '');
-                    nextBtn.innerHTML = 'Next';
+                    nextBtn.classList.remove('hidden');
+                    submitBtn.classList.add('hidden');
                 }
 
                 counterPanel = [...panel].indexOf(p);

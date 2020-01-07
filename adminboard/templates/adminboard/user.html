@@ -73,7 +73,7 @@
                                     {{ i.source }}
                                 {% endif %}
                             </td>
-                            <td class="inv">{{ i.invitestatus }}</td>
+                            <td class="inv">{{ i.status }}</td>
                             <td>
                                 <a href="{% url 'adminboard:admineditcand' username=i.username %}" class="pr-2 edit"><i class="fas fa-edit" title="edit"></i></a>
                                 <a href="{% url 'adminboard:adminnotifycand' username=i.username %}" class="pl-2 pr-2 plane"><i class="fas fa-paper-plane" title="send"></i></a>

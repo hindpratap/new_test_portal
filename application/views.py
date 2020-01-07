@@ -48,7 +48,7 @@ def panel(request):
     username = request.user.username
     english_questions = Question.objects.filter(category__iexact='english').order_by('?')[:10]
     quantitative_questions = Question.objects.filter(category__iexact='quantitative').order_by('?')[:10]
-    reasoning_questions = Question.objects.filter(category__iexact='reasoning').order_by('?')[:30]
+    reasoning_questions = Question.objects.filter(category__iexact='reasoning').order_by('?')[:10]
     return render(request, 'application/panel.html', {'english_questions': english_questions, 'quantitative_questions': quantitative_questions,
                                                       'reasoning_questions': reasoning_questions, 'username': username})
 
