@@ -12,6 +12,7 @@ import pandas as pd
 import numpy as np
 from application.models import Instructions
 from django.core.cache import cache
+from itertools import chain
 
 def adminlogin(request):
     cache.clear()
@@ -51,7 +52,9 @@ def addcredential(request):
     obj = Authorizedadmin.objects.all()
     authorized_admin = [i.email for i in obj]
     email = request.user.email
-    data = CreateCandidate.objects.all()
+    data1 = CreateCandidate.objects.all()
+    data2 = User.objects.all()
+    data = list(chain(data1, data2))
     return render(request, 'adminboard/cred.html', {'authorized_admin': authorized_admin, 'email':email, 'data':data})
 
 @login_required
