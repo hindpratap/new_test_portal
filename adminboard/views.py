@@ -8,7 +8,6 @@ from django.http import HttpResponse
 from datetime import datetime
 from application.models import Question
 from adminboard.tasks import sendmailtask
-from django.db.models import Q
 import pandas as pd
 import numpy as np
 from application.models import Instructions
@@ -144,10 +143,10 @@ def adminnotifycand(request, username):
             pass
         else:
             User.objects.create_user(username=username, password=recreate_cand.password, first_name=recreate_cand.fullname, email=recreate_cand.email)
-        sub = 'test sub'
-        content = ''
-        tomail = ''
-        # sendmailtask.delay(sub, content, tomail)
+        sub = 'no-reply: Test details'
+        content = f'Dear Candidate,\n\nBelow are the credentials of your aptitude test: \nusername-{recreate_cand.username}\npassword-{recreate_cand.password}.\nKindly login to take the test as the test credentials are only valid for certain time.You are advised to read the instructions carefully before making an attempt.\n\nBest of luck\nHuman Resources-Dataflow group'
+        tomail = f'{recreate_cand.email}'
+        sendmailtask.delay(sub, content, tomail)
         user = CreateCandidate.objects.get(username=username)
         user.invitestatus = 'Invite sent'
         user.status = 'Invite sent'
