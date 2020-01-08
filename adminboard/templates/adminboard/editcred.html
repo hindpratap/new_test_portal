@@ -28,6 +28,7 @@
                     "team": `{{ candidate.team }}`,
                     "location": `{{ candidate.location }}`,
                     "source": `{{ candidate.source }}`,
+                    "referral": `{{ candidate.referral }}`,
                     "dResume": `{{ candidate.resume }}`,
                 };
             const formElem = document.querySelectorAll('.form-elem');
@@ -38,13 +39,15 @@
             console.log(candidateObj[keys[1]]);
 
             // Referral Source
-            if(candidateObj["source"] === `Referral`){
+            try{
+                if(candidateObj["source"] === `Referral`){
                 const referralInp = document.querySelector('[data-id="referral"]');
                 referralInp.parentElement.classList.remove('hidden');
 
                 const blank = document.querySelector('.blank_');
                 blank.classList.add('hidden');
             }
+            }catch(err){}
 
             [...formElem].map(e => {
                 e.required = true;
