@@ -157,8 +157,8 @@ def adminnotifycand(request, username):
         else:
             User.objects.create_user(username=username, password=recreate_cand.password, first_name=recreate_cand.fullname, email=recreate_cand.email)
         sub = 'no-reply: Test details'
-        content = f'Dear Candidate,\n\nBelow are the credentials of your aptitude test: \nusername-{recreate_cand.username}\npassword-{recreate_cand.password}.\nKindly login to take the test as the test credentials are only valid for certain time.You are advised to read the instructions carefully before making an attempt.\n\nBest of luck\nHuman Resources-Dataflow group'
-        tomail = f'{recreate_cand.email}'
+        content = f'Hi {recreate_cand.fullname},\nThank you for showing interest in working with DataFlow Group.\nTo complete the application process, you are required to take an online test. The test would include assessment for English Grammar, Logic Check and Reasoning Skills.\n\nBelow are the credentials for the test:\n\nusername-{recreate_cand.username}\npassword-{recreate_cand.password}.\nThe test cannot be fragmented, but must be completed in a single attempt. The duration for the test is 30 minutes.\n\nBest Regards\nHR Team- Dataflow Group'
+        tomail = [f'{recreate_cand.email}']
         sendmailtask.delay(sub, content, tomail)
         user = CreateCandidate.objects.get(username=username)
         user.invitestatus = 'Invite sent'
