@@ -23,7 +23,7 @@
                     "pass": `{{ candidate.password }}`,
                     "email": `{{ candidate.email }}`,
                     "mobile": `{{ candidate.phone }}`,
-                    "dob": `{{ candidate.dob }}`,
+                    "dob": `{{ candidate.dob|date:"m/d/Y" }}`,
                     "position": `{{ candidate.designation }}`,
                     "team": `{{ candidate.team }}`,
                     "location": `{{ candidate.location }}`,
