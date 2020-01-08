@@ -49,6 +49,9 @@
             [...formElem].map(e => {
                 e.required = true;
                 formElemId = e.getAttribute('data-id');
+                if(formElemId === 'referral'){
+                    e.required = false;
+                }
                 keys.forEach(k => {
                     if(formElemId === k){
                         if(e.tagName === 'SELECT'){

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
-from adminboard.models import Authorizedadmin, CreateCandidate
+from adminboard.models import Authorizedadmin, CreateCandidate, History
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 from django.http import HttpResponse
@@ -61,8 +61,8 @@ def addcredential(request):
 @csrf_exempt
 def postcred(request):
     authorized_admin = [i.email for i in Authorizedadmin.objects.all()]
-    email = request.user.email
-    if request.method == 'POST' and email in authorized_admin:
+    filler_email = request.user.email
+    if request.method == 'POST' and filler_email in authorized_admin:
         fullname = request.POST.get('fullName')
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -80,10 +80,10 @@ def postcred(request):
         if User.objects.filter(username=username).exists() and CreateCandidate.objects.filter(username=username).exists():
             # try:
             authcand = User.objects.get(username=username)
-            cand = CreateCandidate.objects.get(username=username)
             authcand.first_name = fullname
             authcand.email = email
             authcand.save()
+            cand = CreateCandidate.objects.get(username=username)
             cand.fullname = fullname
             cand.email = email
             cand.phone = phone
@@ -97,6 +97,10 @@ def postcred(request):
             else:
                 pass
             cand.save()
+            History.objects.create(fullname=fullname, username=username, password=password, email=email,
+                                           phone=phone, designation=designation, team=team, created_at=datetime.today(),
+                                           dob=dob, resume=resume, location=location, source=source,
+                                           referralid=referral, updated_at=datetime.now(), updated_by=filler_email)
             # except:
             #     return HttpResponse('<h2>Error code v6s v7.5s(postcred if)</h2>')
             return redirect('adminboard:adminuser')
@@ -104,6 +108,10 @@ def postcred(request):
             # try:
             CreateCandidate.objects.create(fullname=fullname, username=username, password=password, email=email,
                                         phone=phone, designation=designation, team=team, created_at=datetime.today(), dob=dob, resume=resume, location=location, source=source, referralid=referral)
+            History.objects.create(fullname=fullname, username=username, password=password, email=email,
+                                           phone=phone, designation=designation, team=team, created_at=datetime.today(),
+                                           dob=dob, resume=resume, location=location, source=source,
+                                           referralid=referral, updated_at=datetime.now(), updated_by=filler_email)
             User.objects.create_user(first_name=fullname, username=username, password=password, email=email)
 
             # except:
@@ -139,8 +147,8 @@ def admindelcand(request, username):
 
 def adminnotifycand(request, username):
     authorized_admin = [i.email for i in Authorizedadmin.objects.all()]
-    email = request.user.email
-    if email in authorized_admin:
+    filler_email = request.user.email
+    if filler_email in authorized_admin:
         recreate_cand = CreateCandidate.objects.get(username=username)
         if User.objects.filter(username=username).exists():
             pass
@@ -154,6 +162,13 @@ def adminnotifycand(request, username):
         user.invitestatus = 'Invite sent'
         user.status = 'Invite sent'
         user.save()
+        History.objects.create(username=user.username, password=user.password,
+                               phone=user.phone, fullname=user.fullname, designation=user.designation,
+                               email=user.email, team=user.team, location=user.location, score=user.score,
+                               invitestatus='Invite Sent', teststatus=user.teststatus,
+                               status='Invite Sent', selectionstatus=user.selectionstatus,dob=user.dob, resume=user.resume, created_at=user.created_at,
+                               activestatus=user.activestatus, source=user.source, referralid=user.referralid,
+                               candempid=user.candempid, updated_at=datetime.now(), updated_by=filler_email)
         return redirect('adminboard:adminuser')
     else:
         return HttpResponse('<h2>Error: You do not have admin rights.</h2>')
@@ -256,15 +271,23 @@ def changequest(request):
 @csrf_exempt
 def candaction(request, id):
     authorized_admin = [i.email for i in Authorizedadmin.objects.all()]
-    email = request.user.email
-    if request.method == 'POST' and email in authorized_admin:
+    filler_email = request.user.email
+    if request.method == 'POST' and filler_email in authorized_admin:
         fStatus = request.POST.get('fStatus')
         empId = request.POST.get('empId')
         try:
-            obj = CreateCandidate.objects.get(pk=id)
-            obj.selectionstatus = fStatus
-            obj.candempid = empId
-            obj.save()
+            user = CreateCandidate.objects.get(pk=id)
+            user.selectionstatus = fStatus
+            user.candempid = empId
+            user.save()
+
+            History.objects.create(username=user.username, password=user.password,
+                                              phone=user.phone, fullname=user.fullname, designation=user.designation,
+                                              email=user.email, team=user.team, location=user.location, score=user.score,
+                                              invitestatus=user.invitestatus, teststatus='Test Taken',
+                                              status=fStatus, dob=user.dob, resume=user.resume, created_at=user.created_at,
+                                              activestatus=user.activestatus, selectionstatus=fStatus, source=user.source, referralid=user.referralid,
+                                              candempid=empId, updated_at=datetime.now(), updated_by=filler_email)
             return redirect('adminboard:submission')
         except:
             return HttpResponse('<h2>Error: V@candaccept</h2>')
@@ -275,8 +298,8 @@ def candaction(request, id):
 @csrf_exempt
 def bulkupload(request):
     authorized_admin = [i.email for i in Authorizedadmin.objects.all()]
-    email = request.user.email
-    if email in authorized_admin:
+    filler_email = request.user.email
+    if filler_email in authorized_admin:
         if request.method == 'POST':
             try:
                 csvfile = request.FILES.get('bulk')

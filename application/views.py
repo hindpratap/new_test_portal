@@ -4,11 +4,12 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
 from application.models import Question
-from adminboard.models import CreateCandidate
+from adminboard.models import CreateCandidate, History
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from application.models import Instructions
 from django.core.cache import cache
+from datetime import datetime
 
 
 def applogin(request):
@@ -35,7 +36,7 @@ def instructions(request):
     email = request.user.email
     username = request.user.username
     obj = CreateCandidate.objects.get(username=username)
-    instruct = Instructions.objects.all().order_by('id')
+    instruct = Instructions.objects.all().order_by('-id')
     return render(request, 'application/instructions.html', {'username': username, 'name': obj.fullname, 'email': email, 'phone': obj.phone, 'instruct': instruct})
 
 @login_required(login_url='logincand/')
@@ -64,6 +65,13 @@ def submitted(request):
             user.teststatus = 'Test Taken'
             user.status = 'Test Taken'
             user.save()
+            History.objects.create(username=user.username, password=user.password,
+                                              phone=user.phone, fullname=user.fullname, designation=user.designation,
+                                              email=user.email, team=user.team, location=user.location, score=user.score,
+                                              invitestatus=user.invitestatus, teststatus='Test Taken',
+                                              status='Test Taken', dob=user.dob, resume=user.resume, created_at=user.created_at,
+                                              activestatus=user.activestatus, selectionstatus=user.selectionstatus, source=user.source, referralid=user.referralid,
+                                              candempid=user.candempid, updated_at=datetime.now(), updated_by=user.email)
             User.objects.get(username=username).delete()
         except:
             return HttpResponse('<h2>Unique contraint failed for username</h2>')
