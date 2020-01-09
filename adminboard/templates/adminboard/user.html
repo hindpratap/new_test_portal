@@ -76,7 +76,8 @@
                             <td class="inv">{{ i.status }}</td>
                             <td>
                                 <a href="{% url 'adminboard:admineditcand' username=i.username %}" class="pr-2 edit"><i class="fas fa-edit" title="edit"></i></a>
-                                <a href="{% url 'adminboard:adminnotifycand' username=i.username %}" class="pl-2 pr-2 plane"><i class="fas fa-paper-plane" title="send"></i></a>
+                                <a href="{% url 'adminboard:adminnotifycand' username=i.username %}" class="pl-2 plane"><i class="fas fa-paper-plane" title="send"></i></a>
+                                <a class="loader pl-2 hidden"><i class="fas fa-circle-notch"></i></a>
 <!--                                <a href="{% url 'adminboard:admindelcand' username=i.username %}" class="delete"><i class="fas fa-trash-alt" title="delete"></i></a>-->
                             </td>
                         </tr>

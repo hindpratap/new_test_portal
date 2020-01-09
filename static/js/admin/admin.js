@@ -25,7 +25,16 @@ try{
     [...inv].map(m => {
         st = m.innerHTML.toLowerCase();
         if(st === 'invite sent'){
-            m.nextElementSibling.querySelector('.fa-paper-plane').title = 'resend';s
+            m.nextElementSibling.querySelector('.fa-paper-plane').title = 'resend';
         }
-    })
+    });
+
+    let s = document.querySelectorAll('.plane');
+    [...s].map(p => {
+        p.addEventListener('click', () => {
+            const l = p.nextElementSibling;
+            l.classList.remove('hidden');
+            p.classList.add('hidden');
+        });
+    });
 }catch(err){}

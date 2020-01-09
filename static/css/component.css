@@ -638,6 +638,20 @@ delete{
     color: tomato;
 }
 
+.loader i{
+    color: royalblue;
+    animation: rotateLoader 1s infinite;
+}
+
+@keyframes rotateLoader {
+    0%   {
+            transform: rotate(0deg);
+        }
+    100% {
+            transform: rotate(360deg);
+        }
+}
+
 .accept::before,
 .reject::before,
 .edit::before,
