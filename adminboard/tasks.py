@@ -5,6 +5,8 @@ from django.conf import settings
 
 
 @shared_task
-def sendmailtask(x, y, z):
-    send_mail(x, y, settings.EMAIL_HOST_USER, [z])
+def sendmailtask():
+    print('going to send')
+    send_mail('Hi', 'test', settings.EMAIL_HOST_USER, ['rsharma2@dataflowgroup.com'])
+    print('sent successfully')
     return None
