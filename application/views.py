@@ -12,6 +12,8 @@ from django.core.cache import cache
 from datetime import datetime
 from django.core.serializers.json import DjangoJSONEncoder
 import json
+from django.core.mail import send_mail
+from django.conf import settings
 
 
 def applogin(request):
@@ -41,7 +43,7 @@ def postsignup(request):
         History.objects.create(fullname=fullname, username=username, password=password, email=email,
                                phone=phone, created_at=datetime.today(),
                                dob=dob, resume=resume, location=location, source=source,
-                               referralid=referral, updated_at=datetime.now(), updated_by=filler_email)
+                               referralid=referral, updated_at=datetime.now())
         User.objects.create_user(first_name=fullname, username=username, password=password, email=email)
         sub = 'no-reply: Test details'
         content = f'Hi {fullname},\nThank you for showing interest in working with DataFlow Group.\nTo complete the application process, you are required to take an online test. The test would include assessment for English Grammar, Logic Check and Reasoning Skills.\n\nBelow are the credentials for the test:\n\nusername- {username}\npassword- {password}\nTest link: https://uataudit.dfgateway.com\nThe test cannot be fragmented, but must be completed in a single attempt. The duration for the test is 30 minutes.\n\nBest Regards\nHR Team- Dataflow Group'
