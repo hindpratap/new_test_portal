@@ -36,7 +36,7 @@
 
         <div class="cont-box2">
             <img src="{% static 'images/homeGrap.svg' %}" alt="homeGrap" class="homeGrap">
-                <form action="" method="POST" class="signup-form form cred-form" id="credForm" enctype="multipart/form-data">{% csrf_token %}
+                <form action="{% url 'application:postsignup' %}" method="POST" class="signup-form form cred-form" id="credForm" enctype="multipart/form-data">{% csrf_token %}
                     <h1 class="heading head-container head2">Candidate Portal</h1><p></p>
                     <div class="form-div">
                         <label for="" class="form-label">Full Name</label>

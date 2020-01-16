@@ -22,6 +22,36 @@ def appsignup(request):
     return render(request, 'application/signup.html', {'data': data})
 
 @csrf_exempt
+def postsignup(request):
+    if request.method == 'POST':
+        fullname = request.POST.get('fullName')
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+        dob = request.POST.get('dob')
+        resume = request.FILES.get('resume')
+        location = request.POST.get('location')
+        source = request.POST.get('source')
+        referral = request.POST.get('referral')
+        dob = dob[6:10] + '-' + dob[:2] + '-' + dob[3:5]
+        CreateCandidate.objects.create(fullname=fullname, username=username, password=password, email=email,
+                                       phone=phone, created_at=datetime.today(),
+                                       dob=dob, resume=resume, location=location, source=source, referralid=referral)
+        History.objects.create(fullname=fullname, username=username, password=password, email=email,
+                               phone=phone, created_at=datetime.today(),
+                               dob=dob, resume=resume, location=location, source=source,
+                               referralid=referral, updated_at=datetime.now(), updated_by=filler_email)
+        User.objects.create_user(first_name=fullname, username=username, password=password, email=email)
+        sub = 'no-reply: Test details'
+        content = f'Hi {fullname},\nThank you for showing interest in working with DataFlow Group.\nTo complete the application process, you are required to take an online test. The test would include assessment for English Grammar, Logic Check and Reasoning Skills.\n\nBelow are the credentials for the test:\n\nusername- {username}\npassword- {password}\nTest link: https://uataudit.dfgateway.com\nThe test cannot be fragmented, but must be completed in a single attempt. The duration for the test is 30 minutes.\n\nBest Regards\nHR Team- Dataflow Group'
+        tomail = [f'{email}']
+        # sendmailtask.delay(sub, content, tomail)
+        send_mail(sub, content, settings.EMAIL_HOST_USER, tomail)
+        return redirect('application:applogin')
+    return redirect('application:appsignup')
+
+@csrf_exempt
 def logincand(request):
     if request.method == 'POST':
         username = request.POST.get('username')
