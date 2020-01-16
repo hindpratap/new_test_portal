@@ -91,13 +91,16 @@ try{
 
     const sr = signUpForm.querySelector('[data-id="source"]');
     const rf = signUpForm.querySelector('[data-id="referral"]');
+    const bl = signUpForm.querySelector('.blank_');
 
     sr.addEventListener('change', () => {
         fOpt = sr.options[sr.selectedIndex].value;
         if(fOpt === 'Referral'){
             rf.parentElement.classList.remove('hidden');
+            bl.classList.add('hidden');
         }else{
             rf.parentElement.classList.add('hidden');
+            bl.classList.remove('hidden');
         }
     })
 

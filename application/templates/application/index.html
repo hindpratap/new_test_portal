@@ -36,11 +36,17 @@
             <form action="{% url 'application:logincand' %}" method="POST" class="login-form">{% csrf_token %}
                 <h1 class="heading">Candidate Portal</h1>
                {% for message in messages %}
-                        <div class="alert alert-danger">
-                            <a class="close" href="#" data-dismiss="alert"></a>
-                            <p>{{ message }}</p>
-                        </div>
+                    <div class="alert alert-danger">
+                        <a class="close" href="#" data-dismiss="alert"></a>
+                        <p>{{ message }}</p>
+                    </div>
                 {% endfor %}
+
+                <div class="alert alert-success">
+                    <a class="close" href="#" data-dismiss="alert"></a>
+                    <p>Please check your mail for Login credentials</p>
+                </div>
+
                 <div class="form-comp">
                     <input type="text" name="username" class="input-field" required>
                     <span class="label-placeholder">Username</span>
@@ -54,7 +60,9 @@
                 </div>
                 <button type="submit" class="btn btn--login">Login</button>
                 <p class="another-log mt-4">Don't have an account? <a href="{% url 'application:appsignup' %}">Sign Up</a></p>
+
             </form>
+
 
             <footer class="foot-log">
                 <p>&copy; <span class="foot-log__span">DATA</span>FLOW GROUP</p>
