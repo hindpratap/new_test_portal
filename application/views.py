@@ -10,11 +10,16 @@ from django.contrib.auth.models import User
 from application.models import Instructions
 from django.core.cache import cache
 from datetime import datetime
+from django.core.serializers.json import DjangoJSONEncoder
+import json
 
 
 def applogin(request):
-    cache.clear()
     return render(request, 'application/index.html')
+
+def appsignup(request):
+    data = CreateCandidate.objects.all()
+    return render(request, 'application/signup.html', {'data': data})
 
 @csrf_exempt
 def logincand(request):

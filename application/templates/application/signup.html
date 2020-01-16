@@ -9,42 +9,35 @@
     <!-- Favicon -->
     <link rel="icon" href="{% static 'images/DF Logo.svg' %}">
 
-    <!-- CDN CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
     <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="{% static 'css/admin_home.css' %}">
-
     <!-- Fontawesome -->
     <script src="https://kit.fontawesome.com/11dafce953.js" crossorigin="anonymous"></script>
 
-    <title>Create Credentials</title>
+    <title>Sign Up</title>
 </head>
 <body>
-
     <noscript>
         Your Browser's JavaScript has been turned off kindly enable it.
     </noscript>
 
-    {% include 'adminboard/header.html' %}
-    {% if email in authorized_admin %}
-    <main class="board container-fluid">
+    <div class="app">
 
-        {% include 'adminboard/aside.html' %}
+        <div class="cont-img">
+            <img src="{% static 'images/DF Logo.svg' %}" alt="containerImage">
+            <span class="cont-img__">DATA</span>FLOW
+        </div>
 
-        <div class="screen">
-            <div class="screen__table">
-                <div class="screen__table__top">
-                    <h3 class="table-title">Add Candidate Credentials</h3>
-                    <a href="{% url 'adminboard:adminuser' %}" class="a--back"><i class="fas fa-chevron-left pr-2"></i> View credentials</a>
-                </div>
-                <form action="{% url 'adminboard:postcred' %}" method="POST" class="form cred-form" id="credForm" enctype="multipart/form-data">{% csrf_token %}
-
+        <div class="cont-box2">
+            <img src="{% static 'images/homeGrap.svg' %}" alt="homeGrap" class="homeGrap">
+                <form action="" method="POST" class="signup-form form cred-form" id="credForm" enctype="multipart/form-data">{% csrf_token %}
+                    <h1 class="heading head-container head2">Candidate Portal</h1><p></p>
                     <div class="form-div">
                         <label for="" class="form-label">Full Name</label>
                         <input type="text" name="fullName" class="form-elem form-elem--name" data-id="name" autocomplete="off">
@@ -59,9 +52,8 @@
 
                     <div class="form-div">
                         <label for="" class="form-label">Password
-                            <span class="info-title">i</span>
                         </label>
-                        <input type="text" name="password" class="form-elem form-elem--pass" data-id="pass" maxlength=10 minlength=8 autocomplete="off">
+                        <input type="password" name="password" class="form-elem form-elem--pass" data-id="pass" maxlength=10 minlength=8 autocomplete="off">
                         <span class="note"></span>
                     </div>
 
@@ -80,34 +72,6 @@
                     <div class="form-div">
                         <label for="" class="form-label">Date of Birth</label>
                         <input type="" name="dob" class="form-elem form-elem--dob form-control" id="dob" data-id="dob" autocomplete="off">
-                        <span class="note"></span>
-                    </div>
-
-                    <div class="form-div">
-                        <label for="" class="form-label">Designation</label>
-                        <select name="profile" id="profile" class="form-elem custom-select" data-id="position">
-                            <option value="">--select a designation--</option>
-                            <option value="Associate I">Associate I</option>
-                            <option value="Associate II">Associate II</option>
-                            <option value="Associate III">Associate III</option>
-                            <option value="Team Lead I">Team Lead I</option>
-                            <option value="Team Lead II">Team Lead II</option>
-                            <option value="Team Lead III">Team Lead III</option>
-                        </select>
-                        <span class="note"></span>
-                    </div>
-
-                    <div class="form-div">
-                        <label for="" class="form-label">Team</label>
-                        <select name="team" id="team" class="form-elem custom-select" data-id="team">
-                            <option value="">--select team--</option>
-                            <option value="Analytics">Analytics</option>
-                            <option value="Upsell">Upsell</option>
-                            <option value="Verification">Verification</option>
-                            <option value="Audit">Audit</option>
-                            <option value="Case Management">Case Management</option>
-                            <option value="Issuing Authority">Issuing Authority</option>
-                        </select>
                         <span class="note"></span>
                     </div>
 
@@ -155,20 +119,24 @@
                         {% endblock %}
                     </div>
 
+                    <div class="blank_"></div>
+                    <p class="another-log mt-4">Already have an account? <a href="{% url 'application:applogin' %}">Login</a></p>
                 </form>
-            </div>
+
+            <footer class="foot-log">
+                <p>&copy; <span class="foot-log__span">DATA</span>FLOW GROUP</p>
+            </footer>
         </div>
-    </main>
-    {% else %}
-        GET OUT
-    {% endif %}
-
-
-    <!-- Script
-    ------------------------>
-    <!-- <script src="../assets/js/inspect.js"></script> -->
-    {% block scripts %}
-    <script src="{% static 'js/admin/admin.js' %}"></script>
+    </div>
+    <!-- Script -->
+    <script src="{% static 'js/user/index.js' %}"></script>
+    <script src="{% static 'js/user/inspect.js' %}"></script>
+    <script src="{% static 'js/user/interactive.js' %}"></script>
+    <script defer>
+        let u=[], m=[], p=[];
+        {% for i in data %} u.push(`{{ i.username }}`);m.push(`{{ i.email }}`);p.push(`{{ i.phone }}`);{% endfor %}
+    </script>
+    <script src="{% static 'js/user/validation.js' %}"></script>
     <script>
             //Datepicker
             $('#dob').datepicker({
@@ -181,36 +149,6 @@
                 $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
             });
 
-            /* Get full data */
-            let usernameDup = [];
-            let emailDup = [];
-            let mobileDup = [];
-            let dobDup = [];
-
-            {% for i in data %}
-                usernameDup.push(`{{ i.username }}`);
-                emailDup.push(`{{ i.email }}`);
-                mobileDup.push(`{{ i.phone }}`);
-                dobDup.push(`{{ i.dob }}`);
-            {% endfor %}
-
-            const source = document.querySelector('#source');
-            source.addEventListener('change', () => {
-                const sourceOpt = source.options[source.selectedIndex].value;
-                const referral = document.querySelector('.form-elem--refer');
-                const blank = document.querySelector('.blank_');
-                if(sourceOpt === 'Referral'){
-                    referral.parentElement.classList.remove('hidden');
-                    referral.required = true;
-                    blank.classList.add('hidden');
-                }else{
-                    referral.parentElement.classList.add('hidden');
-                    referral.required = false;
-                    blank.classList.remove('hidden');
-                }
-            });
     </script>
-    <script src="{% static 'js/admin/validation.min.js' %}"></script>
-    {% endblock %}
 </body>
 </html>

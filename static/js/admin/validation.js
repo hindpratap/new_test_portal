@@ -16,6 +16,52 @@ let passRegx = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@\$\^\*])(?=
 let emailRegx = new RegExp(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/);
 let mobileRegx = new RegExp(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/);
 
+const validator = (arg) => {
+
+    /*  Getting data-id of the element calling the function adding 'Regex' to the id
+        Calling eval to evaluate string as a variable storing valid js (in this case Regex)
+        Checking whether the element input follows regex or not
+    */
+
+    let argID = arg.getAttribute('data-id') + 'Regx';
+    let argRegx = eval(argID);
+    if(argRegx.test(arg.value)){
+        arg.style = `border: 1px solid mediumaquamarine; background: #dbfdf1;`;
+        return true;
+    }else{
+        arg.style = `border: 1px solid tomato; background: #ffeae6;`;
+        return false;
+    }
+
+};
+
+const duplicateChecker = (dup)=>{
+    let dupMed = dup.getAttribute('data-id');
+    let dupID = dupMed + 'Dup';
+    let dupVal = eval(dupID);
+    let flag = false;
+
+    for(let i=0; i<dupVal.length; i++){
+        if(dup.value === dupVal[i]){
+            dup.parentElement.querySelector('.note').innerHTML = `${dupMed} already exists!`;
+            dup.style = `border: 1px solid tomato; background: #ffeae6;`;
+            flag = true;
+            break;
+        }else if(dup.value === ``){
+            dup.parentElement.querySelector('.note').innerHTML = `Please provide ${dupMed}`;
+            dup.style = `border: 1px solid tomato; background: #ffeae6;`;
+            flag = false;
+        }
+        else{
+            dup.parentElement.querySelector('.note').innerHTML = ``;
+            dup.style = `border: 1px solid mediumaquamarine; background: #dbfdf1;`;
+            flag = false;
+        }
+    }
+
+    return flag;
+};
+
 try{
     let credForm = document.querySelector('.cred-form');
     let formElem = credForm.querySelectorAll('.form-elem');
@@ -199,54 +245,8 @@ try{
     }
 
 }catch(err){
-    console.error('hey error');
+    console.error(err);
 }
-
-let validator = (arg) => {
-
-    /*  Getting data-id of the element calling the function adding 'Regex' to the id
-        Calling eval to evaluate string as a variable storing valid js (in this case Regex)
-        Checking whether the element input follows regex or not
-    */
-
-    let argID = arg.getAttribute('data-id') + 'Regx';
-    let argRegx = eval(argID);
-    if(argRegx.test(arg.value)){
-        arg.style = `border: 1px solid mediumaquamarine; background: #dbfdf1;`;
-        return true;
-    }else{
-        arg.style = `border: 1px solid tomato; background: #ffeae6;`;
-        return false;
-    }
-
-};
-
-let duplicateChecker = (dup)=>{
-    let dupMed = dup.getAttribute('data-id');
-    let dupID = dupMed + 'Dup';
-    let dupVal = eval(dupID);
-    let flag = false;
-
-    for(let i=0; i<dupVal.length; i++){
-        if(dup.value === dupVal[i]){
-            dup.parentElement.querySelector('.note').innerHTML = `${dupMed} already exists!`;
-            dup.style = `border: 1px solid tomato; background: #ffeae6;`;
-            flag = true;
-            break;
-        }else if(dup.value === ``){
-            dup.parentElement.querySelector('.note').innerHTML = `Please provide ${dupMed}`;
-            dup.style = `border: 1px solid tomato; background: #ffeae6;`;
-            flag = false;
-        }
-        else{
-            dup.parentElement.querySelector('.note').innerHTML = ``;
-            dup.style = `border: 1px solid mediumaquamarine; background: #dbfdf1;`;
-            flag = false;
-        }
-    }
-
-    return flag;
-};
 
 function password_generator( len ){
     let length = (len)?(len):(10);

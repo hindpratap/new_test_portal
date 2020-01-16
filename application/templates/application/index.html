@@ -41,11 +41,11 @@
                             <p>{{ message }}</p>
                         </div>
                 {% endfor %}
-                <div class="login-form-comp">
+                <div class="form-comp">
                     <input type="text" name="username" class="input-field" required>
                     <span class="label-placeholder">Username</span>
                 </div>
-                <div class="login-form-comp">
+                <div class="form-comp">
                     <input type="password" name="password" class="input-field" required>
                     <span class="label-placeholder">Password</span>
                     <span class="password-eye" title="Show Password">
@@ -53,6 +53,7 @@
                     </span>
                 </div>
                 <button type="submit" class="btn btn--login">Login</button>
+                <p class="another-log mt-4">Don't have an account? <a href="{% url 'application:appsignup' %}">Sign Up</a></p>
             </form>
 
             <footer class="foot-log">

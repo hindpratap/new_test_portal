@@ -48,11 +48,15 @@ p{
 }
 
 /* Form Components */
-.cont-box{
+.cont-box,
+.cont-box2{
     height: 100vh;
-    display: grid;
     position: relative;
     overflow: hidden;
+}
+
+.cont-box{
+    display: grid;
 }
 
 .homeGrap{
@@ -61,15 +65,6 @@ p{
     right: -100px;
     z-index: -1;
     transform: scale(.8);
-}
-
-.login-form{
-    width: 50%;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
 
 .heading{
@@ -81,7 +76,33 @@ p{
     color: #EE6F27;
 }
 
-.login-form-comp{
+.head2{
+    font-size: 40px;
+}
+
+.login-form{
+    width: 50%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.signup-form{
+    width: 70%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.signup-form__cont{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.form-comp{
     position: relative;
     padding: .8em .5em;
 }
@@ -120,6 +141,123 @@ input:not(:focus):valid ~ .label-placeholder{
 input[name='password']:valid ~ .password-eye{
     visibility: visible;
 }
+
+/* Sign up Form */
+/* Form */
+.signup-form{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.form-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.form-label{
+    font-weight: 400;
+    font-size: .9rem;
+    margin-bottom: .2rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.info-title{
+    border: 1px solid #ff6347;
+    color: #ff6347;
+    font-size: .6rem;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-left: 1rem;
+}
+
+.form-elem{
+    width: 75%;
+    height: 2.5rem;
+    background-color: #f8f8f8;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    padding: .5em;
+    outline: none;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+    display: flex;
+    align-items: center;
+}
+
+.form-elem:focus{
+    border: 1px solid royalblue;
+}
+
+.form-textarea{
+    width: 87.5%;
+    height: 120px;
+}
+
+.form-elem--mobile::-webkit-inner-spin-button{
+    display: none;
+}
+
+/* Datepicker */
+.gj-datepicker{
+    width: 75%;
+}
+
+/* File Upload */
+.custom-file-label{
+    top: 1.5rem;
+}
+
+.custom-file-label::after{
+    height: calc(1.5rem + .9rem);
+    display: flex;
+    align-items: center;
+}
+
+.note{
+    color: tomato;
+    font-size: .8rem;
+}
+
+
+.btn--success{
+    padding: .5rem 2.5rem;
+}
+
+.btn--success,
+.btn--success:hover{
+    background-color: #50C678;
+    color: #fff;
+}
+
+.gj-datepicker.gj-datepicker-bootstrap.gj-unselectable.input-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+button.btn.btn-outline-secondary{
+    margin: 0px;
+    border: 0px;
+    height: 35px;
+}
+
+span.input-group-append {
+    background: #f8f8f8;
+    padding: 0rem;
+    height: 35px;
+}
+/* End Sign up Form */
 
 /* Buttons */
 
