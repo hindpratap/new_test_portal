@@ -37,7 +37,10 @@
         <div class="cont-box2">
             <img src="{% static 'images/homeGrap.svg' %}" alt="homeGrap" class="homeGrap">
                 <form action="{% url 'application:postsignup' %}" method="POST" class="signup-form form cred-form" id="credForm" enctype="multipart/form-data">{% csrf_token %}
-                    <h1 class="heading head-container head2">Candidate Portal</h1><p></p>
+                    <h1 class="heading head-container head2">Candidate Portal
+                    <span class="head-popup">Please check your mail for login credentails after signing up</span>
+                    </h1><p></p>
+
                     <div class="form-div">
                         <label for="" class="form-label">Full Name</label>
                         <input type="text" name="fullName" class="form-elem form-elem--name" data-id="name" autocomplete="off">
