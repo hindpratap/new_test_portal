@@ -78,6 +78,12 @@ p{
 
 .head2{
     font-size: 40px;
+    line-height: 20px;
+}
+
+.head-popup{
+    font-weight: bold;
+    font-size: .8rem;
 }
 
 .login-form{
