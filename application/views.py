@@ -99,22 +99,22 @@ def submitted(request):
     if request.method == 'POST':
         percent = request.POST.get('percent__')
         username = request.POST.get('username__')
-        try:
-            user = CreateCandidate.objects.get(username=username)
-            user.score = percent
-            user.teststatus = 'Test Taken'
-            user.status = 'Test Taken'
-            user.save()
-            History.objects.create(username=user.username, password=user.password,
-                                              phone=user.phone, fullname=user.fullname, designation=user.designation,
-                                              email=user.email, team=user.team, location=user.location, score=user.score,
-                                              invitestatus=user.invitestatus, teststatus='Test Taken',
-                                              status='Test Taken', dob=user.dob, resume=user.resume, created_at=user.created_at,
-                                              activestatus=user.activestatus, selectionstatus=user.selectionstatus, source=user.source, referralid=user.referralid,
-                                              candempid=user.candempid, updated_at=datetime.now(), updated_by=user.email)
-            User.objects.get(username=username).delete()
-        except:
-            return HttpResponse('<h2>Unique contraint failed for username</h2>')
+        # try:
+        user = CreateCandidate.objects.get(username=username)
+        user.score = percent
+        user.teststatus = 'Test Taken'
+        user.status = 'Test Taken'
+        user.save()
+        History.objects.create(username=user.username, password=user.password,
+                                          phone=user.phone, fullname=user.fullname, designation=user.designation,
+                                          email=user.email, team=user.team, location=user.location, score=user.score,
+                                          invitestatus=user.invitestatus, teststatus='Test Taken',
+                                          status='Test Taken', dob=user.dob, resume=user.resume, created_at=user.created_at,
+                                          activestatus=user.activestatus, selectionstatus=user.selectionstatus, source=user.source, referralid=user.referralid,
+                                          candempid=user.candempid, updated_at=datetime.now(), updated_by=user.email)
+        User.objects.get(username=username).delete()
+        # except:
+        #     return HttpResponse('<h2>Unique contraint failed for username</h2>')
         logout(request)
         return render(request, 'application/submit.html', {'score': percent})
     return redirect('application:panel')

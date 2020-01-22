@@ -1,5 +1,6 @@
-<script>
+<script defer>
     let g = [];
+    const form = document.querySelector('#panelForm');
     {% for i in reasoning_questions %}
         rObj = {};
         rObj[`01`] = `{{ i.id }}`;
@@ -26,8 +27,8 @@
     const pr = document.querySelector('.parinam');
 
     let c = 0;
-    form.addEventListener('submit', e => {
-        e.preventDefault();
+
+    function score(){
         for(let i=0; i<panel.length; i++){
             opt = p[i].querySelectorAll('.optBtn');
             [...opt].map(o => {
@@ -41,6 +42,13 @@
             });
         }
         pr.value = Math.ceil((c/(p.length)) * 100);
+    }
+
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+        score();
         form.submit();
     });
+
+
 </script>

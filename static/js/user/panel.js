@@ -3,15 +3,13 @@
 let timer;
 let savedDate = localStorage.getItem('savedDate');
 let compareDate = new Date();
-
-const form = document.querySelector('#panelForm');
 const monitorTime = document.querySelector('.monitor--time');
 
 if (savedDate)  {
     compareDate = new Date(savedDate);
 }
 else {
-    compareDate.setMinutes(compareDate.getMinutes() + 45); //Entered Time + 45 mins
+    compareDate.setMinutes(compareDate.getMinutes() + 1); //Entered Time + 45 mins
     localStorage.setItem('savedDate', compareDate);
 }
 
@@ -50,6 +48,7 @@ function timeBetweenDates(toDate) {
 
     if(hours === 0 && minutes === 0 && seconds === 0){
         monitorTime.innerHTML = `0:00:00`;
+        score();
         form.submit();
     }
   }
