@@ -20,7 +20,9 @@ def applogin(request):
     return render(request, 'application/index.html')
 
 def appsignup(request):
-    data = CreateCandidate.objects.all()
+    data1 = CreateCandidate.objects.all()
+    data2 = User.objects.all()
+    data = list(chain(data1, data2))
     return render(request, 'application/signup.html', {'data': data})
 
 @csrf_exempt
@@ -39,11 +41,11 @@ def postsignup(request):
         dob = dob[6:10] + '-' + dob[:2] + '-' + dob[3:5]
         CreateCandidate.objects.create(fullname=fullname, username=username, password=password, email=email,
                                        phone=phone, created_at=datetime.today(),
-                                       dob=dob, resume=resume, location=location, source=source, referralid=referral)
+                                       dob=dob, resume=resume, location=location, source=source, referralid=referral, invitestatus='Invite sent', status='Invite sent')
         History.objects.create(fullname=fullname, username=username, password=password, email=email,
                                phone=phone, created_at=datetime.today(),
                                dob=dob, resume=resume, location=location, source=source,
-                               referralid=referral, updated_at=datetime.now())
+                               referralid=referral, updated_at=datetime.now(), invitestatus='Invite sent', status='Invite sent')
         User.objects.create_user(first_name=fullname, username=username, password=password, email=email)
         sub = 'no-reply: Test details'
         content = f'Hi {fullname},\nThank you for showing interest in working with DataFlow Group.\nTo complete the application process, you are required to take an online test. The test would include assessment for English Grammar, Logic Check and Reasoning Skills.\n\nBelow are the credentials for the test:\n\nusername- {username}\npassword- {password}\nTest link: https://uataudit.dfgateway.com\nThe test cannot be fragmented, but must be completed in a single attempt. The duration for the test is 30 minutes.\n\nBest Regards\nHR Team- Dataflow Group'

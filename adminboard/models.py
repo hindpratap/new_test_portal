@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-class Authorizedadmin(models.Model):
+class AuthorizedHr(models.Model):
     email = models.EmailField(null=True)
 
     def __str__(self):

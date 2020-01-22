@@ -1,4 +1,4 @@
 from django.contrib import admin
-from . models import Authorizedadmin, CreateCandidate, History
+from . models import AuthorizedHr, CreateCandidate, History
 
-admin.site.register([Authorizedadmin, CreateCandidate, History])
+admin.site.register([AuthorizedHr, CreateCandidate, History])
