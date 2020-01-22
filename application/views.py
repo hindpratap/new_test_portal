@@ -14,6 +14,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 import json
 from django.core.mail import send_mail
 from django.conf import settings
+from itertools import chain
 
 
 def applogin(request):
