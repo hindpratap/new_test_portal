@@ -31,8 +31,6 @@ def adminhome(request):
     pending_submissions_count = pending_submissions.count()
     candidate_shortlisted = CreateCandidate.objects.filter(score__gte=70)
     candidate_shortlisted_count = candidate_shortlisted.count()
-    print(authorized_admin)
-    print(email)
     return render(request, 'adminboard/home.html', {'authorized_admin': authorized_admin, 'email': email, 'candidate_count': candidate_cont,
                                                     'pending_submissions': pending_submissions, 'candidate_shortlisted':candidate_shortlisted,
                                                     'candidate_shortlisted_count': candidate_shortlisted_count,
