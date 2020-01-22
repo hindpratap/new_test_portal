@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
-from adminboard.models import Authorizedadmin, CreateCandidate, History
+from adminboard.models import AuthorizedHr, CreateCandidate, History
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 from django.http import HttpResponse
@@ -23,7 +23,7 @@ def adminlogin(request):
 
 @login_required
 def adminhome(request):
-    obj = Authorizedadmin.objects.all()
+    obj = AuthorizedHr.objects.all()
     authorized_admin = [i.email for i in obj]
     email = request.user.email
     candidate_cont = CreateCandidate.objects.all().count()
@@ -31,6 +31,8 @@ def adminhome(request):
     pending_submissions_count = pending_submissions.count()
     candidate_shortlisted = CreateCandidate.objects.filter(score__gte=70)
     candidate_shortlisted_count = candidate_shortlisted.count()
+    print(authorized_admin)
+    print(email)
     return render(request, 'adminboard/home.html', {'authorized_admin': authorized_admin, 'email': email, 'candidate_count': candidate_cont,
                                                     'pending_submissions': pending_submissions, 'candidate_shortlisted':candidate_shortlisted,
                                                     'candidate_shortlisted_count': candidate_shortlisted_count,
@@ -44,7 +46,7 @@ def logoutAdmin(request):
 @login_required
 def adminuser(request):
     global authorized_admin
-    obj = Authorizedadmin.objects.all()
+    obj = AuthorizedHr.objects.all()
     email = request.user.email
     authorized_admin = [i.email for i in obj]
     candidates = CreateCandidate.objects.filter(activestatus__iexact='active').exclude(teststatus__iexact='Test Taken').order_by('-id')
@@ -52,7 +54,7 @@ def adminuser(request):
 
 @login_required
 def addcredential(request):
-    obj = Authorizedadmin.objects.all()
+    obj = AuthorizedHr.objects.all()
     authorized_admin = [i.email for i in obj]
     email = request.user.email
     data1 = CreateCandidate.objects.all()
@@ -63,7 +65,7 @@ def addcredential(request):
 @login_required
 @csrf_exempt
 def postcred(request):
-    authorized_admin = [i.email for i in Authorizedadmin.objects.all()]
+    authorized_admin = [i.email for i in AuthorizedHr.objects.all()]
     filler_email = request.user.email
     if request.method == 'POST' and filler_email in authorized_admin:
         fullname = request.POST.get('fullName')
@@ -126,7 +128,7 @@ def postcred(request):
 
 @login_required
 def admineditcand(request, username):
-    authorized_admin = [i.email for i in Authorizedadmin.objects.all()]
+    authorized_admin = [i.email for i in AuthorizedHr.objects.all()]
     try:
         email = request.user.email
         obj = CreateCandidate.objects.get(username=username)
@@ -136,7 +138,7 @@ def admineditcand(request, username):
 
 @login_required
 def admindelcand(request, username):
-    authorized_admin = [i.email for i in Authorizedadmin.objects.all()]
+    authorized_admin = [i.email for i in AuthorizedHr.objects.all()]
     email = request.user.email
     if email in authorized_admin:
         # try:
@@ -151,7 +153,7 @@ def admindelcand(request, username):
         return HttpResponse('<h2>Error: You do not have admin rights.</h2>')
 
 def adminnotifycand(request, username):
-    authorized_admin = [i.email for i in Authorizedadmin.objects.all()]
+    authorized_admin = [i.email for i in AuthorizedHr.objects.all()]
     filler_email = request.user.email
     if filler_email in authorized_admin:
         recreate_cand = CreateCandidate.objects.get(username=username)
@@ -182,7 +184,7 @@ def adminnotifycand(request, username):
 @login_required
 @csrf_exempt
 def addquest(request):
-    authorized_admin = [i.email for i in Authorizedadmin.objects.all()]
+    authorized_admin = [i.email for i in AuthorizedHr.objects.all()]
     email = request.user.email
     if email in authorized_admin:
         if request.method == 'POST':
@@ -210,14 +212,14 @@ def addquest(request):
 
 @login_required
 def viewquest(request):
-    authorized_admin = [i.email for i in Authorizedadmin.objects.all()]
+    authorized_admin = [i.email for i in AuthorizedHr.objects.all()]
     email = request.user.email
     questions = Question.objects.all().order_by('-id')
     return render(request, 'adminboard/viewQuest.html', {'questions': questions, 'email': email, 'authorized_admin': authorized_admin})
 
 @login_required
 def delquest(request, quest):
-    authorized_admin = [i.email for i in Authorizedadmin.objects.all()]
+    authorized_admin = [i.email for i in AuthorizedHr.objects.all()]
     email = request.user.email
     if email in authorized_admin:
         Question.objects.get(pk=quest).delete()
@@ -227,21 +229,21 @@ def delquest(request, quest):
 
 @login_required
 def editquest(request, quest):
-    authorized_admin = [i.email for i in Authorizedadmin.objects.all()]
+    authorized_admin = [i.email for i in AuthorizedHr.objects.all()]
     email = request.user.email
     question = Question.objects.get(pk=quest)
     return render(request, 'adminboard/editquest.html', {'question': question, 'email': email, 'authorized_admin': authorized_admin})
 
 @login_required
 def submission(request):
-    authorized_admin = [i.email for i in Authorizedadmin.objects.all()]
+    authorized_admin = [i.email for i in AuthorizedHr.objects.all()]
     email = request.user.email
     data = CreateCandidate.objects.filter(score__gte=70).order_by('-id')
     return render(request, 'adminboard/submission.html', {'data': data, 'email': email, 'authorized_admin': authorized_admin})
 
 @login_required
 def changequest(request):
-    authorized_admin = [i.email for i in Authorizedadmin.objects.all()]
+    authorized_admin = [i.email for i in AuthorizedHr.objects.all()]
     email = request.user.email
     if email in authorized_admin:
         try:
@@ -276,7 +278,7 @@ def changequest(request):
 @login_required
 @csrf_exempt
 def candaction(request, id):
-    authorized_admin = [i.email for i in Authorizedadmin.objects.all()]
+    authorized_admin = [i.email for i in AuthorizedHr.objects.all()]
     filler_email = request.user.email
     if request.method == 'POST' and filler_email in authorized_admin:
         fStatus = request.POST.get('fStatus')
@@ -303,7 +305,7 @@ def candaction(request, id):
 @login_required
 @csrf_exempt
 def bulkupload(request):
-    authorized_admin = [i.email for i in Authorizedadmin.objects.all()]
+    authorized_admin = [i.email for i in AuthorizedHr.objects.all()]
     filler_email = request.user.email
     if filler_email in authorized_admin:
         if request.method == 'POST':
@@ -356,14 +358,14 @@ def bulkupload(request):
 
 @login_required
 def other(request):
-    authorized_admin = [i.email for i in Authorizedadmin.objects.all()]
+    authorized_admin = [i.email for i in AuthorizedHr.objects.all()]
     email = request.user.email
     instruct = Instructions.objects.all().order_by('-id')
     return render(request, 'adminboard/other.html', {'email': email, 'authorized_admin': authorized_admin, 'instruct': instruct})
 
 @login_required
 def delinstructions(request, inst):
-    authorized_admin = [i.email for i in Authorizedadmin.objects.all()]
+    authorized_admin = [i.email for i in AuthorizedHr.objects.all()]
     email = request.user.email
     if email in authorized_admin:
         Instructions.objects.get(pk=inst).delete()
@@ -374,7 +376,7 @@ def delinstructions(request, inst):
 @login_required
 @csrf_exempt
 def postinstructions(request):
-    authorized_admin = [i.email for i in Authorizedadmin.objects.all()]
+    authorized_admin = [i.email for i in AuthorizedHr.objects.all()]
     email = request.user.email
     if request.method == 'POST' and email in authorized_admin:
         instr = request.POST.get('instruction')
