@@ -137,7 +137,7 @@
     <script src="{% static 'js/user/interactive.js' %}"></script>
     <script defer>
         let u=[], m=[], p=[];
-        {% for i in data %} u.push(`{{ i.username }}`);m.push(`{{ i.email }}`);p.push(`{{ i.phone }}`);console.log({u,m,p});{% endfor %}
+        {% for i in data %} u.push(`{{ i.username }}`);m.push(`{{ i.email }}`);p.push(`{{ i.phone }}`);{% endfor %}
     </script>
     <script src="{% static 'js/user/validation.js' %}"></script>
     <script>
