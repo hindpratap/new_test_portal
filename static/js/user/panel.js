@@ -11,7 +11,7 @@ if (savedDate)  {
     compareDate = new Date(savedDate);
 }
 else {
-    compareDate.setMinutes(compareDate.getMinutes() + 30); //Entered Time + 30 mins
+    compareDate.setMinutes(compareDate.getMinutes() + 45); //Entered Time + 45 mins
     localStorage.setItem('savedDate', compareDate);
 }
 
