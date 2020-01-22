@@ -38,10 +38,10 @@
             <div class="thanks">
             {% block result %}
                 {% if score < '70' %}
-                    <h1>Your final score is  {{ score }}%</h1>
+                    <h1 style="color:#25dc25;">Your final score is  {{ score }}%</h1>
                     <h3 class="test-result">The DataFlow Group will be happy to consider you again for a role after 3 months.<br>Best Regards,<br>HR Team- Dataflow Group</h3>
                 {% else %}
-                    <h1>Your final score is  {{ score }}%</h1>
+                    <h1 style="color:tomato;">Your final score is  {{ score }}%</h1>
                     <h3 class="test-result">You have cleared the test. HR team will come back to you with further interview process for a suitable role.<br>Best Regards,<br>HR Team- Dataflow Group</h3>
                 {% endif %}
             {% endblock %}
