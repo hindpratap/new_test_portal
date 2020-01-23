@@ -98,16 +98,23 @@ def panel(request):
 def submitted(request):
     if request.method == 'POST':
         percent = request.POST.get('percent__')
-        username = request.POST.get('username__')
+        percent_reas = request.POST.get('')
+        percent_eng = request.POST.get('')
+        percent_math = request.POST.get('')
+        username = request.POST.get('')
         # try:
         user = CreateCandidate.objects.get(username=username)
         user.score = percent
+        user.score_reasoning = percent_reas
+        user.score_english = percent_eng
+        user.score_math = percent_math
         user.teststatus = 'Test Taken'
         user.status = 'Test Taken'
         user.save()
         History.objects.create(username=user.username, password=user.password,
                                           phone=user.phone, fullname=user.fullname, designation=user.designation,
                                           email=user.email, team=user.team, location=user.location, score=user.score,
+                                          score_reasoning=percent_reas, score_english=percent_eng, score_math=percent_math,
                                           invitestatus=user.invitestatus, teststatus='Test Taken',
                                           status='Test Taken', dob=user.dob, resume=user.resume, created_at=user.created_at,
                                           activestatus=user.activestatus, selectionstatus=user.selectionstatus, source=user.source, referralid=user.referralid,

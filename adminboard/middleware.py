@@ -8,7 +8,7 @@ class RemoveuserMiddleware(MiddlewareMixin):
     def process_request(self, request):
         users = User.objects.exclude(username='raghav').exclude(username='analytics@123')
         if CreateCandidate.objects.all().exists():
-            for i in users  :
+            for i in users:
                 if abs(i.date_joined.date() - datetime.today().date()).days > 6:
                     User.objects.get(username=i.username).delete()
                     try:
