@@ -236,7 +236,7 @@ def editquest(request, quest):
 def submission(request):
     authorized_admin = [i.email for i in AuthorizedHr.objects.all()]
     email = request.user.email
-    data = CreateCandidate.objects.filter(score__gte=70).order_by('-id')
+    data = CreateCandidate.objects.filter(teststatus__iexact='test taken').order_by('-id')
     return render(request, 'adminboard/submission.html', {'data': data, 'email': email, 'authorized_admin': authorized_admin})
 
 @login_required
