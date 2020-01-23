@@ -67,7 +67,7 @@
                             <td>{{ i.team }}</td>
                             <td>{{ i.location }}</td>
                             <td>{{ i.score }}%</td>
-                            <td><a href="/static/media/{{ i.resume }}">Resume</a></td>
+                            <td><a href="/media/{{ i.resume }}">Resume</a></td>
                             <td>
                                 <form method="post" action="{% url 'adminboard:candaction' id=i.id %}" class="finalForm">{% csrf_token %}
 <!--                                    {% if i.candempid == 'Nan' %}-->
