@@ -101,6 +101,7 @@ def submitted(request):
         percent_reas = request.POST.get('vichar__')
         percent_eng = request.POST.get('angrezi__')
         percent_math = request.POST.get('ganith__')
+        username = request.POST.get('username__')
         # try:
         user = CreateCandidate.objects.get(username=username)
         user.score = percent
