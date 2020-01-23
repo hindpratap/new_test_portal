@@ -45,7 +45,7 @@
             <section class="panel--quest">
                 <form action="{% url 'application:submitted' %}" method="POST" id="panelForm">{% csrf_token %}
                     {% for i in reasoning_questions %}
-                        <div  class="panel panel-hide" data-id="res--quest-{{ forloop.counter }}">
+                        <div  class="panel panel-hide data-v-pv" data-id="res--quest-{{ forloop.counter }}">
                         <span class="panel--quest__cat">Reasoning</span>
                         <div class="panel__head mt-5 mb-4">
                             <h3 class="h3">Ques {{ forloop.counter }}.</h3>
@@ -92,7 +92,7 @@
                     </div>
                     {% endfor %}
                     {% for i in english_questions %}
-                        <div  class="panel panel-hide" data-id="eng--quest-{{ forloop.counter }}">
+                        <div  class="panel panel-hide data-v-pa" data-id="eng--quest-{{ forloop.counter }}">
                         <span class="panel--quest__cat">English</span>
                         <div class="panel__head mt-5 mb-4">
                             <h3 class="h3">Ques {{ forloop.counter }}.</h3>
@@ -139,7 +139,7 @@
                     </div>
                     {% endfor %}
                     {% for i in quantitative_questions %}
-                        <div  class="panel panel-hide" data-id="psy--quest-{{ forloop.counter }}">
+                        <div  class="panel panel-hide data-v-pg" data-id="psy--quest-{{ forloop.counter }}">
                         <span class="panel--quest__cat">Quantitative</span>
                         <div class="panel__head mt-5 mb-4">
                             <h3 class="h3">Ques {{ forloop.counter }}.</h3>
@@ -186,8 +186,13 @@
                     </div>
                     {% endfor %}
 
-                    <input type="number" class="hidden parinam" value="" name="percent__">
-                    <input type="text" class="hidden" value="{{ username }}" name="username__">
+                    <div class="hidden">
+                        <input type="text" class="" value="{{ username }}" name="username__">
+                        <input type="number" name="angrezi__" class="angrezi">
+                        <input type="number" name="ganith__" class="ganith">
+                        <input type="number" name="vichar__" class="vichar">
+                        <input type="number" class="parinam" value="" name="percent__">
+                    </div>
 
                 </form>
             </section>

@@ -1,47 +1,91 @@
 <script defer>
-    let g = [];
+    let vichar = [], angrezi = [], ganith = [];
     const form = document.querySelector('#panelForm');
     {% for i in reasoning_questions %}
-        rObj = {};
-        rObj[`01`] = `{{ i.id }}`;
-        rObj[`02`] = `{{ i.correct }}`;
-        g.push(rObj);
+        rObj = {};rObj[`01`] = `{{ i.id }}`;rObj[`02`] = `{{ i.correct }}`;vichar.push(rObj);
     {% endfor %}
 
     {% for i in english_questions %}
-        eObj = {};
-        eObj[`01`] = `{{ i.id }}`;
-        eObj[`02`] = `{{ i.correct }}`;
-        g.push(eObj);
+        eObj = {};eObj[`01`] = `{{ i.id }}`;eObj[`02`] = `{{ i.correct }}`;angrezi.push(eObj);
     {% endfor %}
 
     {% for i in quantitative_questions %}
-        qObj = {};
-        qObj[`01`] = `{{ i.id }}`;
-        qObj[`02`] = `{{ i.correct }}`;
-        g.push(qObj);
+        qObj = {};qObj[`01`] = `{{ i.id }}`;qObj[`02`] = `{{ i.correct }}`;ganith.push(qObj);
     {% endfor %}
 
     const s = document.querySelector('#nextBtn');
     const p = document.querySelectorAll('.panel');
+    const pv = document.querySelectorAll('.data-v-pv');
+    const pa = document.querySelectorAll('.data-v-pa');
+    const pg = document.querySelectorAll('.data-v-pg');
     const pr = document.querySelector('.parinam');
+    const an = document.querySelector('.angrezi');
+    const ga = document.querySelector('.ganith');
+    const vi = document.querySelector('.vichar');
 
-    let c = 0;
+    let ipv = 0, ipa = 0, ipg = 0, antha = 0;
 
     function score(){
-        for(let i=0; i<panel.length; i++){
-            opt = p[i].querySelectorAll('.optBtn');
+        // for(let i=0; i<panel.length; i++){
+        //     opt = p[i].querySelectorAll('.optBtn');
+        //     [...opt].map(o => {
+        //        if(o.checked){
+        //            v = o.value;
+        //            x = g[i]["02"];
+        //            if(v === x){
+        //                c++;
+        //            }
+        //        }
+        //     });
+        // }
+        // pr.value = Math.ceil((c/(p.length)) * 100);
+
+
+        for(let i=0; i<pv.length; i++){
+            opt = pv[i].querySelectorAll('.optBtn');
             [...opt].map(o => {
                if(o.checked){
                    v = o.value;
-                   x = g[i]["02"];
+                   x = vichar[i]["02"];
                    if(v === x){
-                       c++;
+                       ipv++;    //int stat increases by 1 point
                    }
                }
             });
         }
-        pr.value = Math.ceil((c/(p.length)) * 100);
+
+        for(let i=0; i<pa.length; i++){
+            opt = pa[i].querySelectorAll('.optBtn');
+            [...opt].map(o => {
+               if(o.checked){
+                   v = o.value;
+                   x = angrezi[i]["02"];
+                   if(v === x){
+                       ipa++;    //int stat increases by 1 point
+                   }
+               }
+            });
+        }
+
+        for(let i=0; i<pg.length; i++){
+            opt = pg[i].querySelectorAll('.optBtn');
+            [...opt].map(o => {
+               if(o.checked){
+                   v = o.value;
+                   x = ganith[i]["02"];
+                   if(v === x){
+                       ipg++;    //int stat increases by 1 point
+                   }
+               }
+            });
+        }
+
+        antha = ipv + ipa + ipg;
+        vi.value = Math.round((ipv/pv.length) * 100);
+        an.value = Math.round((ipa/pa.length) * 100);
+        ga.value = Math.round((ipg/pg.length) * 100);
+        pr.value = Math.round((antha/p.length) * 100);
+
     }
 
     form.addEventListener('submit', e => {
