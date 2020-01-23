@@ -98,10 +98,9 @@ def panel(request):
 def submitted(request):
     if request.method == 'POST':
         percent = request.POST.get('percent__')
-        percent_reas = request.POST.get('')
-        percent_eng = request.POST.get('')
-        percent_math = request.POST.get('')
-        username = request.POST.get('')
+        percent_reas = request.POST.get('vichar__')
+        percent_eng = request.POST.get('angrezi__')
+        percent_math = request.POST.get('ganith__')
         # try:
         user = CreateCandidate.objects.get(username=username)
         user.score = percent
