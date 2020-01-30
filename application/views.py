@@ -53,6 +53,7 @@ def postsignup(request):
         content = f'Hi {fullname},\nThank you for showing interest in working with DataFlow Group.\nTo complete the application process, you are required to take an online test. The test would include assessment for English Grammar, Logic Check and Reasoning Skills.\n\nBelow are the credentials for the test:\n\nusername- {username}\npassword- {password}\nTest link: https://uataudit.dfgateway.com\nThe test cannot be fragmented, but must be completed in a single attempt. The duration for the test is 30 minutes.\n\nBest Regards\nHR Team- Dataflow Group'
         tomail = [f'{email}']
         # sendmailtask.delay(sub, content, tomail)
+
         send_mail(sub, content, settings.EMAIL_HOST_USER, tomail)
         return redirect('application:applogin')
     return redirect('application:appsignup')
@@ -88,15 +89,17 @@ def logout_user(request):
 @login_required(login_url='logincand/')
 def panel(request):
     username = request.user.username
-    comp_count = Question.objects.values('question').filter(category__iexact='english').annotate(Count('id')).filter(id__count=2).count()
+    comp_count = Question.objects.values('question').filter(category__iexact='english').annotate(Count('id')).filter(id__count__gte=2).count()
     if comp_count > 0:
-        english = Question.objects.filter(category__iexact='english').order_by('?')[:8]
+        nocomp_quest = [j.id for j in Question.objects.filter(category__iexact='english') if len(j.question) < 1000]
+        english = Question.objects.filter(pk__in=nocomp_quest).order_by('?')[:8]
         random_count = np.random.randint(comp_count)
-        comp_quest = Question.objects.values('question').filter(category__iexact='english').annotate(Count('id')).filter(id__count=2)[random_count]['question']
-        comprehensive = Question.objects.filter(question__iexact=comp_quest)[:2]
+        comp_quest = Question.objects.values('question').filter(category__iexact='english').annotate(Count('id')).filter(id__count__gte=2)[random_count]['question']
+        comprehensive = Question.objects.filter(question__icontains=comp_quest[:1000])[:2]
         english_questions = list(chain(english, comprehensive))
     else:
-        english_questions = Question.objects.filter(category__iexact='english').order_by('?')[:10]
+        nocomp_quest = [j.id for j in Question.objects.filter(category__iexact='english') if len(j.question) < 1000]
+        english_questions = Question.objects.filter(pk__in=nocomp_quest).order_by('?')[:10]
 
     quantitative_questions = Question.objects.filter(category__iexact='quantitative').order_by('?')[:10]
     reasoning_questions = Question.objects.filter(category__iexact='reasoning').order_by('?')[:10]
