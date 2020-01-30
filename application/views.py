@@ -15,7 +15,8 @@ import json
 from django.core.mail import send_mail
 from django.conf import settings
 from itertools import chain
-
+import numpy as np
+from django.db.models import Count
 
 def applogin(request):
     return render(request, 'application/index.html')
@@ -87,7 +88,16 @@ def logout_user(request):
 @login_required(login_url='logincand/')
 def panel(request):
     username = request.user.username
-    english_questions = Question.objects.filter(category__iexact='english').order_by('?')[:10]
+    comp_count = Question.objects.values('question').filter(category__iexact='english').annotate(Count('id')).filter(id__count=2).count()
+    if comp_count > 0:
+        english = Question.objects.filter(category__iexact='english').order_by('?')[:8]
+        random_count = np.random.randint(comp_count)
+        comp_quest = Question.objects.values('question').filter(category__iexact='english').annotate(Count('id')).filter(id__count=2)[random_count]['question']
+        comprehensive = Question.objects.filter(question__iexact=comp_quest)[:2]
+        english_questions = list(chain(english, comprehensive))
+    else:
+        english_questions = Question.objects.filter(category__iexact='english').order_by('?')[:10]
+
     quantitative_questions = Question.objects.filter(category__iexact='quantitative').order_by('?')[:10]
     reasoning_questions = Question.objects.filter(category__iexact='reasoning').order_by('?')[:10]
     return render(request, 'application/panel.html', {'english_questions': english_questions, 'quantitative_questions': quantitative_questions,
