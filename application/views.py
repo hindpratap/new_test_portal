@@ -89,13 +89,14 @@ def logout_user(request):
 @login_required(login_url='logincand/')
 def panel(request):
     username = request.user.username
-    comp_count = Question.objects.values('question').filter(category__iexact='english').annotate(Count('id')).filter(id__count__gte=2).count()
-    if comp_count > 0:
+    # comp_count = Question.objects.values('question').filter(category__iexact='english').annotate(Count('id')).filter(id__count__gte=2).count()
+    comp_count = [i for i in Question.objects.filter(category__iexact='english') if len(i.question) > 2000]
+    if len(comp_count) > 0:
         nocomp_quest = [j.id for j in Question.objects.filter(category__iexact='english') if len(j.question) < 1000]
         english = Question.objects.filter(pk__in=nocomp_quest).order_by('?')[:8]
-        random_count = np.random.randint(comp_count)
-        comp_quest = Question.objects.values('question').filter(category__iexact='english').annotate(Count('id')).filter(id__count__gte=2)[random_count]['question']
-        comprehensive = Question.objects.filter(question__icontains=comp_quest[:1000])[:2]
+        random_count = np.random.randint(len(comp_count))
+        comp_quest = [i.question for i in Question.objects.filter(category__iexact='english') if len(i.question) > 2000]
+        comprehensive = Question.objects.filter(question__icontains=comp_quest[random_count][:1000])[:2]
         english_questions = list(chain(english, comprehensive))
     else:
         nocomp_quest = [j.id for j in Question.objects.filter(category__iexact='english') if len(j.question) < 1000]
