@@ -3,9 +3,11 @@
 try{
     const signUpForm = document.querySelector('.signup-form');
     const elem = signUpForm.querySelectorAll('.form-elem');
+    const signLoader = document.querySelector('.signLoader');
     let fOpt;
 
     signUpForm.addEventListener('submit', (e) => {
+        let check = 1;
         [...elem].forEach(f => {
             const dataId = f.getAttribute('data-id');
 
@@ -13,36 +15,42 @@ try{
                 case 'name':
                     if(dup(f)){
                         e.preventDefault();
+                        check++;
                     }
                     break;
 
                 case 'username':
                     if(dup(f)){
                         e.preventDefault();
+                        check++;
                     }
                     break;
 
                 case 'pass':
                     if(dup(f)){
                         e.preventDefault();
+                        check++;
                     }
                     break;
 
                 case 'email':
                     if(dup(f)){
                         e.preventDefault();
+                        check++;
                     }
                     break;
 
                 case 'mobile':
                     if(dup(f)){
                         e.preventDefault();
+                        check++;
                     }
                     break;
 
                 case 'dob':
                     if (f.value === ``){
                         e.preventDefault();
+                        check++;
                         f.parentElement.parentElement.querySelector('.note').innerHTML = 'Please provide date of birth';
                         f.style = `border: 1px solid tomato; background: #ffeae6;`;
                     }else{
@@ -55,6 +63,7 @@ try{
                     fOpt = f.options[f.selectedIndex].value;
                     if (fOpt === ``){
                         e.preventDefault();
+                        check++;
                         f.parentElement.querySelector('.note').innerHTML = 'Please select a location';
                         f.style = `border: 1px solid tomato; background: #ffeae6;`;
                     }else{
@@ -67,6 +76,7 @@ try{
                     fOpt = f.options[f.selectedIndex].value;
                     if (fOpt === ``){
                         e.preventDefault();
+                        check++;
                         f.parentElement.querySelector('.note').innerHTML = 'Please select a location';
                         f.style = `border: 1px solid tomato; background: #ffeae6;`;
                     }else{
@@ -78,6 +88,7 @@ try{
                 case 'resume':
                     if(dup(f)){
                         e.preventDefault();
+                        check++;
                     }
                     break;
 
@@ -86,6 +97,13 @@ try{
             }
 
         })
+
+        console.log(check)
+        if(check === 1){
+            signLoader.classList.remove('hidden');
+        }else{
+            signLoader.classList.add('hidden');
+        }
 
     });
 
