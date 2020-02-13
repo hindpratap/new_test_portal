@@ -26,20 +26,6 @@
     let ipv = 0, ipa = 0, ipg = 0, antha = 0;
 
     function score(){
-        // for(let i=0; i<panel.length; i++){
-        //     opt = p[i].querySelectorAll('.optBtn');
-        //     [...opt].map(o => {
-        //        if(o.checked){
-        //            v = o.value;
-        //            x = g[i]["02"];
-        //            if(v === x){
-        //                c++;
-        //            }
-        //        }
-        //     });
-        // }
-        // pr.value = Math.ceil((c/(p.length)) * 100);
-
 
         for(let i=0; i<pv.length; i++){
             opt = pv[i].querySelectorAll('.optBtn');
@@ -81,10 +67,9 @@
         }
 
         antha = ipv + ipa + ipg;
-        vi.value = Math.round((ipv/pv.length) * 100);
-        an.value = Math.round((ipa/pa.length) * 100);
-        ga.value = Math.round((ipg/pg.length) * 100);
-        pr.value = Math.round((antha/p.length) * 100);
+        vi.value = ipv;
+        an.value = ipa;
+        ga.value = ipg;
 
     }
 
