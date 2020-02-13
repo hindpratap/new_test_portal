@@ -17,6 +17,8 @@ from django.conf import settings
 from itertools import chain
 import numpy as np
 from django.db.models import Count
+import math
+
 
 def applogin(request):
     return render(request, 'application/index.html')
@@ -111,17 +113,17 @@ def panel(request):
 @csrf_exempt
 def submitted(request):
     if request.method == 'POST':
-        percent = request.POST.get('percent__')
         percent_reas = request.POST.get('vichar__')
         percent_eng = request.POST.get('angrezi__')
         percent_math = request.POST.get('ganith__')
         username = request.POST.get('username__')
         # try:
         user = CreateCandidate.objects.get(username=username)
+        user.score_reasoning = math.ceil(int(percent_reas)/10) * 100
+        user.score_english = math.ceil(int(percent_eng)/10) * 100
+        user.score_math = math.ceil(int(percent_math)/10) * 100
+        percent = math.ceil((int(percent_reas) + int(percent_eng) + int(percent_math)/30) * 100)
         user.score = percent
-        user.score_reasoning = percent_reas
-        user.score_english = percent_eng
-        user.score_math = percent_math
         user.teststatus = 'Test Taken'
         user.status = 'Test Taken'
         user.save()
