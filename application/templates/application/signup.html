@@ -126,6 +126,14 @@
                     <p class="another-log mt-4">Already have an account? <a href="{% url 'application:applogin' %}">Login</a></p>
                 </form>
 
+            <div class="signLoader hidden">
+                <div class="loader-card">
+                    <div class="loader"><div class="pacman"><div></div><div></div><div></div><div></div><div></div></div></div>
+                    <p class="loader_text text-center">Please wait while we create your credentials...</p>
+                    <p class="text-center p-3">An email will be sent to the provided email-address stating your <strong>username</strong> and <strong>password</strong></p>
+                </div>
+            </div>
+
             <footer class="foot-log">
                 <p>&copy; <span class="foot-log__span">DATA</span>FLOW GROUP</p>
             </footer>
