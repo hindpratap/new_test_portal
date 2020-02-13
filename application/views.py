@@ -119,10 +119,10 @@ def submitted(request):
         username = request.POST.get('username__')
         # try:
         user = CreateCandidate.objects.get(username=username)
-        user.score_reasoning = math.ceil(int(percent_reas)/10) * 100
-        user.score_english = math.ceil(int(percent_eng)/10) * 100
-        user.score_math = math.ceil(int(percent_math)/10) * 100
-        percent = math.ceil((int(percent_reas) + int(percent_eng) + int(percent_math)/30) * 100)
+        user.score_reasoning = math.ceil(int(percent_reas)/10 * 100)
+        user.score_english = math.ceil(int(percent_eng)/10 * 100)
+        user.score_math = math.ceil(int(percent_math)/10 * 100)
+        percent = math.ceil(((int(percent_reas) + int(percent_eng) + int(percent_math))/30) * 100)
         user.score = percent
         user.teststatus = 'Test Taken'
         user.status = 'Test Taken'
