@@ -52,8 +52,8 @@ def adminuser(request):
         obj = AuthorizedHr.objects.all()
         email = request.user.email
         authorized_admin = [i.email for i in obj]
-        candidates = CreateCandidate.objects.filter(activestatus__iexact='active').exclude(teststatus__iexact='Test Taken').order_by('-id')
-        return render(request, 'adminboard/user.html', {'authorized_admin': authorized_admin, 'email':email, 'candidates':candidates})
+        candidates = CreateCandidate.objects.all().order_by('-id')
+        return render(request, 'adminboard/user.html', {'authorized_admin': authorized_admin, 'email': email, 'candidates': candidates})
     else:
         return redirect('adminboard:adminlogin')
 
