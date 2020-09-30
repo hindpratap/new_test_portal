@@ -1,132 +1,126 @@
-/* User Signup Form validation */
+// User Sign up form validation
 
-try{
-    const signUpForm = document.querySelector('.signup-form');
-    const elem = signUpForm.querySelectorAll('.form-elem');
-    const signLoader = document.querySelector('.signLoader');
-    let fOpt;
+const signupForm = document.querySelector('#credForm'),
+      formElements = signupForm.querySelectorAll('.form-elem'),
+      registerBtn = signupForm.querySelector('#register');
 
-    signUpForm.addEventListener('submit', (e) => {
-        let check = 1;
-        [...elem].forEach(f => {
-            const dataId = f.getAttribute('data-id');
+signupForm.addEventListener('submit', (e) => {
+    let check = 1;
+    console.log(check);
 
-            switch(dataId){
-                case 'name':
-                    if(dup(f)){
-                        e.preventDefault();
-                        check++;
-                    }
-                    break;
+    formElements.forEach(f => {
+        const dataId = f.getAttribute('data-id');
 
-                case 'username':
-                    if(dup(f)){
-                        e.preventDefault();
-                        check++;
-                    }
-                    break;
+        switch(dataId){
+            case 'name':
+                if(duplicateCheck(f)){
+                    e.preventDefault();
+                    check++;
+                }
+                break;
 
-                case 'pass':
-                    if(dup(f)){
-                        e.preventDefault();
-                        check++;
-                    }
-                    break;
+            case 'username':
+                if(duplicateCheck(f)){
+                    e.preventDefault();
+                    check++;
+                }
+                break;
 
-                case 'email':
-                    if(dup(f)){
-                        e.preventDefault();
-                        check++;
-                    }
-                    break;
+            case 'pass':
+                if(duplicateCheck(f)){
+                    e.preventDefault();
+                    check++;
+                }
+                break;
 
-                case 'mobile':
-                    if(dup(f)){
-                        e.preventDefault();
-                        check++;
-                    }
-                    break;
+            case 'email':
+                if(duplicateCheck(f)){
+                    e.preventDefault();
+                    check++;
+                }
+                break;
 
-                case 'dob':
-                    if (f.value === ``){
-                        e.preventDefault();
-                        check++;
-                        f.parentElement.parentElement.querySelector('.note').innerHTML = 'Please provide date of birth';
-                        f.style = `border: 1px solid tomato; background: #ffeae6;`;
-                    }else{
-                        f.parentElement.parentElement.querySelector('.note').innerHTML = '';
-                        f.style = `border: 1px solid mediumaquamarine; background: #dbfdf1;`;
-                    }
-                    break;
+            case 'mobile':
+                if(duplicateCheck(f)){
+                    e.preventDefault();
+                    check++;
+                }
+                break;
 
-                case 'location':
-                    fOpt = f.options[f.selectedIndex].value;
-                    if (fOpt === ``){
-                        e.preventDefault();
-                        check++;
-                        f.parentElement.querySelector('.note').innerHTML = 'Please select a location';
-                        f.style = `border: 1px solid tomato; background: #ffeae6;`;
-                    }else{
-                        f.parentElement.querySelector('.note').innerHTML = '';
-                        f.style = `border: 1px solid mediumaquamarine; background: #dbfdf1;`;
-                    }
-                    break;
+            case 'dob':
+                if (f.value === ``){
+                    e.preventDefault();
+                    check++;
+                    f.parentElement.parentElement.querySelector('.note').innerHTML = 'Please provide date of birth';
+                    f.style = `border: 1px solid tomato; background: #ffeae6;`;
+                }else{
+                    f.parentElement.parentElement.querySelector('.note').innerHTML = '';
+                    f.style = `border: 1px solid mediumaquamarine; background: #dbfdf1;`;
+                }
+                break;
 
-                case 'source':
-                    fOpt = f.options[f.selectedIndex].value;
-                    if (fOpt === ``){
-                        e.preventDefault();
-                        check++;
-                        f.parentElement.querySelector('.note').innerHTML = 'Please select a location';
-                        f.style = `border: 1px solid tomato; background: #ffeae6;`;
-                    }else{
-                        f.parentElement.querySelector('.note').innerHTML = '';
-                        f.style = `border: 1px solid mediumaquamarine; background: #dbfdf1;`;
-                    }
-                    break;
+            case 'location':
+                fOpt = f.options[f.selectedIndex].value;
+                if (fOpt === ``){
+                    e.preventDefault();
+                    check++;
+                    f.parentElement.querySelector('.note').innerHTML = 'Please select a location';
+                    f.style = `border: 1px solid tomato; background: #ffeae6;`;
+                }else{
+                    f.parentElement.querySelector('.note').innerHTML = '';
+                    f.style = `border: 1px solid mediumaquamarine; background: #dbfdf1;`;
+                }
+                break;
 
-                case 'resume':
-                    if(dup(f)){
-                        e.preventDefault();
-                        check++;
-                    }
-                    break;
+            case 'source':
+                fOpt = f.options[f.selectedIndex].value;
+                if (fOpt === ``){
+                    e.preventDefault();
+                    check++;
+                    f.parentElement.querySelector('.note').innerHTML = 'Please select a location';
+                    f.style = `border: 1px solid tomato; background: #ffeae6;`;
+                }else{
+                    f.parentElement.querySelector('.note').innerHTML = '';
+                    f.style = `border: 1px solid mediumaquamarine; background: #dbfdf1;`;
+                }
+                break;
 
-                default:
-                    break;
-            }
+            case 'resume':
+                if(duplicateCheck(f)){
+                    e.preventDefault();
+                    check++;
+                }
+                break;
 
-        })
+            default:
+                break;
 
-        console.log(check)
-        if(check === 1){
-            signLoader.classList.remove('hidden');
-        }else{
-            signLoader.classList.add('hidden');
         }
-
     });
 
-    const sr = signUpForm.querySelector('[data-id="source"]');
-    const rf = signUpForm.querySelector('[data-id="referral"]');
-    const bl = signUpForm.querySelector('.blank_');
+    console.log(check)
+    if(check === 1){
+        registerBtn.innerHTML=`<i class="fas fa-circle-notch load-icon"></i> Registering`;
+        registerBtn.setAttribute('type', 'button');
+    }
+});
 
-    sr.addEventListener('change', () => {
-        fOpt = sr.options[sr.selectedIndex].value;
-        if(fOpt === 'Referral'){
-            rf.parentElement.classList.remove('hidden');
-            bl.classList.add('hidden');
-        }else{
-            rf.parentElement.classList.add('hidden');
-            bl.classList.remove('hidden');
-        }
-    })
+const sr = signupForm.querySelector('[data-id="source"]');
+const rf = signupForm.querySelector('[data-id="referral"]');
+const bl = signupForm.querySelector('.blank_');
 
-}catch (e) {
-    console.log(e);
-}
+sr.addEventListener('change', () => {
+    fOpt = sr.options[sr.selectedIndex].value;
+    if(fOpt === 'Referral'){
+        rf.parentElement.classList.remove('hidden');
+        bl.classList.add('hidden');
+    }else{
+        rf.parentElement.classList.add('hidden');
+        bl.classList.remove('hidden');
+    }
+})
 
-function dup(b) {
+function duplicateCheck(b) {
     const bID = b.getAttribute('data-id');
     let v;
     let foo = false;

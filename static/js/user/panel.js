@@ -3,6 +3,7 @@ let timer;
 let savedDate = localStorage.getItem('savedDate');
 let compareDate = new Date();
 const monitorTime = document.querySelector('.monitor--time');
+const submitBtn = document.querySelector('#submitBtn');
 
 if (savedDate)  {
     compareDate = new Date(savedDate);
@@ -49,6 +50,8 @@ function timeBetweenDates(toDate) {
         monitorTime.innerHTML = `0:00:00`;
         score();
         form.submit();
+        submitBtn.innerHTML = `<i class="fas fa-circle-notch load-icon"></i> Submitting`;
+        submitBtn.setAttribute('type', 'button');
     }
   }
 }
@@ -58,7 +61,6 @@ function timeBetweenDates(toDate) {
 const panel = document.querySelectorAll('.panel');
 const nextBtn  = document.querySelector('#nextBtn');
 const prevBtn = document.querySelector('#prevBtn');
-const submitBtn = document.querySelector('#submitBtn');
 
 const navSwitch = document.querySelectorAll('.switch__a');
 navSwitch[0].style = 'background-color: royalblue; border: 2px solid royalblue; color: #fff;';

@@ -1,0 +1,143 @@
+@import './_login.css';
+
+.app{
+    background-color: #f7f7f7;
+    height: 100vh;
+}
+
+/* Header */
+.header{
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    height: 60px;
+    border-bottom-left-radius: 17px;
+    border-bottom-right-radius: 17px;
+    box-shadow: 0 10px 20px -10px rgba(54, 52, 73, .3);
+    z-index: 100;
+}
+
+.logo{
+    flex: 1;
+}
+
+.logo{
+    padding: .5rem 2rem;
+    font-weight: 600;
+}
+
+.nav-items{
+    padding: .5rem 1.25rem;
+    position: relative;
+}
+
+.nav-items.active::after{
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: -11.5px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    background-color: #363449;
+}
+
+.nav-items a{
+    color: #363449;
+    text-decoration: none;
+}
+
+.logout-btn{
+    background-color: #f1f1f1;
+    border-radius: 17px;
+}
+
+/* Details */
+.user-data-head,
+.instructuion-data-head{
+    font-size: 1.75rem;
+    font-weight: 600;
+}
+
+.brief{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.brief-box{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 400px;
+    padding: .5rem 0;
+}
+
+.tag{
+    font-weight: 600;
+}
+
+.imp-note{
+    font-weight: 600;
+    color: tomato;
+}
+
+.instruction-list{
+    padding: 0;
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+}
+
+.instruction-list li{
+    padding: .5rem 0;
+}
+
+/* Overlay section */
+.start-test-info{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(54, 52, 73, .3);
+    display: none;
+}
+
+.overlay-sect{
+    width: 400px;
+    background-color: #fff;
+    border-radius: 17px;
+    box-shadow: 0 10px 20px -10px rgba(54, 52, 73, .3);
+}
+
+.overlay-sect .title{
+    padding: 1rem;
+    font-weight: 600;
+    border-bottom: 1px solid #bbb;
+}
+
+.buttons{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 0rem 1rem 1rem;
+}
+
+.btn--cancel,
+.btn--prev{
+    display: inline-block;
+    color: #363449;
+    background-color: #f1f1f1;
+    border: 0;
+    padding: .8rem 2rem;
+    border-radius: 17px;
+    box-sizing: border-box;
+    transition: all .25s ease;
+    outline: none;
+    appearance: none;
+    cursor: pointer;
+}

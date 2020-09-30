@@ -1,0 +1,13 @@
+{% load staticfiles %}
+
+<header class="header">
+    <div class="logo">
+        <span class="navbar-brand">Candidate Portal</span>
+    </div>
+    <nav class="navbar">
+        <ul class="nav">
+            <li class="nav-items active"><a href="">Assessment</a></li>
+            <li class="nav-items logout-btn"><a href="{% url 'application:logout_user' %}">Logout</a></li>
+        </ul>
+    </nav>
+</header>

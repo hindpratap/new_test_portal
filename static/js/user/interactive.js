@@ -19,23 +19,30 @@ try{
             passwordState = true;
         }
     });
+
+    // Logging In
+    const loginForm = document.querySelector('#loginForm'),
+          loginBtn = loginForm.querySelector('#loginBtn');
+
+    loginForm.addEventListener('submit', () => {
+        loginBtn.innerHTML = `<i class="fas fa-circle-notch load-icon"></i> Logging in`;
+    });
+
 }catch(err){}
 
 // Instruction Components
 try{
     // Continue/Start
     const startBtn = document.querySelector('.start-test');
-    const startDiv = document.querySelector('.starter');
+    const startDiv = document.querySelector('.start-test-info');
     const cancelNo = document.querySelector('.cancel-no');
 
     startBtn.addEventListener('click', (e)=>{
-        startDiv.style.visibility = 'visible';
-        console.log('start');
+        startDiv.style.display = 'flex';
     });
 
     cancelNo.addEventListener('click', (e)=>{
-        startDiv.style.visibility = 'hidden';
-        console.log('close');
+        startDiv.style.display = 'none';
     });
 
 }catch(err){

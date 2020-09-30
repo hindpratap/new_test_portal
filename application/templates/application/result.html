@@ -76,6 +76,9 @@
     form.addEventListener('submit', e => {
         e.preventDefault();
         score();
+        const subBtn = document.querySelector('#submitBtn');
+        subBtn.innerHTML = `<i class="fas fa-circle-notch load-icon"></i> Submitting`;
+        subBtn.setAttribute('type', 'button');
         form.submit();
     });
 

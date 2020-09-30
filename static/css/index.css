@@ -525,64 +525,6 @@ span.input-group-append {
     border-radius: 4px;
 }
 
-
-/* Header Components */
-
-.App-header{
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid #bbb;
-    padding: 0em 1em;
-}
-
-.brand{
-    padding: 0em 1em;
-    flex: 1;
-    display: flex;
-    align-items: center;
-}
-
-.navbar-brand{
-    text-transform: uppercase;
-    font-weight: 600;
-    color: #444;
-}
-
-.navbar{
-    padding: 0em;
-}
-
-.nav-items{
-    line-height: 40px;
-    padding: 0em 1em;
-    opacity: .5;
-    border-bottom: 2px solid transparent;
-}
-
-.nav-link{
-    color: #444;
-    font-size: 1em;
-    cursor: pointer;
-}
-
-.nav-link:hover,
-.nav-link:focus{
-    text-decoration: none;
-    color: #444;
-}
-
-.active,
-.nav-items:hover,
-.nav-items:focus{
-    background-color:#FFF4EE;
-}
-
-.active{
-    opacity: 1;
-    border-bottom: 2px solid #EE6F27;
-    transition: all .3s ease;
-}
-
 /* Instructions Components */
 .btn--logout{
     color: #666;
@@ -628,13 +570,7 @@ span.input-group-append {
 .info{
     margin-left: 1em;
     cursor: pointer;
-}
-
-.brief{
-    margin-top: 2rem;
-    display: flex;
-    align-items: center;
-}
+}   
 
 .user-profile{
     width: 100px;
@@ -650,13 +586,6 @@ span.input-group-append {
 /* .brief-all, */
 .fa-chevron-right{
     margin-left: 1em;
-}
-
-.brief-box{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    padding: .5em;
 }
 
 .instructions-all{
@@ -677,28 +606,6 @@ span.input-group-append {
 }
 
 /* Report Components */
-
-.overlay{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0,0,0,.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    visibility: hidden;
-}
-
-.overlay-div{
-    background-color: #fff;
-    border-top: 5px solid #EFAF66;
-    width: 50%;
-    height: auto;
-    padding: 1em;
-}
-
 .report-form{
     position: relative;
 }
@@ -875,11 +782,13 @@ input[name="whichErr"]{
 }
 
 .panel--quest{
-    background: #eff5fa;
+    background: #fff;
     min-height: 50%;
     height: auto;
     padding: 1rem 3rem;
     position: relative;
+    border-radius: 17px;
+    box-shadow: 0 10px 20px -10px rgba(54, 52, 73, .3);
 }
 
 .panel-hide,
@@ -894,6 +803,7 @@ input[name="whichErr"]{
     width: 120px;
     height: 30px;
     background-color: #e78544;
+    border-radius: 17px;
     color: #fff;
     text-align: center;
     padding: .25rem;
@@ -926,7 +836,8 @@ input[name="whichErr"]{
 .panel--nav__body{
     position: sticky;
     top: 1rem;
-    background: #fbfbfb;
+    background: #f1f1f1;
+    border-radius: 17px;
     border-top: 5px solid #EFAF66;
     min-height: 555px;
     height: auto;

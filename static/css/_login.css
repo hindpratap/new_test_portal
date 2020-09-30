@@ -1,0 +1,269 @@
+/* Front Page */
+.front-page{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    height: 100vh;
+    background-color: rgb(24, 3, 63);
+}
+
+.front-page--hero{
+    flex: 1;
+    position: relative;
+    height: 100%;
+    z-index: 0;
+}
+
+.front-page--content{
+    flex: 3;
+    background-color: #f7f7f7;
+    height: 100%;
+    border-top-left-radius: 17px;
+    border-bottom-left-radius: 17px;
+    box-shadow: -6px 0px 24px 4px rgba(0,0,0,.3);
+}
+
+.portal--hero{
+    position: absolute;
+    bottom: 20px;
+}
+
+.logo-nav{
+    display: flex;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+.logo-image{
+    width: 24px;
+    height: 24px;
+}
+
+.logo-title{
+    margin-bottom: 0;
+    margin-left: .25rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #f7f7f7;
+    text-transform: uppercase;
+}
+
+/* Form Section */
+.form-section{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4rem;
+    height: 100%;
+}
+
+.form-title{
+    flex: 1;
+}
+
+.form-title p{
+    margin-bottom: 0;
+}
+
+.form-title--heading{
+    font-size: 2rem;
+    font-weight: 700;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.form-login{
+    flex: 2;
+    padding: 1rem 2rem;
+}
+
+.form-component{
+    width: 400px;
+    height: 50px;
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.label-placeholder{
+    pointer-events: none;
+    position: absolute;
+    top: 12px;
+    left: 20px;
+    transition: 0.2s ease all;
+}
+
+.password-eye{
+    position: absolute;
+    right: 18px;
+    top: 14px;
+    visibility: hidden;
+}
+
+.input-field{
+    width: 400px;
+    height: 50px;
+    background: #Ffffff;
+    border: 0;
+    border-radius: 17px;
+    padding: 0em 1rem;
+    outline: none;
+}
+
+input:focus ~ .label-placeholder,
+input:not(:focus):valid ~ .label-placeholder{
+    top: -18px;
+    font-size: 12px;
+}
+
+input[name='password']:valid ~ .password-eye{
+    visibility: visible;
+}
+
+.form-bottom{
+    width: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.btn--primary{
+    display: inline-block;
+    color: #f7f7f7;
+    background-color: #06f;
+    border: 0;
+    padding: .8rem 2rem;
+    border-radius: 17px;
+    box-sizing: border-box;
+    transition: all .25s ease;
+    outline: none;
+    appearance: none;
+    box-shadow: 0 10px 20px -10px rgba(0, 102, 255, .5);
+}
+
+.btn--primary:hover,
+.btn--primary:focus{
+    outline: none;
+    box-shadow: 0px 20px 20px -10px rgba(0, 102, 255, .5);
+    transform: translateY(-5px);
+}
+
+.goto-signup,
+.goto-login{
+    flex: 1;
+    align-self: flex-end;
+    text-align: right;
+    color: #aaa;
+    outline: none;
+}
+
+.goto-signup a,
+.goto-login a{
+    text-decoration: none;
+}
+
+/* Alert */
+.error-message{
+    width: 400px;
+    height: 50px;
+    padding: .5rem 2rem;
+    border: 0;
+    border-radius: 17px;
+    margin-bottom: 1.5rem;
+}
+
+.load-icon{
+    margin-right: .5rem;
+    animation: rotateLoader 1s infinite;
+}
+
+@keyframes rotateLoader {
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+
+/* Signin */
+.signup-section{
+    height: 100%;
+    padding: 1rem 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.signup-form-section{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-row-gap: .5rem;
+}
+
+.form-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.form-label{
+    font-size: .8rem;
+    margin-bottom: 0.25rem;
+}
+
+.form-elem{
+    width: 400px;
+    height: 40px;
+    border: 0;
+    background-color: #fff;
+    border-radius: 17px;
+    padding: .5rem 1rem;
+    outline: none;
+}
+
+.form-elem--mobile::-webkit-inner-spin-button,
+.form-elem--mobile::-webkit-outer-spin-button{
+    display: none;
+}
+
+.gj-datepicker.gj-datepicker-md.gj-unselectable {
+    width: 400px;
+    background: #fff;
+    border-radius: 17px;
+}
+
+.gj-textbox-md{
+    border: 0px;
+    padding: .5rem 1rem;
+    outline: none;
+}
+
+.gj-datepicker-md [role=right-icon] {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+.gj-textbox-md:active, .gj-textbox-md:focus {
+    outline: none;
+    appearance: none;
+    box-shadow: none !important;
+    border: 0px !important;
+}
+
+.form-elem--resume{
+    position: absolute;
+    opacity: 0;
+    z-index: 10;
+}
+
+.hidden{
+    display: none;
+}
+
+.note{
+    font-size: .8rem;
+    color: tomato;
+}

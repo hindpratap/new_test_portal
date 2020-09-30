@@ -12,12 +12,12 @@
     <!-- CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
-{#    <link rel="stylesheet" href="{% static 'css/dark.css' %}">#}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
     <!-- Fontawesome -->
     <script src="https://kit.fontawesome.com/11dafce953.js" crossorigin="anonymous"></script>
 
-    <title>Instructions</title>
+    <title>Instructions | Candidate Portal</title>
 </head>
 <body>
     <noscript>
@@ -26,81 +26,64 @@
 
     <div class="app">
 
-        <header class="App-header">
-            <div class="brand">
-                <img src="{% static 'images/DF Logo.svg' %}" alt="logo" class="navbar-brand">
-                <span class="navbar-brand">Candidate Portal</span>
-            </div>
-            <nav class="navbar">
-                <ul class="nav">
-                    <li class="nav-items active assess-link"><a href="" class="nav-link">Assessment</a></li>
-{#                    <li class="nav-items report-link"><a class="nav-link">Report an Issue?</a></li>#}
-                    <li class="nav-items log"><a href="{% url 'application:logout_user' %}" class="nav-link btn--logout">Logout</a></li>
-                </ul>
-            </nav>
-        </header>
+        {% include 'application/header.html' %}
 
         <main class="render">
 
-            <section class="user-details">
-                <h4 class="user-detail-head">Candidate Details<span title="if your details doesn't match kindly report to us." class="info"><i class="fas fa-info-circle"></i></span></h4>
+            <section class="user-data mb-4">
+                <p class="user-data-head mb-2">Candidate Details</p>
                 <div class="brief">
-                    <!-- <div class="user-profile">
-                        <img src="../assets/images/user-persona.svg" alt="user-img" class="user-profile-img">
-                    </div> -->
-                    <div class="brief-all">
-                        <div class="brief-box">
-                            <strong>Name:</strong>
-                            <p>{{ name }}</p>
-                        </div>
-                        <div class="brief-box">
-                            <strong>Email:</strong>
-                            <p>{{ email }}</p>
-                        </div>
-                        <div class="brief-box">
-                            <strong>Phone No:</strong>
-                            <p>{{ phone }}</p>
-                        </div>
+                    <div class="brief-box">
+                        <p class="tag">Name:</p>
+                        <p class="tag-value">{{ name }}</p>
+                    </div>
+                    <div class="brief-box">
+                        <p class="tag">Email:</p>
+                        <p class="tag-value">{{ email }}</p>
+                    </div>
+                    <div class="brief-box">
+                        <p class="tag">Phone no:</p>
+                        <p class="tag-value">{{ phone }}</p>
                     </div>
                 </div>
             </section>
 
-            <section class="instruction-details">
-                <h4 class="instruct-title">Instructions</h4>
-                <div class="instructions-all">
-                    <strong class="imp-note">Read through instructions given below carefully before attempting test</strong>
-                    <div class="read-all">
+            <section class="instruction-data mb-4">
+                <p class="instructuion-data-head mb-2">Instructions</p>
+                <div class="instructions">
+                    <p class="imp-note">Note: Read through instructions given below carefully before attempting test</p>
+                    <ul class="instruction-list">
                         {% for i in instruct %}
-                            <p class="read-all__p">{{ i }}</p>
+                            <li>{{ i }}</li>
                         {% endfor %}
-                        <strong class="wishes">BEST OF LUCK &#128512;</strong>
-                    </div>
-                    <button class="btn btn--primary start-test">Start Test<i class="fas fa-chevron-right"></i></button>
+                    </ul>
+                    <strong class="wishes">BEST OF LUCK (づ ◕‿◕ )づ</strong>
                 </div>
             </section>
+
+            <button class="btn--primary start-test">Start Test<i class="fas fa-chevron-right"></i></button>
 
         </main>
 
-        <div class="starter overlay">
-            <div class="start-div overlay-div">
-                <h4 class="overlay-div__title">Make an attempt</h4>
+        <section class="start-test-info">
+            <div class="overlay-sect">
+                <p class="title">Make an attempt</p>
                 <div class="cold-info">
                     <p>This test has a time limit of 45mins. Count down will start the moment you start the test. You've to submit the test within 30 minutes or else it will automatically get submitted.</p><br>
-                    <p>Are you sure you wish to start now?</p>
+                    <strong>Are you sure you wish to start now?</strong>
                 </div>
-                <div class="start-btn">
-                    <a href="{% url 'application:panel' %}" class="btn btn--primary cont mr-3">Continue</a>
-                    <a class="btn btn--cancel cancel-no">Cancel</a>
+                <div class="buttons">
+                    <a href="{% url 'application:panel' %}" class="btn--primary text-center">Continue</a>
+                    <a class="btn--cancel text-center cancel-no">Cancel</a>
                 </div>
             </div>
-        </div>
+        </section>
 
     </div>
     
     <!-- Script -->
     <script src="{% static 'js/user/interactive.js' %}"></script>
     <script src="{% static 'js/user/inspect.js' %}"></script>
-
 
 </body>
 </html>

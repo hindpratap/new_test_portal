@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="DataFlow | Candidate Testing Portal">
+
+    {% load staticfiles %}
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'images/DF Logo.svg' %}">
+
+    <!-- Fontawesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css" integrity="sha384-DhY6onE6f3zzKbjUPRc2hOzGAdEf4/Dz+WJwBvEYL/lkkIsI3ihufq9hk9K4lVoK" crossorigin="anonymous">
+    {% block head %}{% endblock %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <noscript>
+        Your Browser's JavaScript has been turned off kindly enable it.
+    </noscript>
+    
+    <div class="front-page">
+        <section class="front-page--hero">
+            <div class="logo-nav">
+                <img src="{% static 'images/DF Logo.svg' %}" alt="logo" class="logo-image">
+                <p class="logo-title"><span class="logo-title--1">Data</span>flow</p>
+            </div>
+            <img src="{% static 'images/portal-hero.svg' %}" alt="portal" class="portal--hero">
+        </section>
+        
+        <section class="front-page--content">
+            {% block body %}{% endblock %}
+        </section>
+    </div>
+
+    <!-- Script -->
+    <script src="{% static 'js/user/index.js' %}"></script>
+    {% block script %}{% endblock %}
+</body>
+</html>

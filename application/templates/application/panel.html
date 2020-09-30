@@ -13,7 +13,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
-{#    <link rel="stylesheet" href="{% static 'css/dark.css' %}">#}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
     <!-- Fontawesome -->
     <script src="https://kit.fontawesome.com/11dafce953.js" crossorigin="anonymous"></script>
@@ -27,17 +27,7 @@
 
     <div class="app">
 
-        <header class="App-header">
-            <div class="brand">
-                <img src="{% static 'images/DF Logo.svg' %}" alt="logo" class="navbar-brand">
-                <span class="navbar-brand">Candidate Portal</span>
-            </div>
-            <nav class="navbar">
-                <ul class="nav">
-                    <li class="nav-items active assess-link"><a class="nav-link">Assessment</a></li>
-                </ul>
-            </nav>
-        </header>
+        {% include 'application/header.html' %}
 
 
         <main class="main--panel container mt-5 mb-5">
@@ -276,7 +266,7 @@
             </section>
 
             <section class="panel--btn">
-                <button class="btn btn--cancel mr-2" id="prevBtn">Previous</button>
+                <button class="btn btn--prev mr-2" id="prevBtn">Previous</button>
                 <button class="btn btn--primary" id="nextBtn">Next</button>
                 <button class="btn btn--primary hidden" id="submitBtn" form="panelForm">Submit</button>
             </section>
@@ -285,6 +275,10 @@
     </div>
 
     <!-- Script -->
+    <script>
+        const lB = document.querySelector('.logout-btn');
+        lB.remove();
+    </script>
     <script src="{% static 'js/user/inspect.js' %}"></script>
     {% include 'application/result.html' %}
     <script src="{% static 'js/user/panel.js' %}"></script>
