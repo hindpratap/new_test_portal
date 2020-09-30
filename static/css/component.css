@@ -402,7 +402,8 @@ td{
     color: #ff6347;
 }
 
-.dt-button.buttons-csv.buttons-html5 {
+.dt-button.buttons-csv.buttons-html5,
+.dt-button.buttons-excel.buttons-html5{
     background: #fefefe;
     border: 1px solid #bbb;
     padding: 0.25rem 1rem;

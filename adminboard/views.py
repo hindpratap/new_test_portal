@@ -176,9 +176,9 @@ def adminnotifycand(request, username):
             if User.objects.filter(username=username).exists():
                 pass
             else:
-                User.objects.create_user(username=username, password=recreate_cand.password, first_name=recreate_cand.fullname, email=recreate_cand.email)
+                User.objects.create_user(username=username, password=recreate_cand.password)
             sub = 'no-reply: Test details'
-            content = f'Hi {recreate_cand.fullname},\nThank you for showing interest in working with DataFlow Group.\nTo complete the application process, you are required to take an online test. The test would include assessment for English Grammar, Logic Check and Reasoning Skills.\n\nBelow are the credentials for the test:\n\nusername- {recreate_cand.username}\npassword- {recreate_cand.password}\nTest link: https://uataudit.dfgateway.com\nThe test cannot be fragmented, but must be completed in a single attempt. The duration for the test is 30 minutes.\n\nBest Regards\nHR Team- Dataflow Group'
+            content = f'Hi {recreate_cand.fullname},\nThank you for showing interest in working with DataFlow Group.\nTo complete the application process, you are required to take an online test. The test would include assessment for English Grammar, Logic Check and Reasoning Skills.\n\nBelow are the credentials for the test:\n\nusername- {recreate_cand.username}\npassword- {recreate_cand.password}\nTest link: https://test.dfgateway.com\nThe test cannot be fragmented, but must be completed in a single attempt. The duration for the test is 45 minutes.\n\nBest Regards\nHR Team- Dataflow Group'
             tomail = [f'{recreate_cand.email}']
             # sendmailtask.delay(sub, content, tomail)
             send_mail(sub, content, settings.EMAIL_HOST_USER, tomail)

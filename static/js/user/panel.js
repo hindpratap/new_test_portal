@@ -1,4 +1,3 @@
-
 // Timer Countdown
 let timer;
 let savedDate = localStorage.getItem('savedDate');

@@ -52,7 +52,7 @@ def postsignup(request):
                                referralid=referral, updated_at=datetime.now(), invitestatus='Invite sent', status='Invite sent')
         User.objects.create_user(first_name=fullname, username=username, password=password, email=email)
         sub = 'no-reply: Test details'
-        content = f'Hi {fullname},\nThank you for showing interest in working with DataFlow Group.\nTo complete the application process, you are required to take an online test. The test would include assessment for English Grammar, Logic Check and Reasoning Skills.\n\nBelow are the credentials for the test:\n\nusername- {username}\npassword- {password}\nTest link: https://uataudit.dfgateway.com\nThe test cannot be fragmented, but must be completed in a single attempt. The duration for the test is 30 minutes.\n\nBest Regards\nHR Team- Dataflow Group'
+        content = f'Hi {fullname},\nThank you for showing interest in working with DataFlow Group.\nTo complete the application process, you are required to take an online test. The test would include assessment for English Grammar, Logic Check and Reasoning Skills.\n\nBelow are the credentials for the test:\n\nusername- {username}\npassword- {password}\nTest link: https://test.dfgateway.com\nThe test cannot be fragmented, but must be completed in a single attempt. The duration for the test is 45 minutes.\n\nBest Regards\nHR Team- Dataflow Group'
         tomail = [f'{email}']
         # sendmailtask.delay(sub, content, tomail)
 
@@ -75,13 +75,11 @@ def logincand(request):
     return redirect('application:applogin')
 
 @login_required(login_url='logincand/')
-@csrf_exempt
 def instructions(request):
-    email = request.user.email
     username = request.user.username
     obj = CreateCandidate.objects.get(username=username)
     instruct = Instructions.objects.all().order_by('-id')
-    return render(request, 'application/instructions.html', {'username': username, 'name': obj.fullname, 'email': email, 'phone': obj.phone, 'instruct': instruct})
+    return render(request, 'application/instructions.html', {'username': username, 'name': obj.fullname, 'email': obj.email, 'phone': obj.phone, 'instruct': instruct})
 
 @login_required(login_url='logincand/')
 def logout_user(request):

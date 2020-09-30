@@ -167,9 +167,9 @@ SECRET_KEY = 'f9%v*^8rr2y0yu(5-wqoansld+2bs-a&(a)-1@)6pyp+k=rh7c'
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-SESSION_COOKIE_SECURE = True
+#SESSION_COOKIE_SECURE = True
 
-SECURE_SSL_REDIRECT = True
+#SECURE_SSL_REDIRECT = True
 
 
 
@@ -228,8 +228,8 @@ WSGI_APPLICATION = 'testingapp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'uatdatabase',
-        'USER': 'uatuser',
+        'NAME': 'devanalytics',
+        'USER': 'raghav',
         'PASSWORD': 'programming',
         'HOST': 'localhost',
         'PORT': '',
@@ -309,7 +309,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'analytics@dataflowgroup.com'
-EMAIL_HOST_PASSWORD = 'Misteam@123'
+EMAIL_HOST_PASSWORD = 'Analytics@123'
 
 
 

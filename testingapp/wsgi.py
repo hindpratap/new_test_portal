@@ -23,7 +23,7 @@ import sys
 from django.core.wsgi import get_wsgi_application
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testingapp.settings')
-sys.path.append('/home/raghav/testingapp/testingapp/')
+sys.path.append('/home/raghav/home/raghav/testingapp/testingapp/')
 
-sys.path.append('/home/raghav/testingapp/venv/lib/python3.7/site-packages')
+sys.path.append('/home/raghav/home/raghav/testingapp/venv/lib/python3.7/site-packages')
 application = get_wsgi_application()
