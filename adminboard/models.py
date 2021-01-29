@@ -31,6 +31,7 @@ class CreateCandidate(models.Model):
     source = models.CharField(max_length=200, null=True, blank=True)
     referralid = models.CharField(max_length=100, null=True, blank=True, default='No-referral')
     candempid = models.CharField(max_length=100, null=True, blank=True, default='Nan')
+    testcomplete_at = models.DateTimeField(null=True, blank=True, default=None)
 
 
 

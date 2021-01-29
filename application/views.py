@@ -120,6 +120,7 @@ def submitted(request):
         user.score_reasoning = math.ceil(int(percent_reas)/10 * 100)
         user.score_english = math.ceil(int(percent_eng)/10 * 100)
         user.score_math = math.ceil(int(percent_math)/10 * 100)
+        user.testcomplete_at = datetime.now()
         percent = math.ceil(((int(percent_reas) + int(percent_eng) + int(percent_math))/30) * 100)
         user.score = percent
         user.teststatus = 'Test Taken'
