@@ -118,9 +118,11 @@ AUTHENTICATION_BACKENDS = (
 )
 
 SITE_ID =1
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '735863762691-30q0v1djtdrgcnunpi0n9uva3g2lntkg.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'hW6ttmRERnH7zK3RM6Y-Uasq'
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '461917644557-6i015r8m4uvtpigk75i1kt021dg7r17m.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'F9dpcSj_KZQlTg8wft_dHznm'
+# SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '461917644557-6i015r8m4uvtpigk75i1kt021dg7r17m.apps.googleusercontent.com'
+# SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'F9dpcSj_KZQlTg8wft_dHznm'
 
 SOCIAL_AUTH__KEY = 'ID'
 SOCIAL_AUTH__SECRET = 'SECRET'
@@ -145,8 +147,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'analytics@dataflowgroup.com'
-EMAIL_HOST_PASSWORD = 'Misteam@123'
+EMAIL_HOST_USER = 'hindpratapsingh908@gmail.com'
+EMAIL_HOST_PASSWORD = 'Thakurhind@143'
 
 
 

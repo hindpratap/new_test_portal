@@ -52,7 +52,7 @@ def postsignup(request):
                                referralid=referral, updated_at=datetime.now(), invitestatus='Invite sent', status='Invite sent')
         User.objects.create_user(first_name=fullname, username=username, password=password, email=email)
         sub = 'no-reply: Test details'
-        content = f'Hi {fullname},\nThank you for showing interest in working with DataFlow Group.\nTo complete the application process, you are required to take an online test. The test would include assessment for English Grammar, Logic Check and Reasoning Skills.\n\nBelow are the credentials for the test:\n\nusername- {username}\npassword- {password}\nTest link: https://test.dfgateway.com\nThe test cannot be fragmented, but must be completed in a single attempt. The duration for the test is 45 minutes.\n\nBest Regards\nHR Team- Dataflow Group'
+        content = f'Hi {fullname},\nThank you for showing interest in working with Mckinsol Consulting.\nTo complete the application process, you are required to take an online test. The test would include assessment for English Grammar, Logic Check and Reasoning Skills.\n\nBelow are the credentials for the test:\n\nusername- {username}\npassword- {password}\nTest link: https://test.dfgateway.com\nThe test cannot be fragmented, but must be completed in a single attempt. The duration for the test is 45 minutes.\n\nBest Regards\nHR Team- Mckinsol Consulting'
         tomail = [f'{email}']
         # sendmailtask.delay(sub, content, tomail)
 
