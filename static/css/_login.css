@@ -13,6 +13,7 @@
     position: relative;
     height: 100%;
     z-index: 0;
+    background-color: #58D3F7;
 }
 
 .front-page--content{
@@ -36,8 +37,8 @@
 }
 
 .logo-image{
-    width: 80px;
-    height: 80px;
+    width: 24px;
+    height: 24px;
 }
 
 .logo-title{
@@ -63,7 +64,7 @@
 }
 
 .form-title p{
-    margin-bottom: 0;
+    padding-left: 400px;
 }
 
 .form-title--heading{

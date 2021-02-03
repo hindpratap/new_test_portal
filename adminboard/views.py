@@ -177,11 +177,11 @@ def adminnotifycand(request, username):
                 pass
             else:
                 User.objects.create_user(username=username, password=recreate_cand.password)
-            sub = 'no-reply: Test details'
-            content = f'Hi {recreate_cand.fullname},\nThank you for showing interest in working with DataFlow Group.\nTo complete the application process, you are required to take an online test. The test would include assessment for English Grammar, Logic Check and Reasoning Skills.\n\nBelow are the credentials for the test:\n\nusername- {recreate_cand.username}\npassword- {recreate_cand.password}\nTest link: https://test.dfgateway.com\nThe test cannot be fragmented, but must be completed in a single attempt. The duration for the test is 45 minutes.\n\nBest Regards\nHR Team- Dataflow Group'
-            tomail = [f'{recreate_cand.email}']
+            # sub = 'no-reply: Test details'
+            # content = f'Hi {recreate_cand.fullname},\nThank you for showing interest in working with McKinsol Consulting.\nTo complete the application process, you are required to take an online test. The test would include assessment for English Grammar, Logic Check and Reasoning Skills.\n\nBelow are the credentials for the test:\n\nusername- {recreate_cand.username}\npassword- {recreate_cand.password}\nTest link: https://mckinsol.com\nThe test cannot be fragmented, but must be completed in a single attempt. The duration for the test is 45 minutes.\n\nBest Regards\nHR Team- McKinsol Consulting'
+            # tomail = [f'{recreate_cand.email}']
             # sendmailtask.delay(sub, content, tomail)
-            send_mail(sub, content, settings.EMAIL_HOST_USER, tomail)
+            # send_mail(sub, content, settings.EMAIL_HOST_USER, tomail)
             user = CreateCandidate.objects.get(username=username)
             user.invitestatus = 'Invite sent'
             user.status = 'Invite sent'
@@ -329,6 +329,22 @@ def candaction(request, id):
                                                   status=fStatus, dob=user.dob, resume=user.resume, created_at=user.created_at,
                                                   activestatus=user.activestatus, selectionstatus=fStatus, source=user.source, referralid=user.referralid,
                                                   candempid=empId, updated_at=datetime.now(), updated_by=filler_email)
+                if fStatus=='Offered':
+                    sub = 'no-reply: Your Status'
+                    content = f'Hi {user.fullname},\nThank you for showing interest in working with Mckinsol Consulting.\nYour are Qualifying the Online Test and your Application is shortlisted for further Process.\n\nBest Regards\nHR Team- Mckinsol Consulting'
+                    tomail = [f'{user.email}']
+                    # sendmailtask.delay(sub, content, tomail)
+
+                    send_mail(sub, content, settings.EMAIL_HOST_USER, tomail)
+                elif fStatus=='Not Offered':
+                    sub = 'no-reply: Your Status'
+                    content = f'Hi {user.fullname},\nThank you for showing interest in working with Mckinsol Consulting.\nYour are not Qualifying the Online Test and your Application is not shortlist for further Process.\n\nBest Regards\nHR Team- Mckinsol Consulting'
+                    tomail = [f'{user.email}']
+                    # sendmailtask.delay(sub, content, tomail)
+
+                    send_mail(sub, content, settings.EMAIL_HOST_USER, tomail)
+                else:
+                    pass
                 return redirect('adminboard:submission')
             except:
                 return HttpResponse('<h2>Error: V@candaccept</h2>')
